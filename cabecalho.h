@@ -1,4 +1,5 @@
-
+#ifndef CABECALHO_H  
+#define CABECALHO_H
 
 typedef struct {
     char usuario[20];
@@ -35,7 +36,7 @@ typedef struct {
 
 typedef struct {
     char chave[15]; // CPF ou CRM
-    int posicao;    // posi��o do registro no arquivo bin�rio
+    long int posicao;    // posicao do registro no arquivo binario
 } indexPaciente, indexMedico;
 
 
@@ -48,3 +49,4 @@ void ListarConsultasPorMedico();
 void ListarConsultasPorPaciente(); 
 void ListarConsultasPorData();
 
+#endif
