@@ -1,4 +1,4 @@
-
+//testejoke
 
 typedef struct {
     char usuario[20];
@@ -35,7 +35,7 @@ typedef struct {
 
 typedef struct {
     char chave[12]; // CPF ou CRM
-    int posicao;    // posição do registro no arquivo binário
+    int posicao;    // posiï¿½ï¿½o do registro no arquivo binï¿½rio
 } indexPaciente, indexMedico;
 
 

@@ -6,6 +6,6 @@
 
 int main() {
     setlocale(LC_ALL, "Portuguese");
-    printf("baguio doido\n");
+    printf("baguio doidimais\n");
     return 0;
 }
