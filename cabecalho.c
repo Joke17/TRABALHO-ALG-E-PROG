@@ -35,12 +35,19 @@ typedef struct Consulta{
 
 typedef struct {
     char chave[12]; // CPF ou CRM
-    int posicao;    // posi��o do registro no arquivo bin�rio
+    int posicao;    // posição do registro no arquivo binário
 } IndexPaciente, IndexMedico;
 
 
-int buscarMedicoPorCRM(char crm_alvo[]);
-int buscarPacientePorCPF(char cpf_alvo[]);
+int BuscarMedicoPorCRM(char crm_alvo[]);
+int BuscarPacientePorCPF(char cpf_alvo[]);
+
+
+//Funçoes Joke
+void InserirNovoPaciente();
+void AlterarDadosPaciente();
+void BuscarPacientePorNome();
+void ListaPacientes();
 
 
 void InserirNovaConsulta(); 
