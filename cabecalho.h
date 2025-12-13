@@ -63,14 +63,15 @@ void AbreVetores(){
     fclose(ptpacientes);
 
     int quantidade = tamanho / sizeof(Paciente);
-
+    //avbacate
     Paciente *vetPacientes = (Paciente *) malloc(quantidade * sizeof(Paciente));
-    CPF *vetCPF = (CPF *) malloc(quantidade * sizeof(CPF));
+    char *vetCPF = (char *) malloc(quantidade * sizeof(char[12]));
 
     for(int i = 0; i<quantidade; i++)
-        printf("vet %s\ncpf %s", vetPacientes[quantidade].nome, vetCPF[0]);
+        printf("vet %s\ncpf ", vetPacientes[quantidade].nome);
 
     
+    //printf("\n vet %ld\n", tamanho);
 
 }
 
@@ -100,6 +101,7 @@ void BuscarPacientePorNome();
 void ListaPacientes();
 
 
+//funcoes alex - consultas
 void InserirNovaConsulta(); 
 void ListarConsultasPorMedico(); 
 void ListarConsultasPorPaciente(); 
