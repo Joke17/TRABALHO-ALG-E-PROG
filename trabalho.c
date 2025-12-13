@@ -7,6 +7,8 @@
 int main() {
     setlocale(LC_ALL, "Portuguese");
 
+    abrevetores();
+
     Paciente p;
     strcpy(p.nome, "João");
     strcpy(p.CPF, "15");

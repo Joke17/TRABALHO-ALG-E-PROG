@@ -47,14 +47,23 @@ typedef struct {
 //Vetores carregados do .bin
 //Pacientes
 void abrevetores(){
+    // Pacientes
     FILE *ptpacientes;
-    ptpacientes = fopen("TRABALHO-ALG-E-PROG\arquivos\pacientes.bin", "rb");
+    ptpacientes = fopen("TRABALHO-ALG-E-PROG\\arquivos\\pacientes.bin", "rb");
+    if(ptpacientes == NULL){
+        printf("deu merda\n");
+    }
 
     fseek(ptpacientes, 0, SEEK_END);
-    long tamanho = ftell(ptpacientes);
+    long tamanho = (int)ftell(ptpacientes);
     rewind(ptpacientes);
+    fclose(ptpacientes);
 
-    printf("%d", tamanho);
+    int quantidade = tamanho / sizeof(Paciente);
+
+    Paciente *vetPacientes = (Paciente *) malloc(quantidade * sizeof(Paciente));
+
+    printf("\n vet %d\n", tamanho);
 
 }
 
@@ -65,7 +74,10 @@ int BuscarPacientePorCPF(char cpf_alvo[]);
 //Funçoes Joke
 void InserirNovoPaciente(Paciente paciente){
     FILE *ptarq;
-    ptarq = fopen("TRABALHO-ALG-E-PROG\arquivos\pacientes.bin", "wb");
+    ptarq = fopen("TRABALHO-ALG-E-PROG\\arquivos\\pacientes.bin", "w");
+    if(ptarq == NULL){
+        printf("deu merda\n");
+    }
     fwrite(&paciente, sizeof(Paciente), 1, ptarq);
     fclose(ptarq);
 
