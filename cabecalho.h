@@ -60,19 +60,21 @@ void AbreVetores(){
     fseek(ptpacientes, 0, SEEK_END);
     long tamanho = (int)ftell(ptpacientes);
     rewind(ptpacientes);
-    fclose(ptpacientes);
-
+    
     int quantidade = tamanho / sizeof(Paciente);
-    //printf("%d", quantidade);
+    printf("%d\n", quantidade);
     Paciente *vetPacientes = (Paciente *) malloc(quantidade * sizeof(Paciente));
     char *vetCPF = (char *) malloc(quantidade * sizeof(char[12]));
-
+    
     for(int i = 0; i<quantidade; i++){
-        fread(&vetPacientes[quantidade], sizeof(Paciente), quantidade, ptpacientes);
-        fread(&vetCPF[quantidade], sizeof(char[12]), quantidade, ptpacientes);
+        fread(vetPacientes[quantidade], sizeof(Paciente), quantidade, ptpacientes);
+        fread(vetCPF[quantidade], sizeof(char[12]), quantidade, ptpacientes);
+        printf("%d ", i+1);
     }
-    for(int i = 0; i<quantidade; i++)
-        printf("nome %s\ncpf %s\n", vetPacientes[quantidade].nome, vetCPF[0]);
+
+    fclose(ptpacientes);
+    //for(int i = 0; i<quantidade; i++)
+       // printf("nome %s\ncpf %s\n", vetPacientes[quantidade].nome, vetCPF[quantidade]);
     //printf("\n vet %ld\n", tamanho);
 
 }
@@ -84,7 +86,7 @@ int BuscarPacientePorCPF(char cpf_alvo[]);
 //Funçoes Joke
 void InserirNovoPaciente(Paciente paciente){
     FILE *ptarq;
-    ptarq = fopen("pacientes.bin", "a+");
+    ptarq = fopen("pacientes.bin", "wb");
     // ptarq = fopen("pacientes.bin", "wb");
 
     if(ptarq == NULL){
