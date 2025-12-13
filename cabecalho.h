@@ -48,8 +48,13 @@ typedef struct {
 //Pacientes
 void abrevetores(){
     // Pacientes
+
+        char cwd[1024];
+    _getcwd(cwd, sizeof(cwd));
+    printf("Diretório de trabalho atual: %s\n", cwd);
+
     FILE *ptpacientes;
-    ptpacientes = fopen("TRABALHO-ALG-E-PROG\\arquivos\\pacientes.bin", "rb");
+    ptpacientes = fopen("pacientes.bin", "rb");
     if(ptpacientes == NULL){
         printf("deu merda\n");
     }
@@ -74,7 +79,11 @@ int BuscarPacientePorCPF(char cpf_alvo[]);
 //Funçoes Joke
 void InserirNovoPaciente(Paciente paciente){
     FILE *ptarq;
-    ptarq = fopen("TRABALHO-ALG-E-PROG\\arquivos\\pacientes.bin", "w");
+    ptarq = fopen("pacientes.bin", "wb");
+    // ptarq = fopen("pacientes.bin", "wb");
+
+
+
     if(ptarq == NULL){
         printf("deu merda\n");
     }
