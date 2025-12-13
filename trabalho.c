@@ -7,11 +7,10 @@
 int main() {
     setlocale(LC_ALL, "Portuguese");
 
-    abrevetores();
+    AbreVetores();
 
     Paciente p;
     strcpy(p.nome, "João");
-    strcpy(p.CPF, "15");
 
     InserirNovoPaciente(p);
 

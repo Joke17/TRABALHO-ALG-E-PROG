@@ -21,7 +21,6 @@ typedef struct Medico{
     char telefone[14];
 } Medico;
 
-
 typedef struct Paciente{
     char CPF[12];
     char nome[30];
@@ -46,15 +45,14 @@ typedef struct {
 
 //Vetores carregados do .bin
 //Pacientes
-void abrevetores(){
+void AbreVetores(){
+    //char cwd[1024];
+    //_getcwd(cwd, sizeof(cwd));
+    // printf("Diretório de trabalho atual: %s\n", cwd);
+    
     // Pacientes
-
-        char cwd[1024];
-    _getcwd(cwd, sizeof(cwd));
-    printf("Diretório de trabalho atual: %s\n", cwd);
-
     FILE *ptpacientes;
-    ptpacientes = fopen("pacientes.bin", "wb");
+    ptpacientes = fopen("pacientes.bin", "rb");
     if(ptpacientes == NULL){
         printf("deu merda\n");
     }
@@ -67,8 +65,12 @@ void abrevetores(){
     int quantidade = tamanho / sizeof(Paciente);
 
     Paciente *vetPacientes = (Paciente *) malloc(quantidade * sizeof(Paciente));
+    CPF *vetCPF = (CPF *) malloc(quantidade * sizeof(CPF));
 
-    printf("\n vet %d\n", tamanho);
+    for(int i = 0; i<quantidade; i++)
+        printf("vet %s\ncpf %s", vetPacientes[quantidade].nome, vetCPF[0]);
+
+    
 
 }
 
@@ -79,10 +81,8 @@ int BuscarPacientePorCPF(char cpf_alvo[]);
 //Funçoes Joke
 void InserirNovoPaciente(Paciente paciente){
     FILE *ptarq;
-    ptarq = fopen("pacientes.bin", "wb");
+    ptarq = fopen("pacientes.bin", "a+");
     // ptarq = fopen("pacientes.bin", "wb");
-
-
 
     if(ptarq == NULL){
         printf("deu merda\n");
