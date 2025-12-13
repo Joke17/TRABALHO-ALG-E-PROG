@@ -6,11 +6,16 @@
 
 int main() {
     setlocale(LC_ALL, "Portuguese");
-    AlterarDadosPaciente();
+
+    Paciente p;
+    strcpy(p.nome, "João");
+    strcpy(p.CPF, "15");
+
+    InserirNovoPaciente(p);
 
     IndexPaciente i;
     i.posicao = 10;
 
-    printf("baguio doido\n");
+    printf("baguio doido  %d \n", i.posicao);
     return 0;
 }

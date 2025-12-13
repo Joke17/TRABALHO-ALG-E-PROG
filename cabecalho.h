@@ -1,6 +1,11 @@
 #ifndef CABECALHO_H  
 #define CABECALHO_H 
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <locale.h>
+
 typedef struct Login{
     char usuario[20];
     char senha[10];
@@ -39,13 +44,30 @@ typedef struct {
     int posicao;    // posição do registro no arquivo binário
 } IndexPaciente, IndexMedico;
 
+//Vetores carregados do .bin
+//Pacientes
+    // FILE *ptarqpacientes;
+    // ptarqpacientes = fopen("TRABALHO-ALG-E-PROG\arquivos\pacientes.bin", "wb");
+    // fseek(ptarqpacientes, 0, 2); // vai pro fim do arquivo
+    // long tamanho = ftell(ptarqpacientes); //
+    // rewind(ptarqpacientes); //volt pro inicio do arquivo
+    // fclose(ptarqpacientes);
+
 
 int BuscarMedicoPorCRM(char crm_alvo[]);
 int BuscarPacientePorCPF(char cpf_alvo[]);
 
 
 //Funçoes Joke
-void InserirNovoPaciente();
+void InserirNovoPaciente(Paciente paciente){
+    FILE *ptarq;
+    ptarq = fopen("TRABALHO-ALG-E-PROG\arquivos\pacientes.bin", "wb");
+    fwrite(&paciente, sizeof(Paciente), 1, ptarq);
+    fclose(ptarq);
+
+
+    printf("du bao\n");
+}
 void AlterarDadosPaciente(){
     printf("\ndeu bao\n");
 }
