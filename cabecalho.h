@@ -68,7 +68,7 @@ void abrevetores(){
 
     Paciente *vetPacientes = (Paciente *) malloc(quantidade * sizeof(Paciente));
 
-    printf("\n vet %d\n", tamanho);
+    printf("\n vet %ld\n", tamanho);
 
 }
 
