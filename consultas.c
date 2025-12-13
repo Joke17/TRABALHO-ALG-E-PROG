@@ -20,6 +20,8 @@ void InserirNovaConsulta() {
     scanf("%11s", nova_consulta.cpf_paciente);  
     //pra validar se um medico existe usando a fucnao de busca por crm 
     crm_existe = buscarMedicoPorCRM(nova_consulta.crm_medico); 
+
+    //considerando q a funcao vai me retornar -1 se n achar 
     
     if (crm_existe < 0) {
         printf(" O CRM %s não está cadastrado.\n", nova_consulta.crm_medico);
