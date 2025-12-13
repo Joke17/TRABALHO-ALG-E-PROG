@@ -39,6 +39,7 @@ typedef struct {
     int posicao;    // posição do registro no arquivo binário
 } IndexPaciente, IndexMedico;
 
+int VerificarLogin(char user[], char senha[]);
 
 int BuscarMedicoPorCRM(char crm_alvo[]);
 int BuscarPacientePorCPF(char cpf_alvo[]);
