@@ -54,7 +54,7 @@ void abrevetores(){
     printf("Diretório de trabalho atual: %s\n", cwd);
 
     FILE *ptpacientes;
-    ptpacientes = fopen("pacientes.bin", "rb");
+    ptpacientes = fopen("pacientes.bin", "wb");
     if(ptpacientes == NULL){
         printf("deu merda\n");
     }
