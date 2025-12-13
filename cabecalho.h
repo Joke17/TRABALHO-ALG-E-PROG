@@ -46,7 +46,9 @@ int BuscarPacientePorCPF(char cpf_alvo[]);
 
 //Funçoes Joke
 void InserirNovoPaciente();
-void AlterarDadosPaciente();
+void AlterarDadosPaciente(){
+    printf("\ndeu bao\n");
+}
 void BuscarPacientePorNome();
 void ListaPacientes();
 
