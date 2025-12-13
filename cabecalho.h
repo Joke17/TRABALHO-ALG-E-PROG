@@ -100,6 +100,7 @@ void BuscarPacientePorNome();
 void ListaPacientes();
 
 
+//funcoes alex - consultas
 void InserirNovaConsulta(); 
 void ListarConsultasPorMedico(); 
 void ListarConsultasPorPaciente(); 
