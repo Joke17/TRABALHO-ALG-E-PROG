@@ -6,7 +6,13 @@
 
 int main() {
     setlocale(LC_ALL, "Portuguese");
-    AlterarDadosPaciente();
+
+    AbreVetores();
+
+    Paciente p;
+    strcpy(p.nome, "João");
+
+    InserirNovoPaciente(p);
 
     IndexPaciente i;
     i.posicao = 10;
