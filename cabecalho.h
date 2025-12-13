@@ -63,14 +63,16 @@ void AbreVetores(){
     fclose(ptpacientes);
 
     int quantidade = tamanho / sizeof(Paciente);
-    //avbacate
+    //printf("%d", quantidade);
     Paciente *vetPacientes = (Paciente *) malloc(quantidade * sizeof(Paciente));
     char *vetCPF = (char *) malloc(quantidade * sizeof(char[12]));
 
+    for(int i = 0; i<quantidade; i++){
+        fread(&vetPacientes[quantidade], sizeof(Paciente), quantidade, ptpacientes);
+        fread(&vetCPF[quantidade], sizeof(char[12]), quantidade, ptpacientes);
+    }
     for(int i = 0; i<quantidade; i++)
-        printf("vet %s\ncpf ", vetPacientes[quantidade].nome);
-
-    
+        printf("nome %s\ncpf %s\n", vetPacientes[quantidade].nome, vetCPF[0]);
     //printf("\n vet %ld\n", tamanho);
 
 }
