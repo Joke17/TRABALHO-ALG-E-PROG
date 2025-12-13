@@ -46,13 +46,17 @@ typedef struct {
 
 //Vetores carregados do .bin
 //Pacientes
-    // FILE *ptarqpacientes;
-    // ptarqpacientes = fopen("TRABALHO-ALG-E-PROG\arquivos\pacientes.bin", "wb");
-    // fseek(ptarqpacientes, 0, 2); // vai pro fim do arquivo
-    // long tamanho = ftell(ptarqpacientes); //
-    // rewind(ptarqpacientes); //volt pro inicio do arquivo
-    // fclose(ptarqpacientes);
+void abrevetores(){
+    FILE *ptpacientes;
+    ptpacientes = fopen("TRABALHO-ALG-E-PROG\arquivos\pacientes.bin", "rb");
 
+    fseek(ptpacientes, 0, SEEK_END);
+    long tamanho = ftell(ptpacientes);
+    rewind(ptpacientes);
+
+    printf("%d", tamanho);
+
+}
 
 int BuscarMedicoPorCRM(char crm_alvo[]);
 int BuscarPacientePorCPF(char cpf_alvo[]);
