@@ -1,47 +1,54 @@
 #ifndef CABECALHO_H  
 #define CABECALHO_H
 
-typedef struct {
+typedef struct Login{
     char usuario[20];
     char senha[10];
-} login;
+} Login;
 
 
-typedef struct {
+typedef struct Medico{
     char CRM[6];
     char nome[50];
     char especialidade[20];
     char data_de_nascimento[12];
     float valor_hora_trabalho; 
     char telefone[14];
-} medico;
+} Medico;
 
 
-typedef struct {
-    char CPF[15];
+typedef struct Paciente{
+    char CPF[12];
     char nome[30];
     char data_de_nascimento[12]; 
     char telefone[14];
-} paciente;
+} Paciente;
 
 // alequis: estrutura da consulta 
-typedef struct {
+typedef struct Consulta{
     char crm_medico[6];
-    char cpf_paciente[15];
+    char cpf_paciente[12];
     char data[12];
     char sintomas[100];
     char encaminhamentos[100];
-} consulta;
+} Consulta;
 
 
 typedef struct {
-    char chave[15]; // CPF ou CRM
-    long int posicao;    // posicao do registro no arquivo binario
-} indexPaciente, indexMedico;
+    char chave[12]; // CPF ou CRM
+    int posicao;    // posição do registro no arquivo binário
+} IndexPaciente, IndexMedico;
 
 
-int buscarMedicoPorCRM(char crm_alvo[]);
-int buscarPacientePorCPF(char cpf_alvo[]);
+int BuscarMedicoPorCRM(char crm_alvo[]);
+int BuscarPacientePorCPF(char cpf_alvo[]);
+
+
+//Funçoes Joke
+void InserirNovoPaciente();
+void AlterarDadosPaciente();
+void BuscarPacientePorNome();
+void ListaPacientes();
 
 
 void InserirNovaConsulta(); 
