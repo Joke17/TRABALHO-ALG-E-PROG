@@ -4,7 +4,7 @@
 #include "cabecalho.h" 
 
 
-// inserir Nova Consulta 
+// inserir consulta 
 
 void InserirNovaConsulta() {
     Consulta nova_consulta;
@@ -17,7 +17,14 @@ void InserirNovaConsulta() {
     scanf("%5s", nova_consulta.crm_medico); 
 
     printf("Digite o CPF do Paciente: ");
-    scanf("%11s", nova_consulta.cpf_paciente); 
+    scanf("%11s", nova_consulta.cpf_paciente);  
+    //pra validar se um medico existe usando a fucnao de busca por crm 
+    crm_existe = buscarMedicoPorCRM(nova_consulta.crm_medico); 
+    
+    if (crm_existe < 0) {
+        printf(" O CRM %s não está cadastrado.\n", nova_consulta.crm_medico);
+        return; 
+    }
 
 
     
