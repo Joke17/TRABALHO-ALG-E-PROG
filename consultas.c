@@ -4,8 +4,7 @@
 #include "cabecalho.h" 
 
 
-
-// Inserir Nova Consulta 
+// inserir Nova Consulta 
 
 void InserirNovaConsulta() {
     Consulta nova_consulta;
@@ -20,8 +19,15 @@ void InserirNovaConsulta() {
     printf("Digite o CPF do Paciente: ");
     scanf("%11s", nova_consulta.cpf_paciente); 
 
+
     
 }
+
+
+void ListarConsultasPorMedico(); 
+void ListarConsultasPorPaciente(); 
+void ListarConsultasPorData();
+
 
 
 
