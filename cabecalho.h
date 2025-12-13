@@ -1,5 +1,5 @@
 #ifndef CABECALHO_H  
-#define CABECALHO_H
+#define CABECALHO_H 
 
 typedef struct Login{
     char usuario[20];
