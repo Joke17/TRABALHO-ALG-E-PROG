@@ -8,7 +8,7 @@
 
 // inserir consulta 
 
-/*void InserirNovaConsulta() {
+void InserirNovaConsulta() {
     Consulta nova_consulta;
     FILE *arq_consultas;
     int crm_existe, cpf_existe;
@@ -22,12 +22,11 @@
     scanf("%11s", nova_consulta.cpf_paciente); 
 
     //pra validar se um medico existe usando a fucnao de busca por crm 
-    crm_existe = buscarMedicoPorCRM(nova_consulta.crm_medico); 
+    //crm_existe = buscarMedicoPorCRM(nova_consulta.crm_medico); 
 
-    //considerando q a funcao vai me retornar -1 se n achar 
     
     if (crm_existe < 0) {
-        printf("ERRO: O CRM %s nï¿½o estï¿½ cadastrado. Abortando consulta.\n", nova_consulta.crm_medico);
+        printf("ERRO: O CRM %s não está cadastrado.\n", nova_consulta.crm_medico);
         return; 
     }
      
@@ -35,7 +34,6 @@
 
 }
 
-*/
 
 //buceta
 void ListarConsultasPorMedico() {
