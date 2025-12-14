@@ -7,7 +7,7 @@
 
 int main() {
     setlocale(LC_ALL, "PORTUGUESE");
-    printf("---------------\nINICIO\n------------------------");
+    printf("---------------\nINICIO\n------------------------\n\n");
      
 
 
@@ -28,11 +28,11 @@ int main() {
     scanf("%d", &aux);
 
     switch(aux){
-        case 1:
+        case 1:{
             int auxErro;
-            for(auxErro=0;auxErro<=3;auxErro++){
+            for(auxErro=0;auxErro<=2;auxErro++){
                 char userAux[20], senhaAux[20];
-                printf("Usuário: ");
+                printf("\nUsuário: ");
                 scanf("%s", userAux);
 
                 printf("Senha: ");
@@ -44,20 +44,28 @@ int main() {
                 }else{
                     break;
                 }
-                if(auxErro == 3){
+                if(auxErro == 2){
                     printf("Terceira tentativa de login inválida, encerrando o programa...");
                     return 0;
                 }
             }
             break;
+        }
 
-        case 2:
+        case 2:{
             Login novo;
             printf("Usuário:");
             scanf("%s", novo.usuario);
             printf("Senha:");
             scanf("%s", novo.senha);
             CadastrarNovoUsuario(novo);
+            break;
+        }
+
+        case 3:{
+            return 0;
+            break;
+        }
     }
 
     printf("---------------\nFIM.\n------------------------");
