@@ -83,7 +83,9 @@ int BuscarPacientePorCPF(char cpf_alvo[]);
 
 
 //Funçoes Joke
-void InserirNovoPaciente(Paciente paciente){
+void InserirNovoPaciente(Paciente paciente);
+void AlterarDadosPaciente();
+/*void InserirNovoPaciente(Paciente paciente){
     FILE *ptarq;
     ptarq = fopen("pacientes.bin", "wb");
     // ptarq = fopen("pacientes.bin", "wb");
@@ -96,7 +98,7 @@ void InserirNovoPaciente(Paciente paciente){
 
 
     printf("du bao\n");
-}
+}*/
 void AlterarDadosPaciente(){
     printf("\ndeu bao\n");
 }
