@@ -77,10 +77,13 @@ void AbreVetores(){
     fclose(ptpacientes);
 }
 
-
-int BuscarMedicoPorCRM(char crm_alvo[]);
+//funcoes medicos
+void CarregarIndicesMedicos();
+void SalvarIndicesMedicos();
+void InserirNovoMedico();
+void ListarMedicos();
+int buscaBinariaMedico(char *crmBusca);
 int BuscarPacientePorCPF(char cpf_alvo[]);
-
 
 //Funçoes Joke
 void InserirNovoPaciente(Paciente paciente){
