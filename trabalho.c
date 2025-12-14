@@ -7,12 +7,46 @@
 
 int main() {
     setlocale(LC_ALL, "PORTUGUESE");
+    
     printf("---------------\nINICIO\n------------------------\n\n");
-     
 
 
     AbreVetores();
+    // ----------------------------------------------------
+    // --- 1. PREPARAR O AMBIENTE (CARREGAR OS ÍNDICES) ---
+    // ----------------------------------------------------
+    CarregarIndicesMedicos();
+    
+    // OBS: Se você tiver a função AbreVetores() ela deve ser chamada antes de CarregarIndicesMedicos() 
+    // ou você precisa garantir que CarregarIndicesMedicos() não sobrescreva a memória de outros vetores.
 
+    
+    // ----------------------------------------------------
+    // --- 2. GARANTIR DADOS (Cadastrar Médico p/ Teste) ---
+    // ----------------------------------------------------
+    // * DESCOMENTE e execute UMA SÓ VEZ para cadastrar um médico com CRM (ex: 12345).
+    // * DEPOIS COMENTE NOVAMENTE para evitar cadastrar o mesmo várias vezes.
+    // InserirNovoMedico(); 
+
+
+    // ----------------------------------------------------
+    // --- 3. EXECUTAR O TESTE (A SUA FUNÇÃO) ---
+    // ----------------------------------------------------
+    InserirNovaConsulta();
+
+
+    // ----------------------------------------------------
+    // --- 4. FINALIZAR (Salvar e Liberar Memória) ---
+    // ----------------------------------------------------
+    // Salva o novo médico no índice (se ele foi cadastrado) e limpa a RAM.
+    SalvarIndicesMedicos(); 
+
+    printf("---------------\nFIM DO TESTE.\n------------------------");
+
+    // ... O seu código de menu e login continua aqui ...
+    // ... Aqui você pode chamar InserirNovaConsulta() novamente se o login for bem-sucedido ...
+    
+   
     Paciente p;
     strcpy(p.nome, "João");
 
