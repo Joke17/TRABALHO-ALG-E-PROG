@@ -48,7 +48,8 @@ void CadastrarNovoUsuario(Login novo);
 
 //Vetores carregados do .bin
 //Pacientes
-void AbreVetores(){
+void AbreVetores();
+/*void AbreVetores(){
     //char cwd[1024];
     //_getcwd(cwd, sizeof(cwd));
     // printf("Diretório de trabalho atual: %s\n", cwd);
@@ -75,15 +76,20 @@ void AbreVetores(){
     }
 
     fclose(ptpacientes);
-}
+}*/
 
-
-int BuscarMedicoPorCRM(char crm_alvo[]);
+//funcoes medicos
+void CarregarIndicesMedicos();
+void SalvarIndicesMedicos();
+void InserirNovoMedico();
+void ListarMedicos();
+int buscaBinariaMedico(char *crmBusca);
 int BuscarPacientePorCPF(char cpf_alvo[]);
 
-
 //Funçoes Joke
-void InserirNovoPaciente(Paciente paciente){
+void InserirNovoPaciente(Paciente paciente);
+void AlterarDadosPaciente();
+/*void InserirNovoPaciente(Paciente paciente){
     FILE *ptarq;
     ptarq = fopen("pacientes.bin", "wb");
     // ptarq = fopen("pacientes.bin", "wb");
@@ -100,7 +106,7 @@ void InserirNovoPaciente(Paciente paciente){
 void AlterarDadosPaciente(){
     printf("\ndeu bao\n");
 }
-
+*/
 
 void BuscarPacientePorNome();
 void ListaPacientes();
