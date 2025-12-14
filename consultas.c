@@ -33,12 +33,12 @@ void InserirNovaConsulta() {
     printf("Digite a Data da Consulta (DD/MM/AAAA): ");
     scanf("%11s", nova_consulta.data); 
     
-    // usar fgetc(stdin) para limpar o buffer antes de ler strings longas com gets/fgets
-    char dummy;
-    while ((dummy = getchar()) != '\n' && dummy != EOF); 
+    // para limpar o buffer antes de ler strings longas com gets/fgets
+    char limpar;
+    while ((limpar = getchar()) != '\n' && limpar != EOF); 
     
     printf("Digite os Sintomas (máx 99 caracteres): ");
-    // fgets é mais seguro que scanf para strings
+   
     fgets(nova_consulta.sintomas, 100, stdin);
     // remove o \n que o fgets adiciona no final
     nova_consulta.sintomas[strcspn(nova_consulta.sintomas, "\n")] = 0; 
@@ -48,7 +48,7 @@ void InserirNovaConsulta() {
     nova_consulta.encaminhamentos[strcspn(nova_consulta.encaminhamentos, "\n")] = 0;
 
     // gravar no arquivo consultas.bin
-    arq_consultas = fopen("consultas.bin", "ab"); // 'ab': Append Binary (Adicionar no final)
+    arq_consultas = fopen("consultas.bin", "ab"); // 'ab': Append Binary (adiciona so no final)
     if (arq_consultas == NULL) {
         perror("Erro ao abrir o arquivo consultas.bin para escrita");
         return;
