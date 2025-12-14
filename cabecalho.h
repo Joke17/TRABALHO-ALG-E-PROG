@@ -52,7 +52,7 @@ void CadastrarNovoUsuario(Login novo);
 void InserirNovoPaciente(Paciente paciente);
 void AlterarDadosPaciente();
 void AdicionarNaMao(); //SÓ PRA TESTE
-void AbreVetores();
+void CarregarIndicePacientes();
 void BuscarPacientePorNome();
 void ListaPacientes();
 

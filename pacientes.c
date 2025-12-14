@@ -21,7 +21,7 @@ void InserirNovoPaciente(Paciente paciente){
 void AlterarDadosPaciente(){
     printf("\ndeu bao\n");
 }
-void AbreVetores(){
+void CarregarIndicePacientes(){
     //char cwd[1024];
     //_getcwd(cwd, sizeof(cwd));
     // printf("Diretório de trabalho atual: %s\n", cwd);
