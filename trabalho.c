@@ -5,7 +5,7 @@
 #include "cabecalho.h"
 
 int main() {
-    setlocale(LC_ALL, "Portuguese");
+    setlocale(LC_ALL, "PORTUGUESE");
 
     AbreVetores();
 
