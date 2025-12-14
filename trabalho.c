@@ -33,6 +33,7 @@ int main() {
     // a) Se digitar o CRM cadastrado (ex: 12345), deve prosseguir.
     // b) Se digitar um CRM inválido (ex: 99999), deve dar ERRO.
     printf("\n--- Testando InserirNovaConsulta ---\n");
+    //CarregarIndicesMedicos();
     InserirNovaConsulta();
     printf("------------------------------------\n");
     
