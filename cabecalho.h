@@ -49,7 +49,7 @@ void CadastrarNovoUsuario(Login novo);
 //Vetores carregados do .bin
 //Pacientes
 //Funçoes Joke
-void InserirNovoPaciente(Paciente paciente);
+void InserirNovoPaciente();
 void AlterarDadosPaciente();
 void AdicionarNaMao(); //SÓ PRA TESTE
 void CarregarIndicePacientes();

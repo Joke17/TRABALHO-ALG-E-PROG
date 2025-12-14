@@ -4,7 +4,8 @@
 #include <locale.h>
 #include "cabecalho.h"
 
-void InserirNovoPaciente(Paciente paciente){
+void InserirNovoPaciente(){
+    Paciente paciente;
     FILE *ptarq;
     ptarq = fopen("output/pacientes.bin", "wb");
     // ptarq = fopen("pacientes.bin", "wb");
@@ -12,9 +13,21 @@ void InserirNovoPaciente(Paciente paciente){
     if(ptarq == NULL){
         printf("deu merda1\n");
     }
+
+    printf("----------CADASTRO DE PACIENTES----------");
+    printf("Nome: ");
+    scanf("%s", &paciente.nome);
+    printf("CPF: ");
+    scanf("%s", &paciente.CPF);
+    printf("Data de Nascimento: ");
+    scanf("%s", &paciente.data_de_nascimento);
+    printf("Telefone: ");
+    scanf("%s", &paciente.telefone);
+
     fwrite(&paciente, sizeof(Paciente), 1, ptarq);
     fclose(ptarq);
 
+    CarregarIndicePacientes();
 
     printf("du bao\n");
 }
