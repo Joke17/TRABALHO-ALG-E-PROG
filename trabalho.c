@@ -14,9 +14,6 @@ int main() {
 
     InserirNovoPaciente(p);
 
-    IndexPaciente i;
-    i.posicao = 10;
-
     int aux;
 
     printf("1- Efetuar Login\n");
@@ -34,5 +31,6 @@ int main() {
         scanf("%s", senhaAux);
     }
 
+    printf("---------------\nFIM\n------------------------");
     return 0;
 }
