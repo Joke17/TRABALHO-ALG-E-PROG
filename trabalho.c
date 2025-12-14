@@ -16,7 +16,7 @@ int main() {
     CarregarIndicesMedicos();
     // A função AbreVetores() está na cabecalho.h e pode ser mantida
     CarregarIndicePacientes();
-    InserirNovoPaciente();
+    //InserirNovoPaciente();
 
     // ------------------------------------------------------------w-------------------------
     // --- 2. TESTE DE CADASTRO DE MÉDICO (Execute SÓ A PRIMEIRA VEZ, DEPOIS COMENTE) ---
@@ -24,7 +24,7 @@ int main() {
     
     // ATENÇÃO: Descomente a linha abaixo, compile, execute. 
     // Cadastre um médico (ex: CRM 12345) e depois COMENTE de novo para fazer o teste da consulta.
-    InserirNovoMedico(); 
+    ///InserirNovoMedico(); 
 
 
     // ---------------------------------------------
@@ -33,9 +33,9 @@ int main() {
     // Aqui você testará:
     // a) Se digitar o CRM cadastrado (ex: 12345), deve prosseguir.
     // b) Se digitar um CRM inválido (ex: 99999), deve dar ERRO.
-    printf("\n--- Testando InserirNovaConsulta ---\n");
-    InserirNovaConsulta();
-    printf("------------------------------------\n");
+    //printf("\n--- Testando InserirNovaConsulta ---\n");
+    //InserirNovaConsulta();
+    //printf("------------------------------------\n");
     
     
     // --- 4. FINALIZAÇÃO: SALVA ÍNDICES E LIMPA MEMÓRIA ---

@@ -40,7 +40,7 @@ typedef struct Consulta{
 
 typedef struct {
     char chave[12]; // CPF ou CRM
-    int posicao;    // posição do registro no arquivo binário
+    //int posicao;    // posição do registro no arquivo binário
 } IndexPaciente, IndexMedico;
 
 int VerificarLogin(char user[], char senha[]);

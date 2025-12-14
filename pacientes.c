@@ -7,14 +7,13 @@
 void InserirNovoPaciente(){
     Paciente paciente;
     FILE *ptarq;
-    ptarq = fopen("output/pacientes.bin", "wb");
-    // ptarq = fopen("pacientes.bin", "wb");
+    ptarq = fopen("output/pacientes.bin", "a+");
 
     if(ptarq == NULL){
         printf("deu merda1\n");
     }
 
-    printf("----------CADASTRO DE PACIENTES----------");
+    printf("----------CADASTRO DE PACIENTES----------\n");
     printf("Nome: ");
     scanf("%s", &paciente.nome);
     printf("CPF: ");
@@ -28,8 +27,6 @@ void InserirNovoPaciente(){
     fclose(ptarq);
 
     CarregarIndicePacientes();
-
-    printf("du bao\n");
 }
 void AlterarDadosPaciente(){
     printf("\ndeu bao\n");
@@ -52,19 +49,24 @@ void CarregarIndicePacientes(){
     rewind(ptpacientes);
     
     int quantidade = tamanho / sizeof(Paciente);
-    //printf("%d\n", quantidade);
     Paciente *vetPacientes = (Paciente *) malloc(quantidade * sizeof(Paciente));
-    char *vetCPF = (char *) malloc(quantidade * sizeof(char[12]));
+    IndexPaciente *vetIndex = (IndexPaciente *) malloc(quantidade * sizeof(IndexPaciente));
     
     //printf("ate aq veio");
 
     fread(vetPacientes, sizeof(Paciente), quantidade, ptpacientes);
+    fread(vetIndex, sizeof(IndexPaciente), quantidade, ptpacientes);
 
-    for(int i=0; i<quantidade; i++){
-        printf("%s\n",vetPacientes[i].nome);
+    for(int i = 0; i < quantidade; i++){
+        printf("%s \n", vetIndex[i].posicao);
     }
+    // for(int i = 0; i < quantidade; i++){
+    //     printf("%s \n", vetIndex[i].posicao);
+    // }
 
     fclose(ptpacientes);
+    printf("Sistema: %d pacientes carregados na memoria.\n", quantidade);
+
 }
 
 void AdicionarNaMao() {
