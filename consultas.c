@@ -7,13 +7,14 @@
 
 // Inserir Nova Consulta 
 
+// inserir consulta 
+
 void InserirNovaConsulta() {
     Consulta nova_consulta;
     FILE *arq_consultas;
     int crm_existe, cpf_existe;
 
-    printf("\n--- Cadastrar Nova Consulta ---\n");
-
+    printf("\nCadastrar Nova Consulta \n");
 
     printf("Digite o CRM do M�dico: ");
     scanf("%5s", nova_consulta.crm_medico); 
@@ -23,7 +24,11 @@ void InserirNovaConsulta() {
 
     
     // Chamamos a fun��o de validacao do medico
+    scanf("%11s", nova_consulta.cpf_paciente);  
+    //pra validar se um medico existe usando a fucnao de busca por crm 
     crm_existe = buscarMedicoPorCRM(nova_consulta.crm_medico); 
+
+    //considerando q a funcao vai me retornar -1 se n achar 
     
     if (crm_existe < 0) {
         printf("ERRO: O CRM %s n�o est� cadastrado. Abortando consulta.\n", nova_consulta.crm_medico);
@@ -38,11 +43,11 @@ void InserirNovaConsulta() {
     if (cpf_existe < 0) {
         printf("ERRO: O CPF %s n�o est� cadastrado. Abortando consulta.\n", nova_consulta.cpf_paciente);
         return; // Sai da fun��o
+        printf(" O CRM %s n�o est� cadastrado.\n", nova_consulta.crm_medico);
+        return; 
     }
 
-    //  Coletar o Resto dos Dados
-    printf("Digite a Data da Consulta (DD/MM/AAAA): ");
-    scanf("%11s", nova_consulta.data); 
+
     
     // Usar fgetc(stdin) para limpar o buffer antes de ler strings longas com gets/fgets
     char limpeza;
@@ -71,6 +76,12 @@ void InserirNovaConsulta() {
     fclose(arq_consultas);
     printf("\nConsulta cadastrada com sucesso!\n");
 }
+
+//buceta
+void ListarConsultasPorMedico(); 
+void ListarConsultasPorPaciente(); 
+void ListarConsultasPorData();
+
 
 
 
