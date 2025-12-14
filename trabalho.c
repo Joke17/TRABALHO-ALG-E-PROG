@@ -5,7 +5,9 @@
 #include "cabecalho.h"
 
 int main() {
-    setlocale(LC_ALL, "Portuguese");
+    setlocale(LC_ALL, "PORTUGUESE");
+    printf("---------------\nINICIO\n------------------------");
+
 
     AbreVetores();
 
@@ -13,9 +15,6 @@ int main() {
     strcpy(p.nome, "João");
 
     InserirNovoPaciente(p);
-
-    IndexPaciente i;
-    i.posicao = 10;
 
     int aux;
 
@@ -41,5 +40,6 @@ int main() {
         }
     }
 
+    printf("---------------\nFIM\n------------------------");
     return 0;
 }
