@@ -12,46 +12,40 @@ int main() {
 
 
     //AbreVetores();
-    // ----------------------------------------------------
-    // --- 1. PREPARAR O AMBIENTE (CARREGAR OS ÍNDICES) ---
-    // ----------------------------------------------------
+   // --- 1. PREPARAÇÃO: CARREGA ÍNDICES DOS MÉDICOS ---
     CarregarIndicesMedicos();
+    // A função AbreVetores() está na cabecalho.h e pode ser mantida
+    //AbreVetores();
+
+    // ------------------------------------------------------------w-------------------------
+    // --- 2. TESTE DE CADASTRO DE MÉDICO (Execute SÓ A PRIMEIRA VEZ, DEPOIS COMENTE) ---
+    // -------------------------------------------------------------------------------------
     
-    // OBS: Se você tiver a função AbreVetores() ela deve ser chamada antes de CarregarIndicesMedicos() 
-    // ou você precisa garantir que CarregarIndicesMedicos() não sobrescreva a memória de outros vetores.
-
-    
-    // ----------------------------------------------------
-    // --- 2. GARANTIR DADOS (Cadastrar Médico p/ Teste) ---
-    // ----------------------------------------------------
-    // * DESCOMENTE e execute UMA SÓ VEZ para cadastrar um médico com CRM (ex: 12345).
-    // * DEPOIS COMENTE NOVAMENTE para evitar cadastrar o mesmo várias vezes.
-    // InserirNovoMedico(); 
+    // ATENÇÃO: Descomente a linha abaixo, compile, execute. 
+    // Cadastre um médico (ex: CRM 12345) e depois COMENTE de novo para fazer o teste da consulta.
+     InserirNovoMedico(); 
 
 
-    // ----------------------------------------------------
-    // --- 3. EXECUTAR O TESTE (A SUA FUNÇÃO) ---
-    // ----------------------------------------------------
+    // ---------------------------------------------
+    // --- 3. TESTE DA SUA FUNÇÃO DE CONSULTA ---
+    // ---------------------------------------------
+    // Aqui você testará:
+    // a) Se digitar o CRM cadastrado (ex: 12345), deve prosseguir.
+    // b) Se digitar um CRM inválido (ex: 99999), deve dar ERRO.
+    printf("\n--- Testando InserirNovaConsulta ---\n");
     InserirNovaConsulta();
-
-
-    // ----------------------------------------------------
-    // --- 4. FINALIZAR (Salvar e Liberar Memória) ---
-    // ----------------------------------------------------
-    // Salva o novo médico no índice (se ele foi cadastrado) e limpa a RAM.
-    SalvarIndicesMedicos(); 
-
-    printf("---------------\nFIM DO TESTE.\n------------------------");
-
-    // ... O seu código de menu e login continua aqui ...
-    // ... Aqui você pode chamar InserirNovaConsulta() novamente se o login for bem-sucedido ...
+    printf("------------------------------------\n");
+    
+    
+    // --- 4. FINALIZAÇÃO: SALVA ÍNDICES E LIMPA MEMÓRIA ---
+    SalvarIndicesMedicos();
     
    
-    Paciente p;
-    strcpy(p.nome, "João");
+    //Paciente p;
+    //strcpy(p.nome, "João");
 
-    InserirNovoPaciente(p);
-    ListarConsultasPorMedico();
+    //InserirNovoPaciente(p);
+    //ListarConsultasPorMedico();
 
     int aux;
 
