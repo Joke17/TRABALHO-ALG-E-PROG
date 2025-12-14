@@ -61,9 +61,7 @@ void InserirNovaConsulta() {
     printf("\nConsulta cadastrada com sucesso!\n");
 
 }
-
-
-//buceta
+ 
 void ListarConsultasPorMedico() {
     printf("\nListar Consultas por Médicos\n");   
 }
