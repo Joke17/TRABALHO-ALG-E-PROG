@@ -8,22 +8,12 @@
 int main() {
     setlocale(LC_ALL, "PORTUGUESE");
     printf("---------------\nINICIO\n------------------------\n\n");
-     
-
-
-    AbreVetores();
-
-    Paciente p;
-    strcpy(p.nome, "João");
-
-    InserirNovoPaciente(p);
-    ListarConsultasPorMedico();
 
     int aux;
 
     printf("1- Efetuar Login\n");
     printf("2- Cadastrar Usuário\n");
-    printf("3- Encerrar Programa\n");
+    printf("0- Encerrar Programa\n");
 
     scanf("%d", &aux);
 
@@ -62,7 +52,7 @@ int main() {
             break;
         }
 
-        case 3:{
+        case 0:{
             return 0;
             break;
         }
