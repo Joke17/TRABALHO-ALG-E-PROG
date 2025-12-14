@@ -3,10 +3,12 @@
 #include <string.h>
 #include <locale.h>
 #include "cabecalho.h"
+#include "consultas.h"
 
 int main() {
     setlocale(LC_ALL, "PORTUGUESE");
     printf("---------------\nINICIO\n------------------------");
+     printf("---------------\nINICIO\n------------------------");
 
 
     AbreVetores();
@@ -15,6 +17,7 @@ int main() {
     strcpy(p.nome, "João");
 
     InserirNovoPaciente(p);
+    ListarConsultasPorMedico();
 
     int aux;
 
@@ -35,4 +38,5 @@ int main() {
 
     printf("---------------\nFIM\n------------------------");
     return 0;
+    exit(0);
 }
