@@ -5,7 +5,7 @@
 #include "cabecalho.h"
 
 int VerificarLogin(char user[], char senha[]){
-    FILE *loginArq = fopen("login.bin", "rb");
+    FILE *loginArq = fopen("output/login.bin", "rb");
     fseek(loginArq,0,SEEK_END);
     long bytes = ftell(loginArq);
     int tam = bytes/sizeof(Login);
@@ -16,8 +16,8 @@ int VerificarLogin(char user[], char senha[]){
     int verificaLogin = 0;
 
     for(int i=0; i<tam; i++){
-        if(user == logins[i].usuario){
-            if(senha == logins[i].senha){
+        if(strcmp(user, logins[i].usuario) == 0){
+            if(strcmp(senha, logins[i].senha) == 0){
                 verificaLogin = 1;
                 break;
             }
@@ -26,5 +26,5 @@ int VerificarLogin(char user[], char senha[]){
     free(logins);
     fclose(loginArq);
 
-    return 0;
+    return verificaLogin;
 }
