@@ -63,24 +63,16 @@ void AbreVetores(){
     rewind(ptpacientes);
     
     int quantidade = tamanho / sizeof(Paciente);
-    printf("%d\n", quantidade);
+    //printf("%d\n", quantidade);
     Paciente *vetPacientes = (Paciente *) malloc(quantidade * sizeof(Paciente));
     char *vetCPF = (char *) malloc(quantidade * sizeof(char[12]));
     
-    printf("vai dar merda daq a pouco\n");
+    //printf("ate aq veio");
     for(int i = 0; i<quantidade; i++){
-        Paciente p;
-        fread(&p, sizeof(Paciente), 1, ptpacientes);
-        vetPacientes[i] = p;
-
-        printf("%d ", i+1);
+        fread(&vetPacientes[i], sizeof(Paciente), 1, ptpacientes);
     }
 
     fclose(ptpacientes);
-    // for(int i = 0; i<quantidade; i++)
-    //    printf("nome %s\n", vetPacientes[quantidade].nome);
-    //printf("\n vet %ld\n", tamanho);
-
 }
 
 int BuscarMedicoPorCRM(char crm_alvo[]);
