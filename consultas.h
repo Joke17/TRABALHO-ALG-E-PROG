@@ -39,7 +39,7 @@
 
 //buceta
 void ListarConsultasPorMedico() {
-    printf("\nListar Consultas por Médico\n");    // Implementaï¿½ï¿½o da funï¿½ï¿½o
+    printf("\nListar Consultas por Médicos\n");    // Implementaï¿½ï¿½o da funï¿½ï¿½o
 }
 
 void ListarConsultasPorPaciente(); 
