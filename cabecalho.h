@@ -48,37 +48,6 @@ void CadastrarNovoUsuario(Login novo);
 
 //Vetores carregados do .bin
 //Pacientes
-<<<<<<< HEAD
-void CarregarIndicePacientes();
-void CarregarIndicePacientes(){
-    //char cwd[1024];
-    //_getcwd(cwd, sizeof(cwd));
-    // printf("Diretório de trabalho atual: %s\n", cwd);
-    
-    // Pacientes
-    FILE *ptpacientes;
-    ptpacientes = fopen("pacientes.bin", "rb");
-    if(ptpacientes == NULL){
-        printf("deu merda\n");
-    }
-
-    fseek(ptpacientes, 0, SEEK_END);
-    long tamanho = (int)ftell(ptpacientes);
-    rewind(ptpacientes);
-    
-    int quantidade = tamanho / sizeof(Paciente);
-    //printf("%d\n", quantidade);
-    Paciente *vetPacientes = (Paciente *) malloc(quantidade * sizeof(Paciente));
-    char *vetCPF = (char *) malloc(quantidade * sizeof(char[12]));
-    
-    //printf("ate aq veio");
-    for(int i = 0; i<quantidade; i++){
-        fread(&vetPacientes[i], sizeof(Paciente), 1, ptpacientes);
-    }
-
-    fclose(ptpacientes);
-}
-=======
 //Funçoes Joke
 void InserirNovoPaciente(Paciente paciente);
 void AlterarDadosPaciente();
@@ -86,7 +55,6 @@ void AdicionarNaMao(); //SÓ PRA TESTE
 void AbreVetores();
 void BuscarPacientePorNome();
 void ListaPacientes();
->>>>>>> 2666ae7edb0fe7d203ac70ba3ad4e78a9c04b3df
 
 //funcoes medicos
 void CarregarIndicesMedicos();
