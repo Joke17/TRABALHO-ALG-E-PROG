@@ -48,8 +48,8 @@ void CadastrarNovoUsuario(Login novo);
 
 //Vetores carregados do .bin
 //Pacientes
-void AbreVetores();
-/*void AbreVetores(){
+void CarregarIndicePacientes();
+void CarregarIndicePacientes(){
     //char cwd[1024];
     //_getcwd(cwd, sizeof(cwd));
     // printf("Diretório de trabalho atual: %s\n", cwd);
@@ -76,7 +76,7 @@ void AbreVetores();
     }
 
     fclose(ptpacientes);
-}*/
+}
 
 //funcoes medicos
 void CarregarIndicesMedicos();

@@ -15,7 +15,7 @@ int main() {
    // --- 1. PREPARAÇÃO: CARREGA ÍNDICES DOS MÉDICOS ---
     CarregarIndicesMedicos();
     // A função AbreVetores() está na cabecalho.h e pode ser mantida
-    //AbreVetores();
+    CarregarIndicePacientes();
 
     // ------------------------------------------------------------w-------------------------
     // --- 2. TESTE DE CADASTRO DE MÉDICO (Execute SÓ A PRIMEIRA VEZ, DEPOIS COMENTE) ---
@@ -23,7 +23,7 @@ int main() {
     
     // ATENÇÃO: Descomente a linha abaixo, compile, execute. 
     // Cadastre um médico (ex: CRM 12345) e depois COMENTE de novo para fazer o teste da consulta.
-     InserirNovoMedico(); 
+    InserirNovoMedico(); 
 
 
     // ---------------------------------------------
