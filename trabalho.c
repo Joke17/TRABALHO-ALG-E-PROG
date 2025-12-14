@@ -3,7 +3,7 @@
 #include <string.h>
 #include <locale.h>
 #include "cabecalho.h"
-#include "consultas.h"
+
 
 int main() {
     setlocale(LC_ALL, "PORTUGUESE");
