@@ -3,9 +3,6 @@
 #include <string.h>
 #include "cabecalho.h" 
 
-
-
-
 // inserir consulta 
 
 void InserirNovaConsulta() {
@@ -24,8 +21,8 @@ void InserirNovaConsulta() {
     //pra validar se um medico existe usando a fucnao de busca por crm 
     crm_existe = buscaBinariaMedico(nova_consulta.crm_medico); 
 
-    
-    if (crm_existe < 0) {
+    //considerando que a funcao vai retornar -1 se nao encontrar
+    if (crm_existe < 0) { 
         printf("ERRO: O CRM %s não está cadastrado.\n", nova_consulta.crm_medico);
         return; 
     }
