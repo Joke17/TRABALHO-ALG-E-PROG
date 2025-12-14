@@ -44,6 +44,7 @@ typedef struct {
 } IndexPaciente, IndexMedico;
 
 int VerificarLogin(char user[], char senha[]);
+
 //Vetores carregados do .bin
 //Pacientes
 void AbreVetores(){
@@ -80,6 +81,7 @@ void AbreVetores(){
 
 }
 
+
 int BuscarMedicoPorCRM(char crm_alvo[]);
 int BuscarPacientePorCPF(char cpf_alvo[]);
 
@@ -102,6 +104,8 @@ void InserirNovoPaciente(Paciente paciente){
 void AlterarDadosPaciente(){
     printf("\ndeu bao\n");
 }
+
+
 void BuscarPacientePorNome();
 void ListaPacientes();
 

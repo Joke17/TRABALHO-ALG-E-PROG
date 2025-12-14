@@ -32,6 +32,13 @@ int main() {
 
         printf("Senha: ");
         scanf("%s", senhaAux);
+
+        int teste = VerificarLogin(userAux, senhaAux);
+        if(teste == 0){
+            printf("erro");
+        }else{
+            printf("deu certo");
+        }
     }
 
     return 0;
