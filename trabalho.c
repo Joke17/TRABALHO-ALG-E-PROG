@@ -24,7 +24,7 @@ int main() {
     
     // ATENÇÃO: Descomente a linha abaixo, compile, execute. 
     // Cadastre um médico (ex: CRM 12345) e depois COMENTE de novo para fazer o teste da consulta.
-    ///InserirNovoMedico(); 
+    //InserirNovoMedico(); 
 
 
     // ---------------------------------------------
@@ -33,16 +33,9 @@ int main() {
     // Aqui você testará:
     // a) Se digitar o CRM cadastrado (ex: 12345), deve prosseguir.
     // b) Se digitar um CRM inválido (ex: 99999), deve dar ERRO.
-<<<<<<< HEAD
     printf("\n--- Testando InserirNovaConsulta ---\n");
-    //CarregarIndicesMedicos();
     InserirNovaConsulta();
     printf("------------------------------------\n");
-=======
-    //printf("\n--- Testando InserirNovaConsulta ---\n");
-    //InserirNovaConsulta();
-    //printf("------------------------------------\n");
->>>>>>> 51c8e9fc39a377e0aa4ec5e1ffd8404f059ef8ea
     
     
     // --- 4. FINALIZAÇÃO: SALVA ÍNDICES E LIMPA MEMÓRIA ---
