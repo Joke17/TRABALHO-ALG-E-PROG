@@ -44,6 +44,7 @@ typedef struct {
 } IndexPaciente, IndexMedico;
 
 int VerificarLogin(char user[], char senha[]);
+void CadastrarNovoUsuario(Login novo);
 
 //Vetores carregados do .bin
 //Pacientes

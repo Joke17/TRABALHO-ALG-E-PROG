@@ -27,20 +27,37 @@ int main() {
 
     scanf("%d", &aux);
 
-    if(aux==1){
-        char userAux[20], senhaAux[20];
-        printf("Usuário: ");
-        scanf("%s", userAux);
+    switch(aux){
+        case 1:
+            int auxErro;
+            for(auxErro=0;auxErro<=3;auxErro++){
+                char userAux[20], senhaAux[20];
+                printf("Usuário: ");
+                scanf("%s", userAux);
 
-        printf("Senha: ");
-        scanf("%s", senhaAux);
+                printf("Senha: ");
+                scanf("%s", senhaAux);
 
-        int teste = VerificarLogin(userAux, senhaAux);
-        if(teste == 0){
-            printf("erro");
-        }else{
-            printf("deu certo");
-        }
+                int teste = VerificarLogin(userAux, senhaAux);
+                if(teste == 0){
+                    printf("Login ou senha inválidos\n");
+                }else{
+                    break;
+                }
+                if(auxErro == 3){
+                    printf("Terceira tentativa de login inválida, encerrando o programa...");
+                    return 0;
+                }
+            }
+            break;
+
+        case 2:
+            Login novo;
+            printf("Usuário:");
+            scanf("%s", novo.usuario);
+            printf("Senha:");
+            scanf("%s", novo.senha);
+            CadastrarNovoUsuario(novo);
     }
 
     printf("---------------\nFIM.\n------------------------");
