@@ -48,7 +48,8 @@ void CadastrarNovoUsuario(Login novo);
 
 //Vetores carregados do .bin
 //Pacientes
-void AbreVetores(){
+void AbreVetores();
+/*void AbreVetores(){
     //char cwd[1024];
     //_getcwd(cwd, sizeof(cwd));
     // printf("Diretório de trabalho atual: %s\n", cwd);
@@ -75,7 +76,7 @@ void AbreVetores(){
     }
 
     fclose(ptpacientes);
-}
+}*/
 
 
 int BuscarMedicoPorCRM(char crm_alvo[]);
@@ -98,11 +99,11 @@ void AlterarDadosPaciente();
 
 
     printf("du bao\n");
-}*/
+}
 void AlterarDadosPaciente(){
     printf("\ndeu bao\n");
 }
-
+*/
 
 void BuscarPacientePorNome();
 void ListaPacientes();
