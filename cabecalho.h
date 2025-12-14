@@ -48,6 +48,7 @@ void CadastrarNovoUsuario(Login novo);
 
 //Vetores carregados do .bin
 //Pacientes
+<<<<<<< HEAD
 void CarregarIndicePacientes();
 void CarregarIndicePacientes(){
     //char cwd[1024];
@@ -77,6 +78,15 @@ void CarregarIndicePacientes(){
 
     fclose(ptpacientes);
 }
+=======
+//Funçoes Joke
+void InserirNovoPaciente(Paciente paciente);
+void AlterarDadosPaciente();
+void AdicionarNaMao(); //SÓ PRA TESTE
+void AbreVetores();
+void BuscarPacientePorNome();
+void ListaPacientes();
+>>>>>>> 2666ae7edb0fe7d203ac70ba3ad4e78a9c04b3df
 
 //funcoes medicos
 void CarregarIndicesMedicos();
@@ -85,32 +95,6 @@ void InserirNovoMedico();
 void ListarMedicos();
 int buscaBinariaMedico(char *crmBusca);
 int BuscarPacientePorCPF(char cpf_alvo[]);
-
-//Funçoes Joke
-void InserirNovoPaciente(Paciente paciente);
-void AlterarDadosPaciente();
-/*void InserirNovoPaciente(Paciente paciente){
-    FILE *ptarq;
-    ptarq = fopen("pacientes.bin", "wb");
-    // ptarq = fopen("pacientes.bin", "wb");
-
-    if(ptarq == NULL){
-        printf("deu merda\n");
-    }
-    fwrite(&paciente, sizeof(Paciente), 1, ptarq);
-    fclose(ptarq);
-
-
-    printf("du bao\n");
-}
-void AlterarDadosPaciente(){
-    printf("\ndeu bao\n");
-}
-*/
-
-void BuscarPacientePorNome();
-void ListaPacientes();
-
 
 //funcoes alex - consultas
 void InserirNovaConsulta(); 

@@ -51,7 +51,7 @@ int main() {
 
     printf("1- Efetuar Login\n");
     printf("2- Cadastrar Usuário\n");
-    printf("3- Encerrar Programa\n");
+    printf("0- Encerrar Programa\n");
 
     scanf("%d", &aux);
 
@@ -90,7 +90,7 @@ int main() {
             break;
         }
 
-        case 3:{
+        case 0:{
             return 0;
             break;
         }
