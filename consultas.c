@@ -6,32 +6,39 @@
 // inserir consulta 
 
 void InserirNovaConsulta() {
-    Consulta nova_consulta;
+   Consulta nova_consulta;
     FILE *arq_consultas;
     int crm_existe, cpf_existe;
 
     printf("\nCadastrar Nova Consulta \n");
 
-    printf("Digite o CRM do Mï¿½dico: ");
+    printf("Digite o CRM do Médico: ");
     scanf("%5s", nova_consulta.crm_medico); 
 
-    printf("Digite o CPF do Paciente: ");
-    scanf("%11s", nova_consulta.cpf_paciente); 
-
-    //pra validar se um medico existe usando a fucnao de busca por crm 
+    // --- NOVO: LIMPAR O BUFFER APÓS LER O CRM ---
+    char limpar;
+    while ((limpar = getchar()) != '\n' && limpar != EOF); 
+    // ---------------------------------------------
+    
+    // Teste de Busca
     crm_existe = buscaBinariaMedico(nova_consulta.crm_medico); 
 
-    //considerando que a funcao vai retornar -1 se nao encontrar
-    if (crm_existe < 0) { 
+    if (crm_existe < 0) {
         printf("ERRO: O CRM %s não está cadastrado.\n", nova_consulta.crm_medico);
         return; 
     }
      
+    printf("Digite o CPF do Paciente: ");
+    scanf("%11s", nova_consulta.cpf_paciente); 
+
+    // --- NOVO: LIMPAR O BUFFER APÓS LER O CPF ---
+    while ((limpar = getchar()) != '\n' && limpar != EOF); 
+    // ---------------------------------------------
+
     printf("Digite a Data da Consulta (DD/MM/AAAA): ");
     scanf("%11s", nova_consulta.data); 
     
-    // para limpar o buffer antes de ler strings longas com gets/fgets
-    char limpar;
+    // A limpeza original (que é essencial antes do fgets)
     while ((limpar = getchar()) != '\n' && limpar != EOF); 
     
     printf("Digite os Sintomas (máx 99 caracteres): ");
@@ -43,7 +50,6 @@ void InserirNovaConsulta() {
     printf("Digite os Encaminhamentos (máx 99 caracteres): ");
     fgets(nova_consulta.encaminhamentos, 100, stdin);
     nova_consulta.encaminhamentos[strcspn(nova_consulta.encaminhamentos, "\n")] = 0;
-
     // gravar no arquivo consultas.bin
     arq_consultas = fopen("consultas.bin", "ab"); // 'ab': Append Binary (adiciona so no final)
     if (arq_consultas == NULL) {

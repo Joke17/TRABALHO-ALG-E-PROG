@@ -7,6 +7,7 @@
 
 int main() {
     setlocale(LC_ALL, "PORTUGUESE");
+    
     printf("---------------\nINICIO\n------------------------\n\n");
 
     int aux;

@@ -70,4 +70,4 @@ void ListarConsultasPorMedico();
 void ListarConsultasPorPaciente(); 
 void ListarConsultasPorData();
 
-#endif ;
+#endif
