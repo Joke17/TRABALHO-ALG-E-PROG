@@ -6,234 +6,196 @@
 
 void MenuLogin(){
     int aux;
+    do{
+        printf("1- Efetuar Login\n");
+        printf("2- Cadastrar Usuário\n");
+        printf("0- Encerrar Programa\n");
 
-    printf("1- Efetuar Login\n");
-    printf("2- Cadastrar Usuário\n");
-    printf("0- Encerrar Programa\n");
+        scanf("%d", &aux);
 
-    scanf("%d", &aux);
+        switch(aux){
+            case 1:{
+                int auxErro;
+                for(auxErro=0;auxErro<=2;auxErro++){
+                    char userAux[20], senhaAux[20];
+                    printf("\nUsuário: ");
+                    scanf("%s", userAux);
 
-    switch(aux){
-        case 1:{
-            int auxErro;
-            for(auxErro=0;auxErro<=2;auxErro++){
-                char userAux[20], senhaAux[20];
-                printf("\nUsuário: ");
-                scanf("%s", userAux);
+                    printf("Senha: ");
+                    scanf("%s", senhaAux);
 
-                printf("Senha: ");
-                scanf("%s", senhaAux);
-
-                int teste = VerificarLogin(userAux, senhaAux);
-                if(teste == 0){
-                    printf("Login ou senha inválidos\n");
-                }else{
-                    MenuPrincipal();
-                    break;
+                    int teste = VerificarLogin(userAux, senhaAux);
+                    if(teste == 0){
+                        printf("Login ou senha inválidos\n");
+                    }else{
+                        MenuPrincipal();
+                        break;
+                    }
+                    if(auxErro == 2){
+                        printf("Terceira tentativa de login inválida, encerrando o programa...");
+                        return 0;
+                    }
                 }
-                if(auxErro == 2){
-                    printf("Terceira tentativa de login inválida, encerrando o programa...");
-                    return 0;
-                }
+                break;
             }
-            break;
-        }
 
-        case 2:{
-            Login novo;
-            printf("Usuário:");
-            scanf("%s", novo.usuario);
-            printf("Senha:");
-            scanf("%s", novo.senha);
-            CadastrarNovoUsuario(novo);
-            break;
-        }
+            case 2:{
+                Login novo;
+                printf("Usuário:");
+                scanf("%s", novo.usuario);
+                printf("Senha:");
+                scanf("%s", novo.senha);
+                CadastrarNovoUsuario(novo);
+                break;
+            }
 
-        case 0:{
-            return;
-            break;
+            case 0:{
+                return;
+                break;
+            }
         }
-    }
+    }while(aux!=0);
 }
 
 void MenuPrincipal(){
     int aux;
 
-    printf("1- Pacientes\n");
-    printf("2- Médicos\n");
-    printf("3- Consultas\n");
+    do{
+        printf("1- Pacientes\n");
+        printf("2- Médicos\n");
+        printf("3- Consultas\n");
+        printf("0- Voltar para a página anterior\n");
 
-    scanf("%d", &aux);
+        scanf("%d", &aux);
 
-    switch(aux){
-        case 1:{
-            MenuPacientes();
-            break;
+        switch(aux){
+            case 1:{
+                MenuPacientes();
+                break;
+            }
+            case 2:{
+                MenuMedicos();
+                break;
+            }
+            case 3:{
+                MenuConsultas();
+                break;
+            }
+            case 0:{
+                return;
+            }
         }
-        case 2:{
-            MenuMedicos();
-            break;
-        }
-        case 3:{
-            MenuConsultas();
-            break;
-        }
-    }
+    }while(aux!=0);
 }
 
 void MenuPacientes(){
     int aux;
-    printf("1- Inserir novo paciente\n");
-    printf("2- Buscar paciente por nome\n");
-    printf("3- Alterar dados do paciente\n"); 
+    do{
+        printf("1- Inserir novo paciente\n");
+        printf("2- Buscar paciente por nome\n");
+        printf("3- Alterar dados do paciente\n"); 
+        printf("0- Voltar para a página anterior\n");
 
-    scanf("%d", &aux);
+        scanf("%d", &aux);
 
-    switch(aux){
-        case 1:{
-            Paciente paciente;
-            printf("Digite o nome do paciente: ");
-            scanf(" %[^\n]", paciente.nome);
+        switch(aux){
+            case 1:{
+                InserirNovoPaciente();
+                break;
+            }
 
-            printf("Digite o CPF do paciente: ");
-            scanf(" %s", paciente.CPF);
+            case 2:{
+                BuscarPacientePorNome();
+                break;
+            }
 
-            printf("Digite a data de nascimento do paciente: ");
-            scanf(" %s", paciente.data_de_nascimento);
+            case 3:{
+                AlterarDadosPaciente();
+                break;
+            }
 
-            printf("Digite o telefone do paciente: ");
-            scanf(" %s", paciente.telefone);
-
-            InserirNovoPaciente(paciente);
-            break;
+            case 0:{
+                return;
+            }
         }
-
-        case 2:{
-            char nome[50];
-            printf("Digite o nome do paciente que deseja buscar: ");
-            scanf(" %[^\n]", nome);
-            BuscarPacientePorNome(nome);
-            break;
-        }
-
-        case 3:{
-            char cpf[12];
-            printf("Digite o CPF do paciente que deseja alterar: ");
-            scanf(" %s", cpf);
-            AlterarDadosPaciente(cpf);
-            break;
-        }
-    }
+    }while(aux!=0);
 }
 
 void MenuMedicos(){
     int aux;
-    printf("1- Inserir novo médico\n");
-    printf("2- Buscar médico por nome\n");
-    printf("3- Listar médicos por especialidade\n"); 
-    printf("4- Alterar dados do médico\n"); 
+    do{
+        printf("1- Inserir novo médico\n");
+        printf("2- Buscar médico por nome\n");
+        printf("3- Listar médicos por especialidade\n"); 
+        printf("4- Alterar dados do médico\n"); 
+        printf("0- Voltar para a página anterior\n");
 
-    scanf("%d", &aux);
+        scanf("%d", &aux);
 
-    switch(aux){
-        case 1:{
-            Paciente paciente;
-            printf("Digite o nome do paciente: ");
-            scanf(" %[^\n]", paciente.nome);
+        switch(aux){
+            case 1:{
+                InserirNovoPaciente();
+                break;
+            }
 
-            printf("Digite o CPF do paciente: ");
-            scanf(" %s", paciente.CPF);
+            case 2:{
+                BuscarPacientePorNome();
+                break;
+            }
 
-            printf("Digite a data de nascimento do paciente: ");
-            scanf(" %s", paciente.data_de_nascimento);
+            case 3:{
+                ListarMedicos();
+                break;
+            }
 
-            printf("Digite o telefone do paciente: ");
-            scanf(" %s", paciente.telefone);
+            case 4:{
+                //funcao editar heros
+                break;
+            }
 
-            InserirNovoPaciente(paciente);
-            break;
+            case 0:{
+                return;
+            }
         }
-
-        case 2:{
-            char nome[50];
-            printf("Digite o nome do paciente que deseja buscar: ");
-            scanf(" %[^\n]", nome);
-            BuscarPacientePorNome(nome);
-            break;
-        }
-
-        case 3:{
-            char especialidade[20];
-            printf("Digite a especialidade para fazer a busca: ");
-            scanf(" %[^\n]",especialidade);
-            ListarMedicos(especialidade);
-            break;
-        }
-
-        case 4:{
-            char crm[12];
-            printf("Digite o CPF do médico que deseja alterar: ");
-            scanf(" %s", crm);
-            //funcao editar heros
-            break;
-        }
-    }
+    }while(aux!=0);
 }
 
 void MenuConsultas(){
     int aux;
-    printf("1- Agendar nova consulta\n");
-    printf("2- Listar consultas por médico(CRM)\n");
-    printf("3- Listar consultas por paciente(CPF)\n"); 
-    printf("4- Listar consultas por data\n"); 
 
-    scanf("%d", &aux);
+    do{
+        printf("1- Agendar nova consulta\n");
+        printf("2- Listar consultas por médico(CRM)\n");
+        printf("3- Listar consultas por paciente(CPF)\n"); 
+        printf("4- Listar consultas por data\n"); 
+        printf("0- Voltar para a página anterior\n");
 
-    switch(aux){
-        case 1:{
-            Consulta nova;
+        scanf("%d", &aux);
 
-            printf("CRM do Medico: ");
-            scanf("%s", nova.crm_medico);
-                
-            printf("CPF do Paciente: ");
-            scanf("%s", nova.cpf_paciente);
-                
-            printf("Data (dd/mm/aaaa): ");
-            scanf("%s", nova.data); 
-                
-            printf("Sintomas: ");
-            scanf(" %[^\n]", nova.sintomas); 
-                
-            printf("Encaminhamento/Observação: ");
-            scanf(" %[^\n]", nova.encaminhamentos);
-                
-            InserirNovaConsulta(nova);
-            break;
+        switch(aux){
+            case 1:{
+                InserirNovaConsulta();
+                break;
+            }
+
+            case 2:{
+                ListarConsultasPorMedico();
+                break;
+            }
+
+            case 3:{
+                ListarConsultasPorPaciente();
+                break;
+            }
+
+            case 4:{
+                ListarConsultasPorData();
+                break;
+            }
+
+            case 0:{
+                return;
+            }
         }
-
-        case 2:{
-            char crm[6];
-            printf("Digite o CRM do médico para fazer a busca: ");
-            scanf(" %[^\n]", crm);
-            ListarConsultasPorMedico(crm);
-            break;
-        }
-
-        case 3:{
-            char cpf[12];
-            printf("Digite o CPF do médico para fazer a busca: ");
-            scanf(" %[^\n]", cpf);
-            ListarConsultasPorPaciente(cpf);
-            break;
-        }
-
-        case 4:{
-            char data[12];
-            printf("Digite a data para fazer a busca: ");
-            scanf(" %s", data);
-            ListarConsultasPorData(data);
-            break;
-        }
-    }
+    }while(aux!=0);
 }
