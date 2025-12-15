@@ -7,6 +7,18 @@
 int quantidadePacientes = 0;
 Paciente *vetPacientes;
 IndexPaciente *vetIndexPaciente;
+
+void OrdenaCPF(){
+    IndexPaciente aux;
+    int ordenado = 0;
+    while (ordenado != 1){
+        if(strcmp(vetIndexPaciente[i].chave, vetIndexPaciente[i + 1].chave) == 1){
+            aux = vetIndexPaciente[i];
+            vetIndexPaciente[i] = vetIndexPaciente[i + 1];
+            vetIndexPaciente[i + 1] = aux;
+        }
+    }
+}
   
 
 int BuscarPacientePorCPF(){
@@ -64,6 +76,7 @@ void InserirNovoPaciente(){
     fwrite(&paciente, sizeof(Paciente), 1, ptarq);
     fclose(ptarq);
 
+    OrdenaCPF();
     CarregarIndicePacientes();
 }
 void AlterarDadosPaciente(){
