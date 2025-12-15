@@ -67,6 +67,8 @@ void CarregarIndicesMedicos();
 void SalvarIndicesMedicos();
 void InserirNovoMedico();
 void ListarMedicos();
+void EditarMedico();
+void ExcluirMedico();
 int buscaBinariaMedico(char *crmBusca);
 
 void DebugListarIndices(); // testando um bagui
