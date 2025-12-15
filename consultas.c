@@ -66,7 +66,47 @@ void InserirNovaConsulta() {
 }
  
 void ListarConsultasPorMedico() {
-    printf("\nListar Consultas por Médicos\n");   
+    printf("\nListar Consultas por Médicos\n");  
+    FILE *arq_consultas;
+    Consulta c;
+    char crm_busca[6];
+    int consultas_encontradas = 0;
+
+    printf("\n--- Listar Consultas por Médico ---\n");
+    printf("Digite o CRM do Médico para busca: ");
+    scanf("%5s", crm_busca);
+    int limpar;
+    while ((limpar = getchar()) != '\n' && limpar != EOF);
+
+    arq_consultas = fopen("consultas.bin", "rb"); // 'rb': Read Binary
+    if (arq_consultas == NULL) {
+        printf("Nenhuma consulta registrada.\n");
+        return;
+    }
+
+    printf("\nConsultas para o CRM %s:\n", crm_busca);
+   
+    // Loop de leitura: fread retorna 1 se leu um registro completo, 0 se chegou ao fim.
+    while (fread(&c, sizeof(Consulta), 1, arq_consultas) == 1) {
+       
+        // Comparação de string: strcmp retorna 0 se as strings são iguais.
+        if (strcmp(c.crm_medico, crm_busca) == 0) {
+            printf("-------------------------------------------\n");
+            printf("Data: %s\n", c.data);
+            printf("Paciente (CPF): %s\n", c.cpf_paciente);
+            printf("Sintomas: %s\n", c.sintomas);
+            printf("Encaminhamentos: %s\n", c.encaminhamentos);
+            consultas_encontradas++;
+        }
+    }
+   
+    fclose(arq_consultas);
+   
+    if (consultas_encontradas == 0) {
+        printf("Nenhuma consulta encontrada para este médico.\n");
+    } else {
+        printf("-------------------------------------------\n");
+    } 
 }
 
 void ListarConsultasPorPaciente() {
