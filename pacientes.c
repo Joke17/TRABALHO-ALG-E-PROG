@@ -4,6 +4,56 @@
 #include <locale.h>
 #include "cabecalho.h"
 
+int quantidadePacientes = 0;
+Paciente *vetPacientes;
+IndexPaciente *vetIndexPaciente;
+
+void OrdenaCPF(){
+    IndexPaciente aux;
+    int ordenado = 0;
+    while (ordenado != 1){
+        if(strcmp(vetIndexPaciente[i].chave, vetIndexPaciente[i + 1].chave) == 1){
+            aux = vetIndexPaciente[i];
+            vetIndexPaciente[i] = vetIndexPaciente[i + 1];
+            vetIndexPaciente[i + 1] = aux;
+        }
+    }
+}
+  
+
+int BuscarPacientePorCPF(){
+    char CPF[12];
+    printf("DIGITE O CFP PACIENTE DESEJADO: ");
+    scanf("%s", CPF);
+
+    int inicio = 0;             // Começa no primeiro elemento
+    int fim = quantidadePacientes - 1;   // Termina no último elemento válido
+    int meio;                   // Variável para guardar a posição central
+
+    // Enquanto o início não ultrapassar o fim, continuamos procurando
+    while (inicio <= fim) {
+        meio = (inicio + fim) / 2; // Calcula o índice bem no meio da lista
+        
+        // strcmp compara duas strings:
+        // Retorna 0 se forem iguais
+        // Retorna < 0 se a primeira vier antes no alfabeto
+        // Retorna > 0 se a primeira vier depois no alfabeto
+        int cmp = strcmp(CPF, vetIndexPaciente[meio].chave);
+
+        if (cmp == 0) {
+            return meio; // ACHOU! Retorna a posição onde está.
+        } else if (cmp < 0) {
+            fim = meio - 1; // Se é menor, descarta a metade da direita e foca na esquerda.
+        } else {
+            inicio = meio + 1; // Se é maior, descarta a metade da esquerda e foca na direita.
+        }
+    }
+    return -1; // Se saiu do loop, é porque não encontrou nada.
+}
+
+
+
+
 void InserirNovoPaciente(){
     Paciente paciente;
     FILE *ptarq;
@@ -26,10 +76,14 @@ void InserirNovoPaciente(){
     fwrite(&paciente, sizeof(Paciente), 1, ptarq);
     fclose(ptarq);
 
+    OrdenaCPF();
     CarregarIndicePacientes();
 }
 void AlterarDadosPaciente(){
-    printf("\ndeu bao\n");
+    printf("\n----------ALTERAÇÃO DE DADOS PACIENTE----------\n");
+    int posicao = BuscarPacientePorCPF();
+    printf("%d", posicao);
+
 }
 void CarregarIndicePacientes(){
     // Pacientes
@@ -42,18 +96,18 @@ void CarregarIndicePacientes(){
     long tamanho = (int)ftell(ptpacientes);
     rewind(ptpacientes);
     
-    int quantidade = tamanho / sizeof(Paciente);
-    Paciente *vetPacientes = (Paciente *) malloc(quantidade * sizeof(Paciente));
-    IndexPaciente *vetIndexPaciente = (IndexPaciente *) malloc(quantidade * sizeof(IndexPaciente));
+    quantidadePacientes = tamanho / sizeof(Paciente);
+    vetPacientes = (Paciente *) malloc(quantidadePacientes * sizeof(Paciente));
+    vetIndexPaciente = (IndexPaciente *) malloc(quantidadePacientes * sizeof(IndexPaciente));
     
-    fread(vetPacientes, sizeof(Paciente), quantidade, ptpacientes);
+    fread(vetPacientes, sizeof(Paciente), quantidadePacientes, ptpacientes);
 
-    for(int i = 0; i < quantidade; i++){
+    for(int i = 0; i < quantidadePacientes; i++){
         strcpy(vetIndexPaciente[i].chave, vetPacientes[i].CPF);
     }
 
     fclose(ptpacientes);
-    printf("Sistema: %d pacientes carregados na memoria.\n", quantidade);
+    printf("Sistema: %d pacientes carregados na memoria.\n", quantidadePacientes);
 
 }
 

@@ -40,6 +40,9 @@ int main() {
     CarregarIndicesMedicos();
     //DebugListarIndices();
     // A função AbreVetores() está na cabecalho.h e pode ser mantida
+   CarregarIndicePacientes();
+   InserirNovoPaciente();
+   AlterarDadosPaciente();
     CarregarIndicePacientes();
     InserirNovoPaciente();
 
