@@ -151,7 +151,48 @@ void ListarConsultasPorPaciente() {
     }
 }
 
-void ListarConsultasPorData();
+void ListarConsultasPorData() {
+    FILE *arq_consultas;
+    Consulta c;
+    char data_busca[12];
+    int consultas_encontradas = 0;
+
+    printf("\n--- Listar Consultas por Data ---\n");
+    printf("Digite a Data para busca (DD/MM/AAAA): ");
+    scanf("%11s", data_busca);
+
+    int limpar;
+    while ((limpar = getchar()) != '\n' && limpar != EOF);
+
+
+    arq_consultas = fopen("consultas.bin", "rb");
+    if (arq_consultas == NULL) {
+        printf("Nenhuma consulta registrada.\n");
+        return;
+    }
+
+    printf("\nConsultas na data %s:\n", data_busca);
+    
+    while (fread(&c, sizeof(Consulta), 1, arq_consultas) == 1) {
+        // filtrar pela data
+        if (strcmp(c.data, data_busca) == 0) {
+            printf("-------------------------------------------\n");
+            printf("Médico (CRM): %s\n", c.crm_medico);
+            printf("Paciente (CPF): %s\n", c.cpf_paciente);
+            printf("Sintomas: %s\n", c.sintomas);
+            printf("Encaminhamentos: %s\n", c.encaminhamentos);
+            consultas_encontradas++;
+        }
+    }
+    
+    fclose(arq_consultas);
+    
+    if (consultas_encontradas == 0) {
+        printf("Nenhuma consulta encontrada nesta data.\n");
+    } else {
+        printf("-------------------------------------------\n");
+    }
+}
 
 
 
