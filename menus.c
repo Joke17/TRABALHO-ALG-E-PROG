@@ -149,7 +149,12 @@ void MenuMedicos(){
             }
 
             case 4:{
-                //funcao editar heros
+                EditarMedico(); 
+                break;
+            }
+
+            case 5:{
+                ExcluirMedico();
                 break;
             }
 

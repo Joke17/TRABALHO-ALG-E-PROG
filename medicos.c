@@ -110,18 +110,18 @@ void InserirNovoMedico() {
    // --- 1. LEITURA E LIMPEZA DO CRM ---
 printf("\n--- CADASTRO DE MEDICO ---\n");
 printf("Digite o CRM: ");
-// Usa fgets e garante que a string não tem mais que 5 caracteres + \0
+// Usa fgets e garante que a string nï¿½o tem mais que 5 caracteres + \0
 if (fgets(m.CRM, sizeof(m.CRM), stdin) == NULL) return; 
 m.CRM[strcspn(m.CRM, "\n")] = 0; // Remove o '\n'
 
-// --- NOVO PASSO: LIMPEZA MANUAL APÓS FGETS DE CAMPO PEQUENO ---
-// Se o usuário digitou mais caracteres do que o CRM[6] suporta, 
-// os excessos ficam no buffer. Isso os remove para o próximo fgets.
+// --- NOVO PASSO: LIMPEZA MANUAL APï¿½S FGETS DE CAMPO PEQUENO ---
+// Se o usuï¿½rio digitou mais caracteres do que o CRM[6] suporta, 
+// os excessos ficam no buffer. Isso os remove para o prï¿½ximo fgets.
 int c;
 while ((c = getchar()) != '\n' && c != EOF);
 // -----------------------------------------------------------------
 
-// Antes de continuar, verifica se esse CRM já existe
+// Antes de continuar, verifica se esse CRM jï¿½ existe
 if (buscaBinariaMedico(m.CRM) != -1) {
     printf("Erro: Ja existe um medico com este CRM!\n");
     return; // Cancela o cadastro
@@ -129,7 +129,7 @@ if (buscaBinariaMedico(m.CRM) != -1) {
 
 // --- 2. LEITURA DO NOME (DEVE FUNCIONAR AGORA) ---
 printf("Nome: ");
-fgets(m.nome, 50, stdin); // Lê o nome com espaços
+fgets(m.nome, 50, stdin); // Lï¿½ o nome com espaï¿½os
 m.nome[strcspn(m.nome, "\n")] = 0; // Truque para remover o \n do final da string
 
 // --- 3. LEITURA DA ESPECIALIDADE ---
@@ -215,6 +215,8 @@ void ListarMedicos() {
         // Mostra na tela
         printf("CRM: %s | Nome: %s | Esp: %s\n", m.CRM, m.nome, m.especialidade);
     }
+
+}
 
     // --- FUNÃ‡ÃƒO 4: EDITAR MÃ‰DICO (Update) ---
 // Objetivo: Alterar dados de um mÃ©dico jÃ¡ existente (menos o CRM).
@@ -345,11 +347,11 @@ void ExcluirMedico() {
 
     // Aviso final: A exclusÃ£o sÃ³ vai pro arquivo quando chamar "SalvarIndicesMedicos"
     printf("Medico excluido com sucesso! (Sera efetivado ao sair do programa)\n");
-}
+
     fclose(arqDados);
 }
 
-// --- FUNÃÃO EXTRA: DEBUG ---
+// --- FUNï¿½ï¿½O EXTRA: DEBUG ---
 // Objetivo: Mostrar os Ã­ndices carregados em memÃ³ria
 void DebugListarIndices() {
     printf("\n--- DEBUG: INDICES DE MEDICOS CARREGADOS ---\n");
