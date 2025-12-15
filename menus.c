@@ -50,7 +50,7 @@ void MenuLogin(){
         }
 
         case 0:{
-            return 0;
+            return;
             break;
         }
     }

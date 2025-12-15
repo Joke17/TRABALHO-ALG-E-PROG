@@ -76,7 +76,7 @@ int main() {
     //InserirNovoPaciente(p);
     //ListarConsultasPorMedico();
 
-    //MenuLogin();
+    MenuLogin();
 
     printf("---------------\nFIM.\n------------------------");
     return 0;
