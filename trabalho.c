@@ -14,8 +14,9 @@ int main() {
     //AbreVetores();
    // --- 1. PREPARAÇÃO: CARREGA ÍNDICES DOS MÉDICOS ---
     CarregarIndicesMedicos();
+    //DebugListarIndices();
     // A função AbreVetores() está na cabecalho.h e pode ser mantida
-   // CarregarIndicePacientes();
+   CarregarIndicePacientes();
     //InserirNovoPaciente();
 
     // ------------------------------------------------------------w-------------------------
