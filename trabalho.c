@@ -7,63 +7,73 @@
 
 int main() {
     setlocale(LC_ALL, "PORTUGUESE");
-    
     printf("---------------\nINICIO\n------------------------\n\n");
-    printf("DEBUG: CHAMA CARREGAR INDICES\n");
+     
+    // --- 1. PREPARAÇÃO: CARREGA ÍNDICES DOS MÉDICOS ---
     CarregarIndicesMedicos();
-
-    // Comente TUDO o que for InserirNovaConsulta() ou InserirNovoMedico()
-
-    // ------------------------------------------------------------------
-    // --- 3. TESTE DA SUA FUNÃÃO DE LISTAGEM (ÃNICA ATIVA) ---
-    // ------------------------------------------------------------------
-    printf("\nDEBUG: INICIO DO TESTE ListarConsultasPorMedico\n");
-    ListarConsultasPorMedico();
-    printf("\nDEBUG: FIM DO TESTE ListarConsultasPorMedico\n");
     
-    // --- 4. FINALIZAÃÃO ---
-    printf("DEBUG: SALVA INDICES\n");
+    // ------------------------------------------------------------------
+    // --- A. CRIAR DADOS DE TESTE (Rode SÓ NA PRIMEIRA VEZ, DEPOIS COMENTE) ---
+    // ------------------------------------------------------------------
+    
+    printf("\n--- Criando Consultas de Teste para o Paciente (Use o CPF 12345678900) ---\n");
+    // Rode 2 vezes: na primeira, use o CPF de teste (Ex: 12345678900).
+    InserirNovaConsulta(); 
+    // Na segunda, use o mesmo CPF e dados diferentes.
+    InserirNovaConsulta(); 
+    printf("\n--- FIM da Criação de Dados ---\n");
+    
+
+    // ------------------------------------------------------------------
+    // --- B. LISTAR DADOS (Rode na SEGUNDA VEZ, comentando a seção A) ---
+    // ------------------------------------------------------------------
+    printf("\n--- TESTANDO ListarConsultasPorPaciente ---\n");
+    ListarConsultasPorPaciente();
+    printf("-----------------------------------------\n");
+
+    // --- 4. FINALIZAÇÃO: SALVA ÍNDICES E LIMPA MEMÓRIA ---
     SalvarIndicesMedicos();
+ 
 /*
    
-   // --- 1. PREPARAÃÃO: CARREGA ÃNDICES DOS MÃDICOS ---
+   // --- 1. PREPARAÇÃO: CARREGA ÍNDICES DOS MÉDICOS ---
     CarregarIndicesMedicos();
     //DebugListarIndices();
-    // A funÃ§Ã£o AbreVetores() estÃ¡ na cabecalho.h e pode ser mantida
+    // A função AbreVetores() está na cabecalho.h e pode ser mantida
     CarregarIndicePacientes();
     InserirNovoPaciente();
 
     // ------------------------------------------------------------w-------------------------
-    // --- 2. TESTE DE CADASTRO DE MÃDICO (Execute SÃ A PRIMEIRA VEZ, DEPOIS COMENTE) ---
+    // --- 2. TESTE DE CADASTRO DE MÉDICO (Execute SÓ A PRIMEIRA VEZ, DEPOIS COMENTE) ---
     // -------------------------------------------------------------------------------------
     
-    // ATENÃÃO: Descomente a linha abaixo, compile, execute. 
-    // Cadastre um mÃ©dico (ex: CRM 12345) e depois COMENTE de novo para fazer o teste da consulta.
+    // ATENÇÃO: Descomente a linha abaixo, compile, execute. 
+    // Cadastre um médico (ex: CRM 12345) e depois COMENTE de novo para fazer o teste da consulta.
     InserirNovoMedico(); 
 
 
     // ---------------------------------------------
-    // --- 3. TESTE DA SUA FUNÃÃO DE CONSULTA ---
+    // --- 3. TESTE DA SUA FUNÇÃO DE CONSULTA ---
     // ---------------------------------------------
-    // Aqui vocÃª testarÃ¡:
+    // Aqui você testará:
     // a) Se digitar o CRM cadastrado (ex: 12345), deve prosseguir.
-    // b) Se digitar um CRM invÃ¡lido (ex: 99999), deve dar ERRO.
+    // b) Se digitar um CRM inválido (ex: 99999), deve dar ERRO.
     printf("\n--- Testando InserirNovaConsulta ---\n");
     InserirNovaConsulta();
     printf("------------------------------------\n");
     
     
-    // --- 4. FINALIZAÃÃO: SALVA ÃNDICES E LIMPA MEMÃRIA ---
+    // --- 4. FINALIZAÇÃO: SALVA ÍNDICES E LIMPA MEMÓRIA ---
     SalvarIndicesMedicos();
     */
    
     //Paciente p;
-    //strcpy(p.nome, "JoÃ£o");
+    //strcpy(p.nome, "João");
 
     //InserirNovoPaciente(p);
     //ListarConsultasPorMedico();
 
-    MenuLogin();
+    //MenuLogin();
 
     printf("---------------\nFIM.\n------------------------");
     return 0;

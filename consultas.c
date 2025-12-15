@@ -108,7 +108,48 @@ void ListarConsultasPorMedico() {
     }
 }
 
-void ListarConsultasPorPaciente(); 
+void ListarConsultasPorPaciente() {
+    FILE *arq_consultas;
+    Consulta c;
+    char cpf_busca[12];
+    int consultas_encontradas = 0;
+
+    printf("\n--- Listar Consultas por Paciente ---\n");
+    printf("Digite o CPF do Paciente para busca: ");
+    scanf("%11s", cpf_busca);
+
+    int limpar;
+    while ((limpar = getchar()) != '\n' && limpar != EOF);
+
+    arq_consultas = fopen("consultas.bin", "rb");
+    if (arq_consultas == NULL) {
+        printf("Nenhuma consulta registrada.\n");
+        return;
+    }
+
+    printf("\nConsultas para o CPF %s:\n", cpf_busca);
+    
+    while (fread(&c, sizeof(Consulta), 1, arq_consultas) == 1) {
+        // filtrar pelo CPF
+        if (strcmp(c.cpf_paciente, cpf_busca) == 0) {
+            printf("-------------------------------------------\n");
+            printf("Data: %s\n", c.data);
+            printf("Médico (CRM): %s\n", c.crm_medico);
+            printf("Sintomas: %s\n", c.sintomas);
+            printf("Encaminhamentos: %s\n", c.encaminhamentos);
+            consultas_encontradas++;
+        }
+    }
+    
+    fclose(arq_consultas);
+    
+    if (consultas_encontradas == 0) {
+        printf("Nenhuma consulta encontrada para este paciente.\n");
+    } else {
+        printf("-------------------------------------------\n");
+    }
+}
+
 void ListarConsultasPorData();
 
 
