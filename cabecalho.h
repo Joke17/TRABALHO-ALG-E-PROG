@@ -1,35 +1,38 @@
-#ifndef CABECALHO_H  
-#define CABECALHO_H 
+#ifndef CABECALHO_H
+#define CABECALHO_H
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
 
-typedef struct Login{
+typedef struct Login
+{
     char usuario[20];
     char senha[10];
 } Login;
 
-
-typedef struct Medico{
+typedef struct Medico
+{
     char CRM[6];
     char nome[50];
     char especialidade[20];
     char data_de_nascimento[12];
-    float valor_hora_trabalho; 
+    float valor_hora_trabalho;
     char telefone[14];
 } Medico;
 
-typedef struct Paciente{
+typedef struct Paciente
+{
     char CPF[12];
     char nome[30];
-    char data_de_nascimento[12]; 
+    char data_de_nascimento[12];
     char telefone[14];
 } Paciente;
 
-// alequis: estrutura da consulta 
-typedef struct Consulta{
+// alequis: estrutura da consulta
+typedef struct Consulta
+{
     char crm_medico[6];
     char cpf_paciente[12];
     char data[12];
@@ -37,42 +40,108 @@ typedef struct Consulta{
     char encaminhamentos[100];
 } Consulta;
 
-
-typedef struct {
+typedef struct
+{
     char chave[12]; // CPF ou CRM
     int posicao;    // posição do registro no arquivo binário
 } IndexPaciente, IndexMedico;
 
+void troca(int *v, int i, int j)
+{
+  int aux;
+  aux = v[i];
+  v[i] = v[j];
+  v[j] = aux;
+}
+void trocaSTR(int *v, int i, int j)
+{
+  int aux;
+  aux = v[i];
+  v[i] = v[j];
+  v[j] = aux;
+}
+
+
+void quicksort(int *v, int L, int R)
+{
+    int i, j, vm;
+    i = L;
+    j = R;
+    vm = v[(i + j) / 2];
+    do
+    {
+        while (v[i] < vm)
+            i++;
+        while (v[j] > vm)
+            j--;
+        if (i <= j)
+        {
+            troca(v, i, j);
+            i++;
+            j--;
+        }
+    } while (i <= j);
+    if (L < j)
+        quicksort(v, L, j);
+    if (R > i)
+        quicksort(v, i, R);
+}
+
+void quicksortStr(char *v, int L, int R)
+{
+    int i, j, vm;
+    i = L;
+    j = R;
+    vm = v[(i + j) / 2];
+    do
+    {
+        while (v[i] < vm)
+            i++;
+        while (v[j] > vm)
+            j--;
+        if (i <= j)
+        {
+            troca(v, i, j);
+            i++;
+            j--;
+        }
+    } while (i <= j);
+    if (L < j)
+        quicksort(v, L, j);
+    if (R > i)
+        quicksort(v, i, R);
+}
+
 int VerificarLogin(char user[], char senha[]);
 void CadastrarNovoUsuario(Login novo);
 
-//Vetores carregados do .bin
-//Pacientes
-//Funçoes Joke
+// Vetores carregados do .bin
+// Pacientes
+// Funçoes Joke
 void InserirNovoPaciente();
 void AlterarDadosPaciente();
-void AdicionarNaMao(); //SÓ PRA TESTE
+void AdicionarNaMao(); // SÓ PRA TESTE
 void CarregarIndicePacientes();
-void BuscarPacientePorNome();
+// void BuscarPaciente();
 void ListaPacientes();
+int BuscarPacientePorCPF();
 
-//funcoes medicos
+// funcoes medicos
 void CarregarIndicesMedicos();
 void SalvarIndicesMedicos();
 void InserirNovoMedico();
 void ListarMedicos();
 int buscaBinariaMedico(char *crmBusca);
-int BuscarPacientePorCPF(char cpf_alvo[]);
 
-void DebugListarIndices(); //testando um bagui
+void DebugListarIndices(); // testando um bagui
 
-//funcoes alex - consultas
-void InserirNovaConsulta(); 
-void ListarConsultasPorMedico(); 
-void ListarConsultasPorPaciente(); 
+// funcoes alex - consultas
+void InserirNovaConsulta();
+void ListarConsultasPorMedico();
+void ListarConsultasPorPaciente();
 void ListarConsultasPorData();
 
-//funcoes menu
+// funcoes menu
 void MenuLogin();
 void MenuPrincipal();
 void MenuPacientes();
