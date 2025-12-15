@@ -348,7 +348,7 @@ void ExcluirMedico() {
     // Aviso final: A exclusão só vai pro arquivo quando chamar "SalvarIndicesMedicos"
     printf("Medico excluido com sucesso! (Sera efetivado ao sair do programa)\n");
 
-    fclose(arqDados);
+    //fclose(arqDados);
 }
 
 // --- FUN��O EXTRA: DEBUG ---

@@ -11,6 +11,10 @@ int main() {
 
     // --- 1. PREPARAÇÃO: CARREGA ÍNDICES DOS MÉDICOS ---
     CarregarIndicesMedicos();
+    CarregarIndicePacientes();
+    ListaPacientes();
+    BuscarPacientePorCPF();
+    InserirNovoPaciente();
     
     // ------------------------------------------------------------------
     // --- A. CRIAR DADOS DE TESTE (Rode SÓ NA PRIMEIRA VEZ, DEPOIS COMENTE) ---
@@ -109,7 +113,7 @@ int main() {
     //InserirNovoPaciente(p);
     //ListarConsultasPorMedico();
 
-    MenuLogin();
+    //MenuLogin();
 
     printf("---------------\nFIM.\n------------------------");
     return 0;
