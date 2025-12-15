@@ -105,7 +105,7 @@ void MenuPacientes(){
             }
 
             case 2:{
-                BuscarPacientePorNome();
+                //BuscarPacientePorNome();
                 break;
             }
 
@@ -134,12 +134,12 @@ void MenuMedicos(){
 
         switch(aux){
             case 1:{
-                InserirNovoPaciente();
+                InserirNovoMedico();
                 break;
             }
 
             case 2:{
-                BuscarPacientePorNome();
+                //BuscarPacientePorNome();
                 break;
             }
 
