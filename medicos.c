@@ -110,9 +110,13 @@ void InserirNovoMedico() {
     // --- Passo 1: Coleta de dados do usu√°rio ---
     printf("\n--- CADASTRO DE MEDICO ---\n");
     printf("Digite o CRM: ");
-    scanf("%s", m.CRM); // L√™ o CRM (sem espa√ßos)
-    getchar(); // Consome o "Enter" que sobrou no buffer do teclado
-
+    // Antes: scanf("%s", m.CRM); // scanf %s È arriscado para buffer
+    
+    // Novo: use fgets, que È mais seguro, e limite o tamanho
+    if (fgets(m.CRM, sizeof(m.CRM), stdin) == NULL) return; // Leitura mais segura
+    
+    // Remove o '\n' que o fgets adiciona (se houver)
+    m.CRM[strcspn(m.CRM, "\n")] = 0;
     // Antes de continuar, verifica se esse CRM j√° existe
     if (buscaBinariaMedico(m.CRM) != -1) {
         printf("Erro: Ja existe um medico com este CRM!\n");
@@ -207,4 +211,18 @@ void ListarMedicos() {
     }
     
     fclose(arqDados);
+}
+
+// --- FUN√√O EXTRA: DEBUG ---
+// Objetivo: Mostrar os √≠ndices carregados em mem√≥ria
+void DebugListarIndices() {
+    printf("\n--- DEBUG: INDICES DE MEDICOS CARREGADOS ---\n");
+    if (qtdMedicos == 0) {
+        printf("Nenhum indice carregado.\n");
+        return;
+    }
+    for (int i = 0; i < qtdMedicos; i++) {
+        printf("Posicao %d: CRM [%s]\n", i, tabelaIndices[i].chave);
+    }
+    printf("------------------------------------------\n");
 }
