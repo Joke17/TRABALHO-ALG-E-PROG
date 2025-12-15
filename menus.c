@@ -33,7 +33,7 @@ void MenuLogin(){
                     }
                     if(auxErro == 2){
                         printf("Terceira tentativa de login inválida, encerrando o programa...");
-                        return 0;
+                        return;
                     }
                 }
                 break;
