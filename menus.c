@@ -33,7 +33,7 @@ void MenuLogin(){
                 }
                 if(auxErro == 2){
                     printf("Terceira tentativa de login inválida, encerrando o programa...");
-                    return 0;
+                    return;
                 }
             }
             break;
@@ -50,7 +50,7 @@ void MenuLogin(){
         }
 
         case 0:{
-            return 0;
+            return;
             break;
         }
     }
@@ -91,36 +91,17 @@ void MenuPacientes(){
 
     switch(aux){
         case 1:{
-            Paciente paciente;
-            printf("Digite o nome do paciente: ");
-            scanf(" %[^\n]", paciente.nome);
-
-            printf("Digite o CPF do paciente: ");
-            scanf(" %s", paciente.CPF);
-
-            printf("Digite a data de nascimento do paciente: ");
-            scanf(" %s", paciente.data_de_nascimento);
-
-            printf("Digite o telefone do paciente: ");
-            scanf(" %s", paciente.telefone);
-
-            InserirNovoPaciente(paciente);
+            InserirNovoPaciente();
             break;
         }
 
         case 2:{
-            char nome[50];
-            printf("Digite o nome do paciente que deseja buscar: ");
-            scanf(" %[^\n]", nome);
-            BuscarPacientePorNome(nome);
+            BuscarPacientePorNome();
             break;
         }
 
         case 3:{
-            char cpf[12];
-            printf("Digite o CPF do paciente que deseja alterar: ");
-            scanf(" %s", cpf);
-            AlterarDadosPaciente(cpf);
+            AlterarDadosPaciente();
             break;
         }
     }
@@ -137,43 +118,21 @@ void MenuMedicos(){
 
     switch(aux){
         case 1:{
-            Paciente paciente;
-            printf("Digite o nome do paciente: ");
-            scanf(" %[^\n]", paciente.nome);
-
-            printf("Digite o CPF do paciente: ");
-            scanf(" %s", paciente.CPF);
-
-            printf("Digite a data de nascimento do paciente: ");
-            scanf(" %s", paciente.data_de_nascimento);
-
-            printf("Digite o telefone do paciente: ");
-            scanf(" %s", paciente.telefone);
-
-            InserirNovoPaciente(paciente);
+            InserirNovoPaciente();
             break;
         }
 
         case 2:{
-            char nome[50];
-            printf("Digite o nome do paciente que deseja buscar: ");
-            scanf(" %[^\n]", nome);
-            BuscarPacientePorNome(nome);
+            BuscarPacientePorNome();
             break;
         }
 
         case 3:{
-            char especialidade[20];
-            printf("Digite a especialidade para fazer a busca: ");
-            scanf(" %[^\n]",especialidade);
-            ListarMedicos(especialidade);
+            ListarMedicos();
             break;
         }
 
         case 4:{
-            char crm[12];
-            printf("Digite o CPF do médico que deseja alterar: ");
-            scanf(" %s", crm);
             //funcao editar heros
             break;
         }
@@ -190,49 +149,23 @@ void MenuConsultas(){
     scanf("%d", &aux);
 
     switch(aux){
-        case 1:{
-            Consulta nova;
-
-            printf("CRM do Medico: ");
-            scanf("%s", nova.crm_medico);
-                
-            printf("CPF do Paciente: ");
-            scanf("%s", nova.cpf_paciente);
-                
-            printf("Data (dd/mm/aaaa): ");
-            scanf("%s", nova.data); 
-                
-            printf("Sintomas: ");
-            scanf(" %[^\n]", nova.sintomas); 
-                
-            printf("Encaminhamento/Observação: ");
-            scanf(" %[^\n]", nova.encaminhamentos);
-                
-            InserirNovaConsulta(nova);
+        case 1:{  
+            InserirNovaConsulta();
             break;
         }
 
         case 2:{
-            char crm[6];
-            printf("Digite o CRM do médico para fazer a busca: ");
-            scanf(" %[^\n]", crm);
-            ListarConsultasPorMedico(crm);
+            ListarConsultasPorMedico();
             break;
         }
 
         case 3:{
-            char cpf[12];
-            printf("Digite o CPF do médico para fazer a busca: ");
-            scanf(" %[^\n]", cpf);
-            ListarConsultasPorPaciente(cpf);
+            ListarConsultasPorPaciente();
             break;
         }
 
         case 4:{
-            char data[12];
-            printf("Digite a data para fazer a busca: ");
-            scanf(" %s", data);
-            ListarConsultasPorData(data);
+            ListarConsultasPorData();
             break;
         }
     }
