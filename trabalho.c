@@ -11,6 +11,8 @@ int main() {
 
     // --- 1. PREPARAÇÃO: CARREGA ÍNDICES DOS MÉDICOS ---
     CarregarIndicesMedicos();
+
+    DebugListarIndices();
     
     // ------------------------------------------------------------------
     // --- A. CRIAR DADOS DE TESTE (Rode SÓ NA PRIMEIRA VEZ, DEPOIS COMENTE) ---

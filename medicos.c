@@ -232,7 +232,9 @@ void EditarMedico() {
     printf("\n--- EDITAR MEDICO ---\n");
     printf("Digite o CRM do medico que deseja alterar: ");
     scanf("%s", crmBusca); // Lê o CRM
-    getchar(); // Limpa o "Enter" que sobrou no buffer do teclado
+   
+    int limpar;
+    while ((limpar = getchar()) != '\n' && limpar != EOF);
 
     // 3. BUSCA NA MEMÓRIA RAM
     // Chama a busca binária para ver se esse médico existe no índice
@@ -311,7 +313,8 @@ void ExcluirMedico() {
     printf("\n--- EXCLUIR MEDICO ---\n");
     printf("Digite o CRM do medico a ser excluido: ");
     scanf("%s", crmBusca);
-    getchar(); // Limpa buffer
+     int limpar;
+    while ((limpar = getchar()) != '\n' && limpar != EOF);
 
     // Procura onde ele está no vetor de índices
     indice = buscaBinariaMedico(crmBusca);

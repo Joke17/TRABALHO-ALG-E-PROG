@@ -128,6 +128,7 @@ void MenuMedicos(){
         printf("2- Buscar médico por nome\n");
         printf("3- Listar médicos por especialidade\n"); 
         printf("4- Alterar dados do médico\n"); 
+        printf("5- Excluir médico\n");
         printf("0- Voltar para a página anterior\n");
 
         scanf("%d", &aux);
