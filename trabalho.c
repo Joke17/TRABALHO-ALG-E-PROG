@@ -8,8 +8,41 @@
 int main() {
     setlocale(LC_ALL, "PORTUGUESE");
     printf("---------------\nINICIO\n------------------------\n\n");
-     
+
     // --- 1. PREPARAÇÃO: CARREGA ÍNDICES DOS MÉDICOS ---
+    CarregarIndicesMedicos();
+    
+    // ------------------------------------------------------------------
+    // --- A. CRIAR DADOS DE TESTE (Rode SÓ NA PRIMEIRA VEZ, DEPOIS COMENTE) ---
+    // ------------------------------------------------------------------
+    
+    //printf("\n--- Criando Consultas de Teste (Use as datas 01/12/2025 e 15/12/2025) ---\n");
+    
+    // 1ª Chamada: Use a data 01/12/2025
+   // InserirNovaConsulta(); 
+    
+    // 2ª Chamada: Use a data 15/12/2025
+    //InserirNovaConsulta(); 
+    
+    // 3ª Chamada: Use a data 01/12/2025 novamente
+    //InserirNovaConsulta(); 
+    
+    //printf("\n--- FIM da Criação de Dados ---\n");
+    
+
+    // ------------------------------------------------------------------
+    // --- B. LISTAR DADOS (Rode na SEGUNDA VEZ, comentando a seção A) ---
+    // ------------------------------------------------------------------
+    printf("\n--- TESTANDO ListarConsultasPorData ---\n");
+    ListarConsultasPorData();
+    printf("-----------------------------------------\n");
+
+    // --- 4. FINALIZAÇÃO: SALVA ÍNDICES E LIMPA MEMÓRIA ---
+    SalvarIndicesMedicos();
+
+
+     
+  /* // --- 1. PREPARAÇÃO: CARREGA ÍNDICES DOS MÉDICOS ---
     CarregarIndicesMedicos();
     
     // ------------------------------------------------------------------
@@ -33,7 +66,7 @@ int main() {
 
     // --- 4. FINALIZAÇÃO: SALVA ÍNDICES E LIMPA MEMÓRIA ---
     SalvarIndicesMedicos();
- 
+ */ 
 /*
    
    // --- 1. PREPARAÇÃO: CARREGA ÍNDICES DOS MÉDICOS ---
