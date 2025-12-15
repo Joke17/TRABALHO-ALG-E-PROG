@@ -105,7 +105,7 @@ void MenuPacientes(){
             }
 
             case 2:{
-                //BuscarPacientePorNome();
+                BuscarPacientePorCPF();
                 break;
             }
 
