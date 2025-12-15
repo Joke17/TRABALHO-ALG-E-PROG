@@ -55,14 +55,13 @@ void CarregarIndicePacientes(){
     //printf("ate aq veio");
 
     fread(vetPacientes, sizeof(Paciente), quantidade, ptpacientes);
-    fread(vetIndex, sizeof(IndexPaciente), quantidade, ptpacientes);
 
     for(int i = 0; i < quantidade; i++){
-        printf("%s \n", vetIndex[i].posicao);
+        vetIndex[i] = vetPacientes[i];
     }
-    // for(int i = 0; i < quantidade; i++){
-    //     printf("%s \n", vetIndex[i].posicao);
-    // }
+    for(int i = 0; i < quantidade; i++){
+        printf("%s \n", vetIndex[i].chave);
+    }
 
     fclose(ptpacientes);
     printf("Sistema: %d pacientes carregados na memoria.\n", quantidade);
