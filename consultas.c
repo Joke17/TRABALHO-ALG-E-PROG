@@ -32,12 +32,12 @@ void InserirNovaConsulta() {
 
    
     while ((limpar = getchar()) != '\n' && limpar != EOF); 
-    // ---------------------------------------------
+   
 
     printf("Digite a Data da Consulta (DD/MM/AAAA): ");
     scanf("%11s", nova_consulta.data); 
     
-    // A limpeza original (que é essencial antes do fgets)
+    // limpeza original (que é essencial antes do fgets)
     while ((limpar = getchar()) != '\n' && limpar != EOF); 
     
     printf("Digite os Sintomas (máx 99 caracteres): ");
@@ -50,7 +50,7 @@ void InserirNovaConsulta() {
     fgets(nova_consulta.encaminhamentos, 100, stdin);
     nova_consulta.encaminhamentos[strcspn(nova_consulta.encaminhamentos, "\n")] = 0;
     // gravar no arquivo consultas.bin
-    arq_consultas = fopen("consultas.bin", "ab"); // 'ab': Append Binary (adiciona so no final)
+    arq_consultas = fopen("consultas.bin", "ab"); // 'ab': append binary (adiciona so no final)
     if (arq_consultas == NULL) {
         perror("Erro ao abrir o arquivo consultas.bin para escrita");
         return;
@@ -77,7 +77,7 @@ void ListarConsultasPorMedico() {
     int limpar;
     while ((limpar = getchar()) != '\n' && limpar != EOF);
 
-    arq_consultas = fopen("consultas.bin", "rb"); // 'rb': Read Binary
+    arq_consultas = fopen("consultas.bin", "rb"); // 'rb': read binary
     if (arq_consultas == NULL) {
         printf("Nenhuma consulta registrada.\n");
         return;
@@ -88,7 +88,7 @@ void ListarConsultasPorMedico() {
     //  fread retorna 1 se leu um registro completo, 0 se chegou ao fim.
     while (fread(&c, sizeof(Consulta), 1, arq_consultas) == 1) {
        
-        // comparação de string: strcmp retorna 0 se as strings são iguais.
+        // comparação de string, strcmp retorna 0 se as strings são iguais.
         if (strcmp(c.crm_medico, crm_busca) == 0) {
             printf("-------------------------------------------\n");
             printf("Data: %s\n", c.data);
