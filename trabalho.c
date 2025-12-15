@@ -9,14 +9,29 @@ int main() {
     setlocale(LC_ALL, "PORTUGUESE");
     
     printf("---------------\nINICIO\n------------------------\n\n");
+    printf("DEBUG: CHAMA CARREGAR INDICES\n");
+    CarregarIndicesMedicos();
 
+    // Comente TUDO o que for InserirNovaConsulta() ou InserirNovoMedico()
 
-    //AbreVetores();
+    // ------------------------------------------------------------------
+    // --- 3. TESTE DA SUA FUNÇÃO DE LISTAGEM (ÚNICA ATIVA) ---
+    // ------------------------------------------------------------------
+    printf("\nDEBUG: INICIO DO TESTE ListarConsultasPorMedico\n");
+    ListarConsultasPorMedico();
+    printf("\nDEBUG: FIM DO TESTE ListarConsultasPorMedico\n");
+    
+    // --- 4. FINALIZAÇÃO ---
+    printf("DEBUG: SALVA INDICES\n");
+    SalvarIndicesMedicos();
+
+/*
+   
    // --- 1. PREPARAÇÃO: CARREGA ÍNDICES DOS MÉDICOS ---
     CarregarIndicesMedicos();
     //DebugListarIndices();
     // A função AbreVetores() está na cabecalho.h e pode ser mantida
-   CarregarIndicePacientes();
+    CarregarIndicePacientes();
     InserirNovoPaciente();
 
     // ------------------------------------------------------------w-------------------------
@@ -41,7 +56,7 @@ int main() {
     
     // --- 4. FINALIZAÇÃO: SALVA ÍNDICES E LIMPA MEMÓRIA ---
     SalvarIndicesMedicos();
-    
+    */
    
     //Paciente p;
     //strcpy(p.nome, "João");
