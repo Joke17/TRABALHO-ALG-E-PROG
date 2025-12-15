@@ -64,54 +64,7 @@ int main() {
     //InserirNovoPaciente(p);
     //ListarConsultasPorMedico();
 
-    int aux;
-
-    printf("1- Efetuar Login\n");
-    printf("2- Cadastrar Usuário\n");
-    printf("0- Encerrar Programa\n");
-
-    scanf("%d", &aux);
-
-    switch(aux){
-        case 1:{
-            int auxErro;
-            for(auxErro=0;auxErro<=2;auxErro++){
-                char userAux[20], senhaAux[20];
-                printf("\nUsuário: ");
-                scanf("%s", userAux);
-
-                printf("Senha: ");
-                scanf("%s", senhaAux);
-
-                int teste = VerificarLogin(userAux, senhaAux);
-                if(teste == 0){
-                    printf("Login ou senha inválidos\n");
-                }else{
-                    break;
-                }
-                if(auxErro == 2){
-                    printf("Terceira tentativa de login inválida, encerrando o programa...");
-                    return 0;
-                }
-            }
-            break;
-        }
-
-        case 2:{
-            Login novo;
-            printf("Usuário:");
-            scanf("%s", novo.usuario);
-            printf("Senha:");
-            scanf("%s", novo.senha);
-            CadastrarNovoUsuario(novo);
-            break;
-        }
-
-        case 0:{
-            return 0;
-            break;
-        }
-    }
+    MenuLogin();
 
     printf("---------------\nFIM.\n------------------------");
     return 0;
