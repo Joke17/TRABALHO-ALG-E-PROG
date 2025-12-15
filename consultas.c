@@ -15,11 +15,10 @@ void InserirNovaConsulta() {
     printf("Digite o CRM do Médico: ");
     scanf("%5s", nova_consulta.crm_medico); 
 
-    // --- NOVO: LIMPAR O BUFFER APÓS LER O CRM ---
+    //limpar buffer do teclado
     char limpar;
     while ((limpar = getchar()) != '\n' && limpar != EOF); 
-    // ---------------------------------------------
-    
+   
     // Teste de Busca
     crm_existe = buscaBinariaMedico(nova_consulta.crm_medico); 
 
@@ -31,7 +30,7 @@ void InserirNovaConsulta() {
     printf("Digite o CPF do Paciente: ");
     scanf("%11s", nova_consulta.cpf_paciente); 
 
-    // --- NOVO: LIMPAR O BUFFER APÓS LER O CPF ---
+   
     while ((limpar = getchar()) != '\n' && limpar != EOF); 
     // ---------------------------------------------
 
@@ -86,10 +85,10 @@ void ListarConsultasPorMedico() {
 
     printf("\nConsultas para o CRM %s:\n", crm_busca);
    
-    // Loop de leitura: fread retorna 1 se leu um registro completo, 0 se chegou ao fim.
+    //  fread retorna 1 se leu um registro completo, 0 se chegou ao fim.
     while (fread(&c, sizeof(Consulta), 1, arq_consultas) == 1) {
        
-        // Comparação de string: strcmp retorna 0 se as strings são iguais.
+        // comparação de string: strcmp retorna 0 se as strings são iguais.
         if (strcmp(c.crm_medico, crm_busca) == 0) {
             printf("-------------------------------------------\n");
             printf("Data: %s\n", c.data);
@@ -172,7 +171,8 @@ void ListarConsultasPorData() {
     }
 
     printf("\nConsultas na data %s:\n", data_busca);
-    
+
+    //fread retorna 1 se leu um registro completo, 0 se chegou ao fim.
     while (fread(&c, sizeof(Consulta), 1, arq_consultas) == 1) {
         // filtrar pela data
         if (strcmp(c.data, data_busca) == 0) {
