@@ -17,31 +17,36 @@ int capIndices = 0;
 // Objetivo: Achar um médico muito rápido sem ler tudo.
 // Retorna: A posição no vetor (0, 1, 2...) se achar, ou -1 se não achar.
 int buscaBinariaMedico(char *crmBusca) {
-    int inicio = 0;             // Começa no primeiro elemento
-    int fim = qtdMedicos - 1;   // Termina no último elemento válido
-    int meio;                   // Variável para guardar a posição central
+    // --- BLINDAGEM CONTRA CRASH ---
+    printf("[DEBUG] Buscando: %s | Qtd Medicos: %d | Endereco Tabela: %p\n", crmBusca, qtdMedicos, tabelaIndices);
+    fflush(stdout); // <--- ISSO OBRIGA A MENSAGEM A APARECER
+    if (tabelaIndices == NULL) {
+        printf("[DEBUG] ERRO CRITICO: Tabela de indices esta vazia (NULL).\n");
+        printf("[DEBUG] Voce esqueceu de chamar CarregarIndicesMedicos() na main?\n");
+        return -1;
+    }
+    // ------------------------------
 
-    // Enquanto o início não ultrapassar o fim, continuamos procurando
+    int inicio = 0;
+    int fim = qtdMedicos - 1;
+    int meio;
+
+    printf("[DEBUG] Buscando CRM: %s | Total Medicos: %d\n", crmBusca, qtdMedicos);
+
     while (inicio <= fim) {
-        meio = (inicio + fim) / 2; // Calcula o índice bem no meio da lista
+        meio = (inicio + fim) / 2;
         
-        // strcmp compara duas strings:
-        // Retorna 0 se forem iguais
-        // Retorna < 0 se a primeira vier antes no alfabeto
-        // Retorna > 0 se a primeira vier depois no alfabeto
+        // Debug para ver onde ele está lendo
+        printf("[DEBUG] Comparando com indice %d (CRM do Indice: %s)\n", meio, tabelaIndices[meio].chave);
+
         int cmp = strcmp(crmBusca, tabelaIndices[meio].chave);
 
-        if (cmp == 0) {
-            return meio; // ACHOU! Retorna a posição onde está.
-        } else if (cmp < 0) {
-            fim = meio - 1; // Se é menor, descarta a metade da direita e foca na esquerda.
-        } else {
-            inicio = meio + 1; // Se é maior, descarta a metade da esquerda e foca na direita.
-        }
+        if (cmp == 0) return meio;
+        else if (cmp < 0) fim = meio - 1;
+        else inicio = meio + 1;
     }
-    return -1; // Se saiu do loop, é porque não encontrou nada.
+    return -1;
 }
-
 // --- FUNÇÃO 1: CARREGAR ÍNDICES ---
 // Objetivo: Ler o arquivo de índices do HD e passar para a RAM ao iniciar o programa.
 void CarregarIndicesMedicos() {
@@ -346,7 +351,7 @@ void ExcluirMedico() {
     SalvarIndicesMedicos();
     // Aviso final: A exclusão só vai pro arquivo quando chamar "SalvarIndicesMedicos"
     printf("Medico excluido com sucesso! (Sera efetivado ao sair do programa)\n");
-    
+
 }
 
 // --- FUN��O EXTRA: DEBUG ---
