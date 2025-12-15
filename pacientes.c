@@ -57,7 +57,7 @@ void CarregarIndicePacientes(){
     fread(vetPacientes, sizeof(Paciente), quantidade, ptpacientes);
 
     for(int i = 0; i < quantidade; i++){
-        vetIndex[i] = vetPacientes[i];
+        strcpy(vetIndex[i].chave, vetPacientes[i].CPF);
     }
     for(int i = 0; i < quantidade; i++){
         printf("%s \n", vetIndex[i].chave);
