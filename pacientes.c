@@ -21,45 +21,57 @@ void OrdenaCPF(){
 }
 */
 
-int BuscarPacientePorCPF(){
+int BuscarPacientePorCPF()
+{
     char CPF[12];
     printf("DIGITE O CFP PACIENTE DESEJADO: ");
     scanf("%s", CPF);
 
-    int inicio = 0;             // Começa no primeiro elemento
-    int fim = quantidadePacientes - 1;   // Termina no último elemento válido
-    int meio;                   // Variável para guardar a posição central
+    int inicio = 0;                    // Começa no primeiro elemento
+    int fim = quantidadePacientes - 1; // Termina no último elemento válido
+    int meio;                          // Variável para guardar a posição central
 
     // Enquanto o início não ultrapassar o fim, continuamos procurando
-    while (inicio <= fim) {
+    while (inicio <= fim)
+    {
         meio = (inicio + fim) / 2; // Calcula o índice bem no meio da lista
-        
+
         // strcmp compara duas strings:
         // Retorna 0 se forem iguais
         // Retorna < 0 se a primeira vier antes no alfabeto
         // Retorna > 0 se a primeira vier depois no alfabeto
         int cmp = strcmp(CPF, vetIndexPaciente[meio].chave);
 
-        if (cmp == 0) {
+        printf("cmp %d\n", cmp);
+        printf("m %d\n", meio);
+        
+        if (cmp == 0)
+        {
+            printf("ACHOU\n", meio);
             return meio; // ACHOU! Retorna a posição onde está.
-        } else if (cmp < 0) {
+
+        }
+        else if (cmp < 0)
+        {
             fim = meio - 1; // Se é menor, descarta a metade da direita e foca na esquerda.
-        } else {
+        }
+        else
+        {
             inicio = meio + 1; // Se é maior, descarta a metade da esquerda e foca na direita.
         }
     }
-    return -1; // Se saiu do loop, é porque não encontrou nada.
+    printf("\n%d\n", meio);
+    return meio; // Se saiu do loop, é porque não encontrou nada.
 }
 
-
-
-
-void InserirNovoPaciente(){
+void InserirNovoPaciente()
+{
     Paciente paciente;
     FILE *ptarq;
     ptarq = fopen("output/pacientes.bin", "a+");
 
-    if(ptarq == NULL){
+    if (ptarq == NULL)
+    {
         printf("deu merda1\n");
     }
 
@@ -76,44 +88,65 @@ void InserirNovoPaciente(){
     fwrite(&paciente, sizeof(Paciente), 1, ptarq);
     fclose(ptarq);
 
-    //OrdenaCPF();
+    // OrdenaCPF();
     CarregarIndicePacientes();
 }
-void AlterarDadosPaciente(){
+void AlterarDadosPaciente()
+{
     printf("\n----------ALTERAÇÃO DE DADOS PACIENTE----------\n");
     int posicao = BuscarPacientePorCPF();
     printf("%d", posicao);
-
 }
-void CarregarIndicePacientes(){
+
+void ListaPacientes()
+{
+    printf("----------------------------------");
+    printf("Lista de Pacientes");
+    printf("----------------------------------");
+    for (int i = 0; i < quantidadePacientes; i++)
+    {
+        printf("Nome: %s\n",vetPacientes[i].nome);
+        printf("CPF: %s\n",vetPacientes[i].CPF);
+        printf("Data de Nascimento: %s\n",vetPacientes[i].data_de_nascimento);
+        printf("Telefone: %s\n",vetPacientes[i].telefone);
+    }
+    printf("----------------------------------");
+    printf("Fim");
+    printf("----------------------------------\n");
+}
+
+void CarregarIndicePacientes()
+{
     // Pacientes
     FILE *ptpacientes = fopen("output/pacientes.bin", "rb");
-    if(ptpacientes == NULL){
+    if (ptpacientes == NULL)
+    {
         printf("deu merda\n");
     }
 
     fseek(ptpacientes, 0, SEEK_END);
     long tamanho = (int)ftell(ptpacientes);
     rewind(ptpacientes);
-    
+
     quantidadePacientes = tamanho / sizeof(Paciente);
-    vetPacientes = (Paciente *) malloc(quantidadePacientes * sizeof(Paciente));
-    vetIndexPaciente = (IndexPaciente *) malloc(quantidadePacientes * sizeof(IndexPaciente));
-    
+    vetPacientes = (Paciente *)malloc(quantidadePacientes * sizeof(Paciente));
+    vetIndexPaciente = (IndexPaciente *)malloc(quantidadePacientes * sizeof(IndexPaciente));
+
     fread(vetPacientes, sizeof(Paciente), quantidadePacientes, ptpacientes);
 
-    for(int i = 0; i < quantidadePacientes; i++){
+    for (int i = 0; i < quantidadePacientes; i++)
+    {
         strcpy(vetIndexPaciente[i].chave, vetPacientes[i].CPF);
     }
 
     fclose(ptpacientes);
     printf("Sistema: %d pacientes carregados na memoria.\n", quantidadePacientes);
-
 }
 
-void AdicionarNaMao() {
+void AdicionarNaMao()
+{
     Paciente p;
-    
+
     // Preenchendo dados falsos pra teste
     strcpy(p.CPF, "123.456.789-00");
     strcpy(p.nome, "Laercio da Silva"); // O brabo
@@ -121,13 +154,16 @@ void AdicionarNaMao() {
     strcpy(p.telefone, "38999999999");
 
     // "ab" = Append Binary (Adiciona no final ou cria se não existir)
-    FILE *arq = fopen("output/pacientes.bin", "ab"); 
-    
-    if (arq != NULL) {
+    FILE *arq = fopen("output/pacientes.bin", "ab");
+
+    if (arq != NULL)
+    {
         fwrite(&p, sizeof(Paciente), 1, arq);
         fclose(arq);
         printf("Paciente adicionado com sucesso!\n");
-    } else {
+    }
+    else
+    {
         printf("Erro ao abrir arquivo pra escrita.\n");
     }
 }
