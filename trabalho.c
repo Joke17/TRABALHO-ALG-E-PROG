@@ -7,16 +7,44 @@
 
 int main() {
     setlocale(LC_ALL, "PORTUGUESE");
-    
     printf("---------------\nINICIO\n------------------------\n\n");
+     
+    // --- 1. PREPARAÇÃO: CARREGA ÍNDICES DOS MÉDICOS ---
+    CarregarIndicesMedicos();
+    
+    // ------------------------------------------------------------------
+    // --- A. CRIAR DADOS DE TESTE (Rode SÓ NA PRIMEIRA VEZ, DEPOIS COMENTE) ---
+    // ------------------------------------------------------------------
+    
+    printf("\n--- Criando Consultas de Teste para o Paciente (Use o CPF 12345678900) ---\n");
+    // Rode 2 vezes: na primeira, use o CPF de teste (Ex: 12345678900).
+    InserirNovaConsulta(); 
+    // Na segunda, use o mesmo CPF e dados diferentes.
+    InserirNovaConsulta(); 
+    printf("\n--- FIM da Criação de Dados ---\n");
+    
 
+    // ------------------------------------------------------------------
+    // --- B. LISTAR DADOS (Rode na SEGUNDA VEZ, comentando a seção A) ---
+    // ------------------------------------------------------------------
+    printf("\n--- TESTANDO ListarConsultasPorPaciente ---\n");
+    ListarConsultasPorPaciente();
+    printf("-----------------------------------------\n");
 
-    //AbreVetores();
+    // --- 4. FINALIZAÇÃO: SALVA ÍNDICES E LIMPA MEMÓRIA ---
+    SalvarIndicesMedicos();
+ 
+/*
+   
    // --- 1. PREPARAÇÃO: CARREGA ÍNDICES DOS MÉDICOS ---
     CarregarIndicesMedicos();
+    //DebugListarIndices();
     // A função AbreVetores() está na cabecalho.h e pode ser mantida
-   // CarregarIndicePacientes();
-    //InserirNovoPaciente();
+   CarregarIndicePacientes();
+   InserirNovoPaciente();
+   AlterarDadosPaciente();
+    CarregarIndicePacientes();
+    InserirNovoPaciente();
 
     // ------------------------------------------------------------w-------------------------
     // --- 2. TESTE DE CADASTRO DE MÉDICO (Execute SÓ A PRIMEIRA VEZ, DEPOIS COMENTE) ---
@@ -40,7 +68,7 @@ int main() {
     
     // --- 4. FINALIZAÇÃO: SALVA ÍNDICES E LIMPA MEMÓRIA ---
     SalvarIndicesMedicos();
-    
+    */
    
     //Paciente p;
     //strcpy(p.nome, "João");
@@ -48,54 +76,7 @@ int main() {
     //InserirNovoPaciente(p);
     //ListarConsultasPorMedico();
 
-    int aux;
-
-    printf("1- Efetuar Login\n");
-    printf("2- Cadastrar Usuário\n");
-    printf("0- Encerrar Programa\n");
-
-    scanf("%d", &aux);
-
-    switch(aux){
-        case 1:{
-            int auxErro;
-            for(auxErro=0;auxErro<=2;auxErro++){
-                char userAux[20], senhaAux[20];
-                printf("\nUsuário: ");
-                scanf("%s", userAux);
-
-                printf("Senha: ");
-                scanf("%s", senhaAux);
-
-                int teste = VerificarLogin(userAux, senhaAux);
-                if(teste == 0){
-                    printf("Login ou senha inválidos\n");
-                }else{
-                    break;
-                }
-                if(auxErro == 2){
-                    printf("Terceira tentativa de login inválida, encerrando o programa...");
-                    return 0;
-                }
-            }
-            break;
-        }
-
-        case 2:{
-            Login novo;
-            printf("Usuário:");
-            scanf("%s", novo.usuario);
-            printf("Senha:");
-            scanf("%s", novo.senha);
-            CadastrarNovoUsuario(novo);
-            break;
-        }
-
-        case 0:{
-            return 0;
-            break;
-        }
-    }
+    //MenuLogin();
 
     printf("---------------\nFIM.\n------------------------");
     return 0;
