@@ -72,4 +72,11 @@ void ListarConsultasPorMedico();
 void ListarConsultasPorPaciente(); 
 void ListarConsultasPorData();
 
+//funcoes menu
+void MenuLogin();
+void MenuPrincipal();
+void MenuPacientes();
+void MenuMedicos();
+void MenuConsultas();
+
 #endif
