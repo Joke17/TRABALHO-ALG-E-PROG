@@ -307,7 +307,6 @@ void ExcluirMedico() {
     int indice;        // Posição no vetor
     int confirmacao;   // Variável para sim/não
     int i;             // Contador para o loop for
-
     // 2. BUSCA DO ALVO
     printf("\n--- EXCLUIR MEDICO ---\n");
     printf("Digite o CRM do medico a ser excluido: ");
@@ -344,11 +343,10 @@ void ExcluirMedico() {
     // Diminuímos a contagem total. O último elemento fica duplicado lá no fundo,
     // mas o sistema ignora ele porque qtdMedicos diminuiu.
     qtdMedicos--; 
-
+    SalvarIndicesMedicos();
     // Aviso final: A exclusão só vai pro arquivo quando chamar "SalvarIndicesMedicos"
     printf("Medico excluido com sucesso! (Sera efetivado ao sair do programa)\n");
-
-    fclose(arqDados);
+    
 }
 
 // --- FUN��O EXTRA: DEBUG ---
