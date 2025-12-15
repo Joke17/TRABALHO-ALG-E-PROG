@@ -107,29 +107,35 @@ void SalvarIndicesMedicos() {
 void InserirNovoMedico() {
     Medico m; // Cria uma variÃ¡vel temporÃ¡ria para receber os dados
     
-    // --- Passo 1: Coleta de dados do usuÃ¡rio ---
-    printf("\n--- CADASTRO DE MEDICO ---\n");
-    printf("Digite o CRM: ");
-    // Antes: scanf("%s", m.CRM); // scanf %s é arriscado para buffer
-    
-    // Novo: use fgets, que é mais seguro, e limite o tamanho
-    if (fgets(m.CRM, sizeof(m.CRM), stdin) == NULL) return; // Leitura mais segura
-    
-    // Remove o '\n' que o fgets adiciona (se houver)
-    m.CRM[strcspn(m.CRM, "\n")] = 0;
-    // Antes de continuar, verifica se esse CRM jÃ¡ existe
-    if (buscaBinariaMedico(m.CRM) != -1) {
-        printf("Erro: Ja existe um medico com este CRM!\n");
-        return; // Cancela o cadastro
-    }
+   // --- 1. LEITURA E LIMPEZA DO CRM ---
+printf("\n--- CADASTRO DE MEDICO ---\n");
+printf("Digite o CRM: ");
+// Usa fgets e garante que a string não tem mais que 5 caracteres + \0
+if (fgets(m.CRM, sizeof(m.CRM), stdin) == NULL) return; 
+m.CRM[strcspn(m.CRM, "\n")] = 0; // Remove o '\n'
 
-    printf("Nome: ");
-    fgets(m.nome, 50, stdin); // LÃª o nome com espaÃ§os
-    m.nome[strcspn(m.nome, "\n")] = 0; // Truque para remover o \n do final da string
+// --- NOVO PASSO: LIMPEZA MANUAL APÓS FGETS DE CAMPO PEQUENO ---
+// Se o usuário digitou mais caracteres do que o CRM[6] suporta, 
+// os excessos ficam no buffer. Isso os remove para o próximo fgets.
+int c;
+while ((c = getchar()) != '\n' && c != EOF);
+// -----------------------------------------------------------------
 
-    printf("Especialidade: ");
-    fgets(m.especialidade, 20, stdin);
-    m.especialidade[strcspn(m.especialidade, "\n")] = 0;
+// Antes de continuar, verifica se esse CRM já existe
+if (buscaBinariaMedico(m.CRM) != -1) {
+    printf("Erro: Ja existe um medico com este CRM!\n");
+    return; // Cancela o cadastro
+}
+
+// --- 2. LEITURA DO NOME (DEVE FUNCIONAR AGORA) ---
+printf("Nome: ");
+fgets(m.nome, 50, stdin); // Lê o nome com espaços
+m.nome[strcspn(m.nome, "\n")] = 0; // Truque para remover o \n do final da string
+
+// --- 3. LEITURA DA ESPECIALIDADE ---
+printf("Especialidade: ");
+fgets(m.especialidade, 20, stdin);
+m.especialidade[strcspn(m.especialidade, "\n")] = 0;
 
     printf("Valor Hora (ex: 100.50): ");
     scanf("%f", &m.valor_hora_trabalho); // LÃª o float

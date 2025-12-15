@@ -17,7 +17,7 @@ int main() {
     //DebugListarIndices();
     // A função AbreVetores() está na cabecalho.h e pode ser mantida
    CarregarIndicePacientes();
-    //InserirNovoPaciente();
+    InserirNovoPaciente();
 
     // ------------------------------------------------------------w-------------------------
     // --- 2. TESTE DE CADASTRO DE MÉDICO (Execute SÓ A PRIMEIRA VEZ, DEPOIS COMENTE) ---

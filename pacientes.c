@@ -32,14 +32,8 @@ void AlterarDadosPaciente(){
     printf("\ndeu bao\n");
 }
 void CarregarIndicePacientes(){
-    //char cwd[1024];
-    //_getcwd(cwd, sizeof(cwd));
-    // printf("Diretório de trabalho atual: %s\n", cwd);
-    
     // Pacientes
     FILE *ptpacientes = fopen("output/pacientes.bin", "rb");
-    //FILE *ptpacientes;
-    //ptpacientes = fopen("pacientes.bin", "rb");
     if(ptpacientes == NULL){
         printf("deu merda\n");
     }
@@ -50,17 +44,12 @@ void CarregarIndicePacientes(){
     
     int quantidade = tamanho / sizeof(Paciente);
     Paciente *vetPacientes = (Paciente *) malloc(quantidade * sizeof(Paciente));
-    IndexPaciente *vetIndex = (IndexPaciente *) malloc(quantidade * sizeof(IndexPaciente));
+    IndexPaciente *vetIndexPaciente = (IndexPaciente *) malloc(quantidade * sizeof(IndexPaciente));
     
-    //printf("ate aq veio");
-
     fread(vetPacientes, sizeof(Paciente), quantidade, ptpacientes);
 
     for(int i = 0; i < quantidade; i++){
-        strcpy(vetIndex[i].chave, vetPacientes[i].CPF);
-    }
-    for(int i = 0; i < quantidade; i++){
-        printf("%s \n", vetIndex[i].chave);
+        strcpy(vetIndexPaciente[i].chave, vetPacientes[i].CPF);
     }
 
     fclose(ptpacientes);
