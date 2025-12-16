@@ -88,6 +88,59 @@ int BuscarPacientePorCPF(char CPF[])
     */
 }
 
+void BuscarPacientePorNome(){
+
+    char nomeBusca[50];
+    int i;
+    int encontrou = 0; 
+    Paciente p;
+    FILE *arqDados;
+
+    printf("\n--- BUSCA POR NOME (Parcial) ---\n");
+    printf("Digite parte do nome: ");
+    
+    // limepeza de buffer antes de ler string
+    int limpar;
+    while ((limpar = getchar()) != '\n' && limpar != EOF);
+    
+    fgets(nomeBusca, 50, stdin);
+    nomeBusca[strcspn(nomeBusca, "\n")] = 0; 
+
+    // se o usuário der Enter sem digitar nada, sai
+    if (strlen(nomeBusca) == 0) return;
+
+    arqDados = fopen("output/pacientes.bin", "rb"); 
+    if (arqDados == NULL) {
+        printf("Erro ao ler banco de dados de pacientes.\n");
+        return;
+    }
+
+    printf("\nResultados para '%s':\n", nomeBusca);
+    printf("--------------------------------------------------\n");
+
+    for (i = 0; i < quantidadePacientes; i++) {
+
+        fseek(arqDados, vetIndexPaciente[i].posicao, SEEK_SET);
+        
+        fread(&p, sizeof(Paciente), 1, arqDados);
+
+        if (strstr(p.nome, nomeBusca) != NULL) {
+            printf("CPF: %-11s | Nome: %-25s | Telefone: %s\n", p.CPF, p.nome, p.telefone);
+            encontrou++;
+        }
+    }
+
+    printf("--------------------------------------------------\n");
+    if (encontrou == 0) {
+        printf("Nenhum paciente encontrado com esse nome.\n"); 
+    }
+    else {
+        printf("Total encontrados: %d\n", encontrou);
+    }
+
+    fclose(arqDados);
+}
+
 void ReordenaPacientes(int posicao){
     Paciente aux;
     vetPacientes = (Paciente *)realloc(vetPacientes, (quantidadePacientes + 1) * sizeof(Paciente));
@@ -250,15 +303,16 @@ void ListaPacientes()
 
 void CarregarIndicePacientes()
 {
-    // Pacientes
-    FILE *ptpacientes = fopen("output/pacientes.bin", "r+b");
+    FILE *ptpacientes = fopen("output/pacientes.bin", "rb"); //le apenas
     if (ptpacientes == NULL)
     {
-        printf("deu merda\n");
+        // aqui so trata o erro e sai, garantindo quantidadepacientes = 0
+        quantidadePacientes = 0;
+        return; 
     }
 
     fseek(ptpacientes, 0, SEEK_END);
-    long tamanho = (int)ftell(ptpacientes);
+    long tamanho = ftell(ptpacientes);
     rewind(ptpacientes);
 
     quantidadePacientes = tamanho / sizeof(Paciente);
@@ -270,6 +324,11 @@ void CarregarIndicePacientes()
     for (int i = 0; i < quantidadePacientes; i++)
     {
         strcpy(vetIndexPaciente[i].chave, vetPacientes[i].CPF);
+        
+        vetIndexPaciente[i].posicao = (long)i * sizeof(Paciente);
+        
+        // nesse daso aqui o 'i' é o índice do vetor, e cada paciente tem o tamanho sizeof(Paciente)
+        // então a posição do paciente 'i' é: i * tamanho do Paciente.
     }
 
     fclose(ptpacientes);
@@ -280,13 +339,13 @@ void AdicionarNaMao()
 {
     Paciente p;
 
-    // Preenchendo dados falsos pra teste
+    // preenchendo dados falsos pra teste
     strcpy(p.CPF, "123.456.789-00");
     strcpy(p.nome, "Laercio da Silva"); // O brabo
     strcpy(p.data_de_nascimento, "01/01/1980");
     strcpy(p.telefone, "38999999999");
 
-    // "ab" = Append Binary (Adiciona no final ou cria se não existir)
+    // "ab" = Append Binary (adiciona no final ou cria se não existir)
     FILE *arq = fopen("output/pacientes.bin", "ab");
 
     if (arq != NULL)

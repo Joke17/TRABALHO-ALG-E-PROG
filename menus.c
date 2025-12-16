@@ -123,7 +123,7 @@ void MenuPacientes(){
 
             case 2:{
                LimparTela();
-                //BuscarPacientePorNome();
+                BuscarPacientePorNome();
                 break;
             }
 
