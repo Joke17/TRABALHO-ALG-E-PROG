@@ -34,7 +34,7 @@ int BuscarPacientePorCPF(char CPF[])
     int achou = 0;
 
     for(int i = 0; i < quantidadePacientes; i++){
-        if(strcmp(CPF,vetPacientes[i].chave)){
+        if(strcmp(CPF,vetIndexPaciente[i].chave)){
             achou = 1;
         }
     }

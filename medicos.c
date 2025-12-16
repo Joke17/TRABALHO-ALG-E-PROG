@@ -166,7 +166,7 @@ void InserirNovoMedico() {
     while ((c = getchar()) != '\n' && c != EOF);
 
     // --- GRAVAÇÃO (Igual ao seu código) ---
-    FILE *arqDados = fopen("medicos.bin", "ab");
+    FILE *arqDados = fopen("output/medicos.bin", "ab");
     if (arqDados == NULL) { printf("Erro ao abrir medicos.bin!\n"); return; }
 
     fseek(arqDados, 0, SEEK_END);
@@ -242,7 +242,7 @@ void EditarMedico() {
         return;
     }
 
-    arqDados = fopen("medicos.bin", "r+b"); 
+    arqDados = fopen("output/medicos.bin", "r+b"); 
     if (arqDados == NULL) { printf("Erro no arquivo.\n"); return; }
 
     posicao = tabelaIndices[indice].posicao;
@@ -353,7 +353,7 @@ void BuscarMedicoPorNome() {
     if (strlen(nomeBusca) == 0) return;
 
     // 2. Abrir arquivo para leitura
-    arqDados = fopen("medicos.bin", "rb");
+    arqDados = fopen("output/medicos.bin", "rb");
     if (arqDados == NULL) {
         printf("Erro ao ler banco de dados.\n");
         return;

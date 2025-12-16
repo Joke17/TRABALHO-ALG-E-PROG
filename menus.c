@@ -121,13 +121,13 @@ void MenuPacientes(){
 
             case 2:{
                LimparTela();
-                BuscarPacientePorCPF();
+                //BuscarPacientePorCPF();
                 break;
             }
 
             case 3:{
                 LimparTela();
-                AlterarDadosPaciente();
+                //AlterarDadosPaciente();
                 break;
             }
 
@@ -159,7 +159,7 @@ void MenuMedicos(){
             }
 
             case 2:{
-                //LimparTela();
+                LimparTela();
                 BuscarMedicoPorNome();
                 break;
             }
