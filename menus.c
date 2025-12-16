@@ -104,10 +104,12 @@ void MenuPrincipal(){
 void MenuPacientes(){
     int aux;
     do{
-        LimparTela();
+        //LimparTela();
         printf("1- Inserir novo paciente\n");
         printf("2- Buscar paciente por nome\n");
         printf("3- Alterar dados do paciente\n"); 
+        printf("4- Excluir paciente\n");
+        printf("5- Listar pacientes\n");
         printf("0- Voltar para a página anterior\n");
 
         scanf("%d", &aux);
@@ -121,13 +123,18 @@ void MenuPacientes(){
 
             case 2:{
                LimparTela();
-                //BuscarPacientePorCPF();
+               // BuscarPacientePorNome();
                 break;
             }
 
             case 3:{
                 LimparTela();
-                //AlterarDadosPaciente();
+                AlterarDadosPaciente();
+                break;
+            }
+            case 4:{
+                //LimparTela();
+                ExcluirPaciente();
                 break;
             }
 
@@ -159,7 +166,7 @@ void MenuMedicos(){
             }
 
             case 2:{
-                LimparTela();
+                //LimparTela();
                 BuscarMedicoPorNome();
                 break;
             }
@@ -171,14 +178,14 @@ void MenuMedicos(){
             }
 
             case 4:{
-                LimparTela();
+                //LimparTela();
                 EditarMedico(); 
                 break;
             }
 
             case 5:{
-                LimparTela();
-                ExcluirMedico();
+               // LimparTela();
+               ExcluirMedico();
                 break;
             }
 
@@ -204,25 +211,25 @@ void MenuConsultas(){
 
         switch(aux){
             case 1:{
-                LimparTela();
+                //LimparTela();
                 InserirNovaConsulta();
                 break;
             }
 
             case 2:{
-                LimparTela();
+                //LimparTela();
                 ListarConsultasPorMedico();
                 break;
             }
 
             case 3:{
-                LimparTela();
+               // LimparTela();
                 ListarConsultasPorPaciente();
                 break;
             }
 
             case 4:{
-               LimparTela();
+              // LimparTela();
                 ListarConsultasPorData();
                 break;
             }

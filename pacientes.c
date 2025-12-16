@@ -184,7 +184,7 @@ void AlterarDadosPaciente()
 
 }
 
-void ExcuirPaciente(){
+void ExcluirPaciente(){
     char CPF[12];
     printf("\n----------EXCLUSÃO DE PACIENTE----------\n");
     printf("Digite o CPF do paciente que deseja Alterar: ");
