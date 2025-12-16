@@ -47,6 +47,7 @@ typedef struct
     int posicao;    // posição do registro no arquivo binário
 } IndexPaciente, IndexMedico;
 
+
 //void OrdenaCPF();
 
 int VerificarLogin(char user[], char senha[]);

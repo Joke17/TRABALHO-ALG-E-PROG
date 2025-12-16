@@ -10,8 +10,12 @@ int main() {
     printf("---------------\nINICIO\n------------------------\n\n");
 
     // --- 1. PREPARAÇÃO: CARREGA ÍNDICES DOS MÉDICOS ---
+    CarregarIndicePacientes();
     CarregarIndicesMedicos();
     DebugListarIndices();
+
+    printf("\n--- Testando InserirNovoMedico ---");
+    InserirNovoMedico();
 
     //CarregarIndicePacientes();
     //ListaPacientes();
