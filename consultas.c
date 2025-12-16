@@ -50,7 +50,7 @@ void InserirNovaConsulta() {
     fgets(nova_consulta.encaminhamentos, 100, stdin);
     nova_consulta.encaminhamentos[strcspn(nova_consulta.encaminhamentos, "\n")] = 0;
     // gravar no arquivo consultas.bin
-    arq_consultas = fopen("consultas.bin", "ab"); // 'ab': append binary (adiciona so no final)
+    arq_consultas = fopen("output/consultas.bin", "ab"); // 'ab': append binary (adiciona so no final)
     if (arq_consultas == NULL) {
         perror("Erro ao abrir o arquivo consultas.bin para escrita");
         return;
@@ -77,7 +77,7 @@ void ListarConsultasPorMedico() {
     int limpar;
     while ((limpar = getchar()) != '\n' && limpar != EOF);
 
-    arq_consultas = fopen("consultas.bin", "rb"); // 'rb': read binary
+    arq_consultas = fopen("output/consultas.bin", "rb"); // 'rb': read binary
     if (arq_consultas == NULL) {
         printf("Nenhuma consulta registrada.\n");
         return;
@@ -121,7 +121,7 @@ void ListarConsultasPorPaciente() {
     int limpar;
     while ((limpar = getchar()) != '\n' && limpar != EOF);
 
-    arq_consultas = fopen("consultas.bin", "rb");
+    arq_consultas = fopen("output/consultas.bin", "rb");
     if (arq_consultas == NULL) {
         printf("Nenhuma consulta registrada.\n");
         return;
@@ -164,7 +164,7 @@ void ListarConsultasPorData() {
     while ((limpar = getchar()) != '\n' && limpar != EOF);
 
 
-    arq_consultas = fopen("consultas.bin", "rb");
+    arq_consultas = fopen("output/consultas.bin", "rb");
     if (arq_consultas == NULL) {
         printf("Nenhuma consulta registrada.\n");
         return;

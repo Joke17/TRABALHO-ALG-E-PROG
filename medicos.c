@@ -64,7 +64,7 @@ int buscaBinariaMedico(char *crmBusca) {
 // Objetivo: Ler o arquivo de índices do HD e passar para a RAM ao iniciar o programa.
 void CarregarIndicesMedicos() {
     // Tenta abrir o arquivo de índices em modo leitura binária ("rb")
-    FILE *arqIndex = fopen("indices_medicos.bin", "rb");
+    FILE *arqIndex = fopen("output/indices_medicos.bin", "rb");
     
     // Se o arquivo não existir (primeira vez que roda o programa), retorna NULL
     if (arqIndex == NULL) {
@@ -111,7 +111,7 @@ void SalvarIndicesMedicos() {
 
     // Abre o arquivo em modo de escrita binária ("wb"). 
     // O "w" zera o arquivo e escreve tudo novo por cima.
-    FILE *arqIndex = fopen("indices_medicos.bin", "wb");
+    FILE *arqIndex = fopen("output/indices_medicos.bin", "wb");
     
     if (arqIndex == NULL) {
         printf("Erro grave: Nao foi possivel salvar os indices!\n");
@@ -177,7 +177,7 @@ void InserirNovoMedico() {
 
     // --- Passo 2: Gravar os DADOS no arquivo (HDD) ---
     // Abre o arquivo de DADOS em modo append ("ab"), adiciona ao final
-    FILE *arqDados = fopen("medicos.bin", "ab");
+    FILE *arqDados = fopen("output/medicos.bin", "ab");
     if (arqDados == NULL) {
         printf("Erro ao abrir medicos.bin!\n");
         return;
@@ -232,7 +232,7 @@ void ListarMedicos() {
     }
 
     // Abre o arquivo de dados apenas para leitura
-    FILE *arqDados = fopen("medicos.bin", "rb");
+    FILE *arqDados = fopen("output/medicos.bin", "rb");
     if (!arqDados) { printf("Erro ao ler dados.\n"); return; }
 
     Medico m;
@@ -283,7 +283,7 @@ void EditarMedico() {
     // 4. PREPARAÇÃO DO ARQUIVO
     // Abre o arquivo "medicos.bin" em modo "r+b"
     // "r+" = Leitura e Escrita (Update). Permite alterar dados sem apagar o arquivo todo.
-    arqDados = fopen("medicos.bin", "r+b"); 
+    arqDados = fopen("output/medicos.bin", "r+b"); 
     
     // Verifica se o arquivo abriu corretamente
     if (arqDados == NULL) {
