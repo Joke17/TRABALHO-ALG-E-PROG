@@ -184,7 +184,7 @@ void AlterarDadosPaciente()
     ptarq = fopen("output/pacientes.bin", "w+b");
     
     fseek(ptarq, p, SEEK_SET);
-    fwrite(vetPacientes, sizeof(Paciente), p , ptarq);
+    fwrite(vetPacientes[p], sizeof(Paciente), p , ptarq);
     fclose(ptarq);
 
     CarregarIndicePacientes();
