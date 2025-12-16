@@ -66,6 +66,7 @@ void ListaPacientes();
 int BuscarPacientePorCPF();
 void ReordenaPacientes();
 void ExcluirPaciente();
+void BuscarPacientePorNome();
 
 // funcoes medicos
 void CarregarIndicesMedicos();

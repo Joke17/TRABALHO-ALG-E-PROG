@@ -37,7 +37,7 @@ void InserirNovaConsulta() {
     printf("Digite a Data da Consulta (DD/MM/AAAA): ");
     scanf("%11s", nova_consulta.data); 
     
-    // limpeza original (que é essencial antes do fgets)
+    // limpeza original (que é mt importante antes do fgets)
     while ((limpar = getchar()) != '\n' && limpar != EOF); 
     
     printf("Digite os Sintomas (máx 99 caracteres): ");
@@ -85,7 +85,7 @@ void ListarConsultasPorMedico() {
 
     printf("\nConsultas para o CRM %s:\n", crm_busca);
    
-    //  fread retorna 1 se leu um registro completo, 0 se chegou ao fim.
+    //  fread retorna 1 se leu um registro completo e 0 se chegou ao fim.
     while (fread(&c, sizeof(Consulta), 1, arq_consultas) == 1) {
        
         // comparação de string, strcmp retorna 0 se as strings são iguais.
@@ -193,10 +193,3 @@ void ListarConsultasPorData() {
         printf("-------------------------------------------\n");
     }
 }
-
-
-
-
-
-
-
