@@ -75,7 +75,7 @@ void CargaInicial(){
         strcpy(indicesMedicos[2].chave, m3.CRM);
         indicesMedicos[2].posicao = posicaoAtual;
         
-        fwrite(indicesMedicos, sizeof(IndexMedico), MAX_TESTE, indicesMedicoIni);
+        fwrite(indicesMedicos, sizeof(IndexMedico), QUANT_TESTE, indicesMedicoIni);
         
         printf("Medicos de teste e índices criados.\n");
         
@@ -109,7 +109,7 @@ void CargaInicial(){
         strcpy(indicesPacientes[2].chave, p3.CPF);
         indicesPacientes[2].posicao = posicaoAtual;
 
-        fwrite(indicesPacientes, sizeof(IndexPaciente), MAX_TESTE, indicesPacienteIni);
+        fwrite(indicesPacientes, sizeof(IndexPaciente), QUANT_TESTE, indicesPacienteIni);
         
         printf("Pacientes de teste e índices criados.\n");
         
