@@ -12,10 +12,10 @@ int main() {
     //LimparTela();
     printf("------------------------\nINICIO\n------------------------\n\n");
 
-    // --- 1. PREPARAÇÃO: CARREGA ÍNDICES DOS MÉDICOS ---
+    //carregando indices de pacientes e medicos para testes
     CarregarIndicePacientes();
     CarregarIndicesMedicos();
-    DebugListarIndices();
+    //DebugListarIndices();
 
     //printf("\n--- Testando InserirNovoMedico ---");
    
