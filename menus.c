@@ -3,6 +3,7 @@
 #include <string.h>
 #include <locale.h>
 #include "cabecalho.h"
+#include <unistd.h>  //biblioteca pesquisada por alequis para usar a função sleep que da uma mini pausa na execução do programa.
 
 void LimparTela() {
     system("cls");
@@ -11,7 +12,8 @@ void LimparTela() {
 void MenuLogin(){
     int aux;
     do{
-        //LimparTela();
+        sleep(2);
+        LimparTela();
         printf("1- Efetuar Login\n");
         printf("2- Cadastrar Usuário\n");
         printf("0- Encerrar Programa\n");
@@ -67,6 +69,7 @@ void MenuPrincipal(){
     int aux;
 
     do{
+        sleep(0.5);
         LimparTela();
         printf("1- Pacientes\n");
         printf("2- Médicos\n");
@@ -77,17 +80,17 @@ void MenuPrincipal(){
 
         switch(aux){
             case 1:{
-                LimparTela();
+               LimparTela();
                 MenuPacientes();
                 break;
             }
             case 2:{
-                LimparTela();
+               LimparTela();
                 MenuMedicos();
                 break;
             }
             case 3:{
-                LimparTela();
+               LimparTela();
                 MenuConsultas();
                 break;
             }
@@ -117,7 +120,7 @@ void MenuPacientes(){
             }
 
             case 2:{
-                LimparTela();
+               LimparTela();
                 BuscarPacientePorCPF();
                 break;
             }
@@ -138,7 +141,8 @@ void MenuPacientes(){
 void MenuMedicos(){
     int aux;
     do{
-        LimparTela();
+        sleep(2);
+       LimparTela();
         printf("1- Inserir novo médico\n");
         printf("2- Buscar médico por nome\n");
         printf("3- Listar médicos por especialidade\n"); 
@@ -162,7 +166,7 @@ void MenuMedicos(){
             }
 
             case 3:{
-                LimparTela();
+               LimparTela();
                 ListarMedicos();
                 break;
             }
@@ -219,7 +223,7 @@ void MenuConsultas(){
             }
 
             case 4:{
-                LimparTela();
+               LimparTela();
                 ListarConsultasPorData();
                 break;
             }
