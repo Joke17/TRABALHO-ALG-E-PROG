@@ -37,7 +37,7 @@ void InserirNovaConsulta() {
     printf("Digite a Data da Consulta (DD/MM/AAAA): ");
     scanf("%11s", nova_consulta.data); 
     
-    // limpeza original (que é essencial antes do fgets)
+    // limpeza original (que é mt importante antes do fgets)
     while ((limpar = getchar()) != '\n' && limpar != EOF); 
     
     printf("Digite os Sintomas (máx 99 caracteres): ");
@@ -193,10 +193,3 @@ void ListarConsultasPorData() {
         printf("-------------------------------------------\n");
     }
 }
-
-
-
-
-
-
-
