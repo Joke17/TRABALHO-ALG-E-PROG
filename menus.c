@@ -3,6 +3,7 @@
 #include <string.h>
 #include <locale.h>
 #include "cabecalho.h"
+#include <unistd.h>
 
 void LimparTela() {
     system("cls");
@@ -11,7 +12,8 @@ void LimparTela() {
 void MenuLogin(){
     int aux;
     do{
-        //LimparTela();
+        sleep(2);
+        LimparTela();
         printf("1- Efetuar Login\n");
         printf("2- Cadastrar Usuário\n");
         printf("0- Encerrar Programa\n");
@@ -67,7 +69,7 @@ void MenuPrincipal(){
     int aux;
 
     do{
-        LimparTela();
+       LimparTela();
         printf("1- Pacientes\n");
         printf("2- Médicos\n");
         printf("3- Consultas\n");
@@ -77,17 +79,17 @@ void MenuPrincipal(){
 
         switch(aux){
             case 1:{
-                LimparTela();
+               LimparTela();
                 MenuPacientes();
                 break;
             }
             case 2:{
-                LimparTela();
+               LimparTela();
                 MenuMedicos();
                 break;
             }
             case 3:{
-                LimparTela();
+               LimparTela();
                 MenuConsultas();
                 break;
             }
@@ -101,7 +103,7 @@ void MenuPrincipal(){
 void MenuPacientes(){
     int aux;
     do{
-        LimparTela();
+       LimparTela();
         printf("1- Inserir novo paciente\n");
         printf("2- Buscar paciente por nome\n");
         printf("3- Alterar dados do paciente\n"); 
@@ -117,7 +119,7 @@ void MenuPacientes(){
             }
 
             case 2:{
-                LimparTela();
+               LimparTela();
                 BuscarPacientePorCPF();
                 break;
             }
@@ -162,7 +164,7 @@ void MenuMedicos(){
             }
 
             case 3:{
-                LimparTela();
+               LimparTela();
                 ListarMedicos();
                 break;
             }
@@ -219,7 +221,7 @@ void MenuConsultas(){
             }
 
             case 4:{
-                LimparTela();
+               LimparTela();
                 ListarConsultasPorData();
                 break;
             }

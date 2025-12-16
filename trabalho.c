@@ -3,6 +3,7 @@
 #include <string.h>
 #include <locale.h>
 #include "cabecalho.h"
+#include <unistd.h>
 
 
 int main() {
@@ -13,7 +14,7 @@ int main() {
 
     // --- 1. PREPARAÇÃO: CARREGA ÍNDICES DOS MÉDICOS ---
     //CarregarIndicePacientes();
-    //CarregarIndicesMedicos();
+   // CarregarIndicesMedicos();
     //DebugListarIndices();
 
     //printf("\n--- Testando InserirNovoMedico ---");
