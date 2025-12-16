@@ -3,7 +3,7 @@
 #include <string.h>
 #include <locale.h>
 #include "cabecalho.h"
-#include <unistd.h>
+#include <unistd.h>  //biblioteca pesquisada por alequis para usar a função sleep que da uma mini pausa na execução do programa.
 
 void LimparTela() {
     system("cls");
@@ -69,7 +69,8 @@ void MenuPrincipal(){
     int aux;
 
     do{
-       LimparTela();
+        sleep(0.5);
+        LimparTela();
         printf("1- Pacientes\n");
         printf("2- Médicos\n");
         printf("3- Consultas\n");
@@ -103,7 +104,7 @@ void MenuPrincipal(){
 void MenuPacientes(){
     int aux;
     do{
-       LimparTela();
+        LimparTela();
         printf("1- Inserir novo paciente\n");
         printf("2- Buscar paciente por nome\n");
         printf("3- Alterar dados do paciente\n"); 
@@ -140,7 +141,8 @@ void MenuPacientes(){
 void MenuMedicos(){
     int aux;
     do{
-        LimparTela();
+        sleep(2);
+       LimparTela();
         printf("1- Inserir novo médico\n");
         printf("2- Buscar médico por nome\n");
         printf("3- Listar médicos por especialidade\n"); 

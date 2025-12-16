@@ -328,7 +328,63 @@ void DebugListarIndices() {
     }
 
     printf("------------------------------------------\n");
+}
+// --- FUNÇÃO 6: BUSCAR MÉDICO POR NOME (Pesquisa Sequencial) ---
+void BuscarMedicoPorNome() {
+    char nomeBusca[50];
+    int i, c;
+    int encontrou = 0; // Contador de resultados
+    Medico m;
+    FILE *arqDados;
 
-   
+    // 1. Entrada de dados
+    printf("\n--- BUSCA POR NOME (Parcial) ---\n");
+    printf("Digite parte do nome: ");
+    
+    // Limpeza de buffer preventiva antes de ler string
+    // (Caso venha de um menu que deixou sujeira)
+    // Se o seu menu já limpa, pode tirar o setbuf, mas mal não faz.
+    setbuf(stdin, NULL); 
+    
+    fgets(nomeBusca, 50, stdin);
+    nomeBusca[strcspn(nomeBusca, "\n")] = 0; // Remove o Enter (\n)
 
+    // Se o usuário der Enter sem digitar nada, sai
+    if (strlen(nomeBusca) == 0) return;
+
+    // 2. Abrir arquivo para leitura
+    arqDados = fopen("medicos.bin", "rb");
+    if (arqDados == NULL) {
+        printf("Erro ao ler banco de dados.\n");
+        return;
+    }
+
+    printf("\nResultados para '%s':\n", nomeBusca);
+    printf("--------------------------------------------------\n");
+
+    // 3. Loop: Percorre TODOS os médicos ativos no índice
+    // (Usamos o índice para garantir que não mostremos médicos excluídos)
+    for (i = 0; i < qtdMedicos; i++) {
+        
+        // Vai no HD buscar os dados completos deste médico
+        fseek(arqDados, tabelaIndices[i].posicao, SEEK_SET);
+        fread(&m, sizeof(Medico), 1, arqDados);
+
+        // 4. A Mágica: strstr (String String)
+        // Verifica se 'nomeBusca' existe DENTRO de 'm.nome'
+        // Retorna um ponteiro se achar, ou NULL se não achar.
+        if (strstr(m.nome, nomeBusca) != NULL) {
+            printf("CRM: %-6s | Nome: %-25s | Esp: %s\n", m.CRM, m.nome, m.especialidade);
+            encontrou++;
+        }
+    }
+
+    printf("--------------------------------------------------\n");
+    if (encontrou == 0) {
+        printf("Nenhum medico encontrado com esse nome.\n");
+    } else {
+        printf("Total encontrados: %d\n", encontrou);
+    }
+
+    fclose(arqDados);
 }
