@@ -163,7 +163,7 @@ void AlterarDadosPaciente()
     printf("Para Alterar o Nome digite 1; \n");
     printf("Para Alterar o Telefone digite 2; \n");
     printf("Para Alterar data de nascmiento digite 3. \n");
-    scanf("%d", edicao);
+    scanf("%d", &edicao);
 
     switch (edicao){
         case 1:
@@ -226,6 +226,8 @@ void ListaPacientes()
     printf("----------------------------------");
     printf("Fim");
     printf("----------------------------------\n");
+
+    CarregarIndicePacientes();
 }
 
 void CarregarIndicePacientes()

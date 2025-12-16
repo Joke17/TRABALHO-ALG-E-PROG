@@ -137,6 +137,11 @@ void MenuPacientes(){
                 ExcluirPaciente();
                 break;
             }
+            case 5:{
+                LimparTela();
+                ListaPacientes();
+                break;
+            }
 
             case 0:{
                 return;
