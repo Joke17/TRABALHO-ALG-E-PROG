@@ -84,6 +84,7 @@ void ListarConsultasPorPaciente();
 void ListarConsultasPorData();
 
 // funcoes menu
+void LimparTela();
 void MenuLogin();
 void MenuPrincipal();
 void MenuPacientes();

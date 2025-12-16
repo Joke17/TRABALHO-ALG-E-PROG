@@ -4,9 +4,14 @@
 #include <locale.h>
 #include "cabecalho.h"
 
+void LimparTela() {
+    system("cls");
+}
+
 void MenuLogin(){
     int aux;
     do{
+        LimparTela();
         printf("1- Efetuar Login\n");
         printf("2- Cadastrar Usuário\n");
         printf("0- Encerrar Programa\n");
@@ -15,6 +20,7 @@ void MenuLogin(){
 
         switch(aux){
             case 1:{
+                LimparTela();
                 int auxErro;
                 for(auxErro=0;auxErro<=2;auxErro++){
                     char userAux[20], senhaAux[20];
@@ -40,6 +46,7 @@ void MenuLogin(){
             }
 
             case 2:{
+                LimparTela();
                 Login novo;
                 printf("Usuário:");
                 scanf("%s", novo.usuario);
@@ -50,8 +57,8 @@ void MenuLogin(){
             }
 
             case 0:{
+                LimparTela();
                 return;
-                break;
             }
         }
     }while(aux!=0);
@@ -61,6 +68,7 @@ void MenuPrincipal(){
     int aux;
 
     do{
+        LimparTela();
         printf("1- Pacientes\n");
         printf("2- Médicos\n");
         printf("3- Consultas\n");
@@ -70,18 +78,22 @@ void MenuPrincipal(){
 
         switch(aux){
             case 1:{
+                LimparTela();
                 MenuPacientes();
                 break;
             }
             case 2:{
+                LimparTela();
                 MenuMedicos();
                 break;
             }
             case 3:{
+                LimparTela();
                 MenuConsultas();
                 break;
             }
             case 0:{
+                LimparTela();
                 return;
             }
         }
@@ -91,6 +103,7 @@ void MenuPrincipal(){
 void MenuPacientes(){
     int aux;
     do{
+        LimparTela();
         printf("1- Inserir novo paciente\n");
         printf("2- Buscar paciente por nome\n");
         printf("3- Alterar dados do paciente\n"); 
@@ -100,21 +113,25 @@ void MenuPacientes(){
 
         switch(aux){
             case 1:{
+                LimparTela();
                 InserirNovoPaciente();
                 break;
             }
 
             case 2:{
+                LimparTela();
                 BuscarPacientePorCPF();
                 break;
             }
 
             case 3:{
+                LimparTela();
                 AlterarDadosPaciente();
                 break;
             }
 
             case 0:{
+                LimparTela();
                 return;
             }
         }
@@ -124,6 +141,7 @@ void MenuPacientes(){
 void MenuMedicos(){
     int aux;
     do{
+        LimparTela();
         printf("1- Inserir novo médico\n");
         printf("2- Buscar médico por nome\n");
         printf("3- Listar médicos por especialidade\n"); 
@@ -135,31 +153,37 @@ void MenuMedicos(){
 
         switch(aux){
             case 1:{
+                LimparTela();
                 InserirNovoMedico();
                 break;
             }
 
             case 2:{
+                LimparTela();
                 //BuscarMedicoPorNome();
                 break;
             }
 
             case 3:{
+                LimparTela();
                 ListarMedicos();
                 break;
             }
 
             case 4:{
+                LimparTela();
                 EditarMedico(); 
                 break;
             }
 
             case 5:{
+                LimparTela();
                 ExcluirMedico();
                 break;
             }
 
             case 0:{
+                LimparTela();
                 return;
             }
         }
@@ -170,6 +194,7 @@ void MenuConsultas(){
     int aux;
 
     do{
+        LimparTela();
         printf("1- Agendar nova consulta\n");
         printf("2- Listar consultas por médico(CRM)\n");
         printf("3- Listar consultas por paciente(CPF)\n"); 
@@ -180,26 +205,31 @@ void MenuConsultas(){
 
         switch(aux){
             case 1:{
+                LimparTela();
                 InserirNovaConsulta();
                 break;
             }
 
             case 2:{
+                LimparTela();
                 ListarConsultasPorMedico();
                 break;
             }
 
             case 3:{
+                LimparTela();
                 ListarConsultasPorPaciente();
                 break;
             }
 
             case 4:{
+                LimparTela();
                 ListarConsultasPorData();
                 break;
             }
 
             case 0:{
+                LimparTela();
                 return;
             }
         }
