@@ -6,6 +6,7 @@
 #include <string.h>
 #include <locale.h>
 
+
 typedef struct Login
 {
     char usuario[20];
