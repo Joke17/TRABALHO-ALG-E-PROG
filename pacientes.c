@@ -34,7 +34,7 @@ int BuscarPacientePorCPF(char CPF[])
     int achou = 0;
 
     for(int i = 0; i < quantidadePacientes; i++){
-        if(strcmp(CPF,vetPacientes[i].chave)){
+        if(strcmp(CPF,vetIndexPaciente[i].chave)){
             achou = 1;
         }
     }
@@ -168,15 +168,15 @@ void AlterarDadosPaciente()
     switch (edicao){
         case 1:
             printf("Digite o novo Nome: ");
-            scanf("%s", vetPacientes[posicao].nome);
+            scanf("%s", vetPacientes[p].nome);
         break;
         case 2:
             printf("Digite o novo Telefone: ");
-            scanf("%s", vetPacientes[posicao].telefone);
+            scanf("%s", vetPacientes[p].telefone);
         break;
         case 3:
             printf("Digite a nova data de nascimento: ");
-            scanf("%s", vetPacientes[posicao].data_de_nascimento);
+            scanf("%s", vetPacientes[p].data_de_nascimento);
         break;
     }
 
@@ -192,7 +192,7 @@ void ExcuirPaciente(){
 
     int p = BuscarPacientePorCPF(CPF), qt = quantidadePacientes;
 
-    Paciente aux = NULL;
+    Paciente aux;
     vetPacientes[p] = aux;
     for(p ; p < quantidadePacientes; p++){
         aux = vetPacientes[p + 1];
