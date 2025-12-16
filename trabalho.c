@@ -8,7 +8,7 @@
 
 int main() {
     setlocale(LC_ALL, "PORTUGUESE");
-    CargaInicial();
+    //CargaInicial();
     //LimparTela();
     printf("------------------------\nINICIO\n------------------------\n\n");
 
@@ -22,7 +22,7 @@ int main() {
 
     //CarregarIndicePacientes();
     //ListaPacientes();
-   // BuscarPacientePorCPF();
+    //BuscarPacientePorCPF();
     //InserirNovoPaciente();
     
     // ------------------------------------------------------------------

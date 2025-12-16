@@ -34,12 +34,13 @@ int BuscarPacientePorCPF(char CPF[])
     int achou = 0;
 
     for(int i = 0; i < quantidadePacientes; i++){
-        if(strcmp(CPF,vetIndexPaciente[i].chave)){
-            achou = 1;
+        if(strcmp(CPF,vetIndexPaciente[i].chave) == 0){
+            //achou = 1;
+            return i;
         }
     }
 
-    return achou;
+    
 
     /*
 
@@ -156,8 +157,18 @@ void AlterarDadosPaciente()
     printf("Digite o CPF do paciente que deseja Alterar: ");
     scanf("%s", CPF);
 
+    
+    
     int p = BuscarPacientePorCPF(CPF);
     int edicao = -1;
+
+
+
+    printf("\nPaciente:\n");
+    printf("Nome: %s\n",vetPacientes[p].nome);
+    printf("CPF: %s\n",vetPacientes[p].CPF);
+    printf("Data de Nascimento: %s\n",vetPacientes[p].data_de_nascimento);
+    printf("Telefone: %s\n\n",vetPacientes[p].telefone);
 
     printf("Digite o dado que deseja aterar: \n");
     printf("Para Alterar o Nome digite 1; \n");
