@@ -14,11 +14,11 @@ int main() {
 
     // --- 1. PREPARAÇÃO: CARREGA ÍNDICES DOS MÉDICOS ---
     //CarregarIndicePacientes();
-   // CarregarIndicesMedicos();
-    //DebugListarIndices();
+    CarregarIndicesMedicos();
+    DebugListarIndices();
 
     //printf("\n--- Testando InserirNovoMedico ---");
-    //InserirNovoMedico();
+   
 
     //CarregarIndicePacientes();
     //ListaPacientes();
@@ -51,7 +51,7 @@ int main() {
     //printf("-----------------------------------------\n");
 
     // --- 4. FINALIZAÇÃO: SALVA ÍNDICES E LIMPA MEMÓRIA ---
-    //SalvarIndicesMedicos();
+   // SalvarIndicesMedicos();
 
 
      
@@ -126,5 +126,4 @@ int main() {
 
     printf("---------------\nFIM.\n------------------------");
     return 0;
-    exit(0);
 }
