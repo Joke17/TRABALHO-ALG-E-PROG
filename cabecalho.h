@@ -74,6 +74,7 @@ void ListarMedicos();
 void EditarMedico();
 void ExcluirMedico();
 int buscaBinariaMedico(char *crmBusca);
+void BuscarMedicoPorNome();
 
 void DebugListarIndices(); // testando um bagui
 
