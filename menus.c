@@ -69,7 +69,7 @@ void MenuPrincipal(){
     int aux;
 
     do{
-        sleep(2);
+        sleep(0.5);
         LimparTela();
         printf("1- Pacientes\n");
         printf("2- Médicos\n");
