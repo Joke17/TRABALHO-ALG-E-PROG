@@ -10,14 +10,17 @@ int main() {
     printf("---------------\nINICIO\n------------------------\n\n");
 
     // --- 1. PREPARAÇÃO: CARREGA ÍNDICES DOS MÉDICOS ---
-    CarregarIndicesMedicos();
     CarregarIndicePacientes();
-    ListaPacientes();
-    //BuscarPacientePorCPF();
-    InserirNovoPaciente();
-    // ReordenaPacientes();
-    // ListaPacientes();
-    return 0;
+    CarregarIndicesMedicos();
+    DebugListarIndices();
+
+    printf("\n--- Testando InserirNovoMedico ---");
+    InserirNovoMedico();
+
+    //CarregarIndicePacientes();
+    //ListaPacientes();
+   // BuscarPacientePorCPF();
+    //InserirNovoPaciente();
     
     // ------------------------------------------------------------------
     // --- A. CRIAR DADOS DE TESTE (Rode SÓ NA PRIMEIRA VEZ, DEPOIS COMENTE) ---

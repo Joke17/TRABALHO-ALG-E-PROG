@@ -17,34 +17,47 @@ int capIndices = 0;
 // Objetivo: Achar um m√©dico muito r√°pido sem ler tudo.
 // Retorna: A posi√ß√£o no vetor (0, 1, 2...) se achar, ou -1 se n√£o achar.
 int buscaBinariaMedico(char *crmBusca) {
-    // --- BLINDAGEM CONTRA CRASH ---
-    printf("[DEBUG] Buscando: %s | Qtd Medicos: %d | Endereco Tabela: %p\n", crmBusca, qtdMedicos, tabelaIndices);
-    fflush(stdout); // <--- ISSO OBRIGA A MENSAGEM A APARECER
+    
+    // --- CHECAGEM CRÕTICA ---
     if (tabelaIndices == NULL) {
-        printf("[DEBUG] ERRO CRITICO: Tabela de indices esta vazia (NULL).\n");
-        printf("[DEBUG] Voce esqueceu de chamar CarregarIndicesMedicos() na main?\n");
+        printf("teste_BUSCA: ERRO - Tabela de indices nao inicializada.\n");
         return -1;
     }
-    // ------------------------------
+    // -------------------------
+    
+    int inicio = 0;             
+    int fim = qtdMedicos - 1;   
+    int meio;                   
 
-    int inicio = 0;
-    int fim = qtdMedicos - 1;
-    int meio;
+    // ... (Mantenha seus prints de debug abaixo) ...
 
-    printf("[DEBUG] Buscando CRM: %s | Total Medicos: %d\n", crmBusca, qtdMedicos);
+    printf("\nteste_BUSCA: CRM Alvo: %s\n", crmBusca);
+    printf("teste_BUSCA: Qtd Medicos: %d, Fim do Vetor: %d\n", qtdMedicos, fim);
+    
+    if (qtdMedicos == 0) {
+        printf("teste_BUSCA: Vetor vazio, retornando -1.\n");
+        return -1;
+    }
 
-    while (inicio <= fim) {
+   while (inicio <= fim) {
         meio = (inicio + fim) / 2;
         
-        // Debug para ver onde ele est√° lendo
-        printf("[DEBUG] Comparando com indice %d (CRM do Indice: %s)\n", meio, tabelaIndices[meio].chave);
-
+        printf("BUSCA: Comparando com indice %d: [%s]\n", meio, tabelaIndices[meio].chave); 
+        
         int cmp = strcmp(crmBusca, tabelaIndices[meio].chave);
 
-        if (cmp == 0) return meio;
-        else if (cmp < 0) fim = meio - 1;
-        else inicio = meio + 1;
+        if (cmp == 0) {
+            printf("teste_BUSCA: ACHOU!\n");
+            return meio; // Encontrou!
+        } else if (cmp < 0) {
+            // Se o CRM buscado È MENOR que o do meio, procuramos na ESQUERDA.
+            fim = meio - 1; // << ESSA LINHA ESTAVA FALTANDO OU ERRADA
+        } else { // (cmp > 0)
+            // Se o CRM buscado È MAIOR que o do meio, procuramos na DIREITA.
+            inicio = meio + 1; // << ESSA LINHA ESTAVA FALTANDO OU ERRADA
+        }
     }
+    printf("teste_BUSCA: N„o encontrado.\n");
     return -1;
 }
 // --- FUN√á√ÉO 1: CARREGAR √çNDICES ---
@@ -70,13 +83,21 @@ void CarregarIndicesMedicos() {
     qtdMedicos = tamanhoBytes / sizeof(IndexMedico);
     
     // -- Preparando a mem√≥ria RAM --
-    capIndices = qtdMedicos + 10; // Aloca o necess√°rio + uma sobra de seguran√ßa
-    tabelaIndices = (IndexMedico *) malloc(capIndices * sizeof(IndexMedico));
+    capIndices = qtdMedicos + 10;
+tabelaIndices = (IndexMedico *) malloc(capIndices * sizeof(IndexMedico));
 
-    // -- Lendo os dados --
-    fseek(arqIndex, 0, SEEK_SET); // Volta o cursor para o in√≠cio do arquivo
-    // Copia tudo do arquivo (HD) para o vetor tabelaIndices (RAM) de uma vez s√≥
-    fread(tabelaIndices, sizeof(IndexMedico), qtdMedicos, arqIndex);
+// NOVO: CHECAGEM CRÕTICA DE ALOCA«√O AQUI
+if (tabelaIndices == NULL) {
+    printf("ERRO FATAL: Falha ao alocar memoria para carregar indices.\n");
+    fclose(arqIndex); 
+    qtdMedicos = 0; // Se falhou, o vetor est· vazio
+    return;
+}
+// --------------------------------------------------------
+
+// -- Lendo os dados --
+fseek(arqIndex, 0, SEEK_SET);
+fread(tabelaIndices, sizeof(IndexMedico), qtdMedicos, arqIndex);
     
     fclose(arqIndex); // Fecha o arquivo pois j√° est√° tudo na mem√≥ria
     printf("Sistema: %d medicos carregados na memoria.\n", qtdMedicos);
@@ -110,41 +131,49 @@ void SalvarIndicesMedicos() {
 // --- FUN√á√ÉO 3: INSERIR NOVO M√âDICO ---
 // Objetivo: Cadastrar dados no arquivo e atualizar o √≠ndice de forma ordenada.
 void InserirNovoMedico() {
-    Medico m; // Cria uma vari√°vel tempor√°ria para receber os dados
+    Medico m;
+
+    // --- 1. LEITURA E LIMPEZA DO CRM ---
+    printf("\n--- CADASTRO DE MEDICO ---\n");
+    printf("Digite o CRM: ");
     
-   // --- 1. LEITURA E LIMPEZA DO CRM ---
-printf("\n--- CADASTRO DE MEDICO ---\n");
-printf("Digite o CRM: ");
-// Usa fgets e garante que a string nÔøΩo tem mais que 5 caracteres + \0
-if (fgets(m.CRM, sizeof(m.CRM), stdin) == NULL) return; 
-m.CRM[strcspn(m.CRM, "\n")] = 0; // Remove o '\n'
+    // Agora o fgets deve parar e esperar, pois o buffer est· limpo.
+    if (fgets(m.CRM, sizeof(m.CRM), stdin) == NULL) return; 
+    
+    m.CRM[strcspn(m.CRM, "\n")] = 0; // Remove o '\n' que o fgets acabou de ler
+    
+    printf("teste: CRM lido: '%s'\n", m.CRM);
+    
+    // Antes de continuar, verifica se esse CRM j· existe
+    if (buscaBinariaMedico(m.CRM) != -1) {
+        printf("Erro: Ja existe um medico com este CRM!\n");
+        return; // Cancela o cadastro
+    }
 
-// --- NOVO PASSO: LIMPEZA MANUAL APÔøΩS FGETS DE CAMPO PEQUENO ---
-// Se o usuÔøΩrio digitou mais caracteres do que o CRM[6] suporta, 
-// os excessos ficam no buffer. Isso os remove para o prÔøΩximo fgets.
-int c;
-while ((c = getchar()) != '\n' && c != EOF);
-// -----------------------------------------------------------------
+    // --- 2. LEITURA DO NOME (DEVE FUNCIONAR AGORA) ---
+    char limpar;
+    while ((limpar = getchar()) != '\n' && limpar != EOF); 
 
-// Antes de continuar, verifica se esse CRM jÔøΩ existe
-if (buscaBinariaMedico(m.CRM) != -1) {
-    printf("Erro: Ja existe um medico com este CRM!\n");
-    return; // Cancela o cadastro
-}
+    printf("Nome: ");
 
-// --- 2. LEITURA DO NOME (DEVE FUNCIONAR AGORA) ---
-printf("Nome: ");
-fgets(m.nome, 50, stdin); // LÔøΩ o nome com espaÔøΩos
-m.nome[strcspn(m.nome, "\n")] = 0; // Truque para remover o \n do final da string
+    fgets(m.nome, 50, stdin); // LÔøΩ o nome com espaÔøΩos
 
-// --- 3. LEITURA DA ESPECIALIDADE ---
-printf("Especialidade: ");
-fgets(m.especialidade, 20, stdin);
-m.especialidade[strcspn(m.especialidade, "\n")] = 0;
+    m.nome[strcspn(m.nome, "\n")] = 0; // Truque para remover o \n do final da string
 
+    //--- 3. LEITURA DA ESPECIALIDADE ---
+
+    printf("Especialidade: ");
+
+    fgets(m.especialidade, 20, stdin);
+
+    m.especialidade[strcspn(m.especialidade, "\n")] = 0;
+    
     printf("Valor Hora (ex: 100.50): ");
-    scanf("%f", &m.valor_hora_trabalho); // L√™ o float
-    getchar(); // Limpa buffer novamente
+    scanf("%f", &m.valor_hora_trabalho); // LÍ o float
+    
+    // Limpeza apÛs o scanf È obrigatÛria (deve ser mantida)
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
 
     // --- Passo 2: Gravar os DADOS no arquivo (HDD) ---
     // Abre o arquivo de DADOS em modo append ("ab"), adiciona ao final
@@ -368,5 +397,9 @@ void DebugListarIndices() {
     for (int i = 0; i < qtdMedicos; i++) {
         printf("Posicao %d: CRM [%s]\n", i, tabelaIndices[i].chave);
     }
+
     printf("------------------------------------------\n");
+
+   
+
 }

@@ -6,6 +6,7 @@
 #include <string.h>
 #include <locale.h>
 
+
 typedef struct Login
 {
     char usuario[20];
@@ -45,6 +46,7 @@ typedef struct
     char chave[12]; // CPF ou CRM
     int posicao;    // posição do registro no arquivo binário
 } IndexPaciente, IndexMedico;
+
 
 //void OrdenaCPF();
 

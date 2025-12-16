@@ -140,7 +140,7 @@ void MenuMedicos(){
             }
 
             case 2:{
-                //BuscarPacientePorNome();
+                //BuscarMedicoPorNome();
                 break;
             }
 
