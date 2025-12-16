@@ -9,6 +9,7 @@ void LimparTela() {
     system("cls");
 }
 
+
 void MenuLogin(){
     int aux;
     do{
@@ -122,7 +123,7 @@ void MenuPacientes(){
             }
 
             case 2:{
-               LimparTela();
+                LimparTela();
                 BuscarPacientePorNome();
                 break;
             }
@@ -133,7 +134,7 @@ void MenuPacientes(){
                 break;
             }
             case 4:{
-                //LimparTela();
+                LimparTela();
                 ExcluirPaciente();
                 break;
             }
@@ -165,13 +166,13 @@ void MenuMedicos(){
 
         switch(aux){
             case 1:{
-               // LimparTela();
+                LimparTela();
                 InserirNovoMedico();
                 break;
             }
 
             case 2:{
-                //LimparTela();
+                LimparTela();
                 BuscarMedicoPorNome();
                 break;
             }
@@ -183,13 +184,13 @@ void MenuMedicos(){
             }
 
             case 4:{
-                //LimparTela();
+                LimparTela();
                 EditarMedico(); 
                 break;
             }
 
             case 5:{
-               // LimparTela();
+               LimparTela();
                ExcluirMedico();
                 break;
             }
@@ -205,7 +206,7 @@ void MenuConsultas(){
     int aux;
 
     do{
-        LimparTela();
+        //LimparTela();
         printf("1- Agendar nova consulta\n");
         printf("2- Listar consultas por médico(CRM)\n");
         printf("3- Listar consultas por paciente(CPF)\n"); 
@@ -213,30 +214,29 @@ void MenuConsultas(){
         printf("0- Voltar para a página anterior\n");
 
         scanf("%d", &aux);
-
         switch(aux){
             case 1:{
-                //LimparTela();
+                LimparTela();
                 InserirNovaConsulta();
                 break;
             }
 
             case 2:{
-                //LimparTela();
+                LimparTela();
                 ListarConsultasPorMedico();
                 break;
             }
 
             case 3:{
-               // LimparTela();
+                LimparTela();
                 ListarConsultasPorPaciente();
                 break;
             }
 
             case 4:{
-              // LimparTela();
-                ListarConsultasPorData();
-                break;
+               LimparTela();
+               ListarConsultasPorData();
+               break; 
             }
 
             case 0:{

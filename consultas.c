@@ -19,7 +19,7 @@ void InserirNovaConsulta() {
     char limpar;
     while ((limpar = getchar()) != '\n' && limpar != EOF); 
    
-    // Teste de Busca
+    // teste de Busca
     crm_existe = buscaBinariaMedico(nova_consulta.crm_medico); 
 
     if (crm_existe < 0) {
@@ -56,7 +56,7 @@ void InserirNovaConsulta() {
         return;
     }
 
-    // fwrite(endereço da struct, tamanho da struct, quantidade, ponteiro do arquivo)
+    // fwrite(endereço da struct, tamanho da struct, quant, ponteiro do arquivo)
     fwrite(&nova_consulta, sizeof(Consulta), 1, arq_consultas);
 
     fclose(arq_consultas);

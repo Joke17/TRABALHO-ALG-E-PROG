@@ -13,14 +13,11 @@ int qtdMedicos = 0;
 // Variável de controle para saber o tamanho atual da memória alocada (para saber quando usar realloc)
 int capIndices = 0;    
 
-// --- FUNÇÃO AUXILIAR: BUSCA BINÁRIA ---
-// Objetivo: Achar um médico muito rápido sem ler tudo.
-// Retorna: A posição no vetor (0, 1, 2...) se achar, ou -1 se não achar.
+
 int buscaBinariaMedico(char *crmBusca) {
     
-    // --- CHECAGEM CR�TICA ---
     if (tabelaIndices == NULL) {
-        printf("teste_BUSCA: ERRO - Tabela de indices nao inicializada.\n");
+        printf("BUSCA: ERRO - Tabela de indices nao inicializada.\n");
         return -1;
     }
     // -------------------------
@@ -29,13 +26,12 @@ int buscaBinariaMedico(char *crmBusca) {
     int fim = qtdMedicos - 1;   
     int meio;                   
 
-    // ... (Mantenha seus prints de debug abaixo) ...
 
-    printf("\nteste_BUSCA: CRM Alvo: %s\n", crmBusca);
-    printf("teste_BUSCA: Qtd Medicos: %d, Fim do Vetor: %d\n", qtdMedicos, fim);
+    printf("\nBUSCA: CRM Alvo: %s\n", crmBusca);
+    printf("BUSCA: Qtd Medicos: %d, Fim do Vetor: %d\n", qtdMedicos, fim);
     
     if (qtdMedicos == 0) {
-        printf("teste_BUSCA: Vetor vazio, retornando -1.\n");
+        printf("BUSCA: Vetor vazio, retornando -1.\n");
         return -1;
     }
 
@@ -47,17 +43,17 @@ int buscaBinariaMedico(char *crmBusca) {
         int cmp = strcmp(crmBusca, tabelaIndices[meio].chave);
 
         if (cmp == 0) {
-            printf("teste_BUSCA: ACHOU!\n");
-            return meio; // Encontrou!
+            printf("BUSCA: ACHOU!\n");
+            return meio; 
         } else if (cmp < 0) {
-            // Se o CRM buscado � MENOR que o do meio, procuramos na ESQUERDA.
-            fim = meio - 1; // << ESSA LINHA ESTAVA FALTANDO OU ERRADA
+            
+            fim = meio - 1; 
         } else { // (cmp > 0)
-            // Se o CRM buscado � MAIOR que o do meio, procuramos na DIREITA.
-            inicio = meio + 1; // << ESSA LINHA ESTAVA FALTANDO OU ERRADA
+           
+            inicio = meio + 1; 
         }
     }
-    printf("teste_BUSCA: N�o encontrado.\n");
+    printf("BUSCA: N�o encontrado.\n");
     return -1;
 }
 // --- FUNÇÃO 1: CARREGAR ÍNDICES ---
