@@ -141,8 +141,7 @@ void MenuPacientes(){
 void MenuMedicos(){
     int aux;
     do{
-        sleep(2);
-       LimparTela();
+       //LimparTela();
         printf("1- Inserir novo médico\n");
         printf("2- Buscar médico por nome\n");
         printf("3- Listar médicos por especialidade\n"); 
@@ -154,14 +153,14 @@ void MenuMedicos(){
 
         switch(aux){
             case 1:{
-                LimparTela();
+               // LimparTela();
                 InserirNovoMedico();
                 break;
             }
 
             case 2:{
-                LimparTela();
-                //BuscarMedicoPorNome();
+                //LimparTela();
+                BuscarMedicoPorNome();
                 break;
             }
 
