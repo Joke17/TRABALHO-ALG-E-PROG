@@ -139,6 +139,7 @@ void BuscarPacientePorNome(){
     }
 
     fclose(arqDados);
+    
 }
 
 void ReordenaPacientes(int posicao){
@@ -210,12 +211,8 @@ void AlterarDadosPaciente()
     printf("Digite o CPF do paciente que deseja Alterar: ");
     scanf("%s", CPF);
 
-    
-    
     int p = BuscarPacientePorCPF(CPF);
     int edicao = -1;
-
-
 
     printf("\nPaciente:\n");
     printf("Nome: %s\n",vetPacientes[p].nome);
