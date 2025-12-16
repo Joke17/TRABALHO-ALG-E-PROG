@@ -3,7 +3,7 @@
 #include <string.h>
 #include "cabecalho.h" 
 
-#define MAX_TESTE 3
+#define QUANT_TESTE 3
 
  //função auxiliar para verificar se o arquivo existe e está vazio.
  //fiz isso aqui para evitar que toda vez que o programa rodar ele adicione os mesmosarquivos de dados de teste
@@ -30,8 +30,8 @@ int VerificarSeDeveCriar(const char *nomeArquivo) {
 
 void CargaInicial(){
 
-    IndexMedico indicesMedicos[MAX_TESTE];
-    IndexPaciente indicesPacientes[MAX_TESTE];
+    IndexMedico indicesMedicos[QUANT_TESTE];
+    IndexPaciente indicesPacientes[QUANT_TESTE];
     long posicaoAtual = 0; 
 
     if(VerificarSeDeveCriar("output/login.bin")) {
