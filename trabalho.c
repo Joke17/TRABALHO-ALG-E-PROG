@@ -13,7 +13,7 @@ int main() {
     printf("------------------------\nINICIO\n------------------------\n\n");
 
     // --- 1. PREPARAÇÃO: CARREGA ÍNDICES DOS MÉDICOS ---
-    //CarregarIndicePacientes();
+    CarregarIndicePacientes();
     CarregarIndicesMedicos();
     DebugListarIndices();
 
