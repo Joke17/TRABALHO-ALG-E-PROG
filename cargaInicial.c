@@ -64,6 +64,7 @@ void CargaInicial(){
         fwrite(&m1, sizeof(Medico), 1, medicoIni);
         strcpy(indicesMedicos[0].chave, m1.CRM);
         indicesMedicos[0].posicao = posicaoAtual;
+
         posicaoAtual = ftell(medicoIni);
         fwrite(&m2, sizeof(Medico), 1, medicoIni);
         strcpy(indicesMedicos[1].chave, m2.CRM);
