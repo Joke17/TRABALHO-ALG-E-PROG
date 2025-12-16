@@ -13,10 +13,13 @@ int main() {
     printf("------------------------\nINICIO\n------------------------\n\n");
 
     //carregando indices de pacientes e medicos para testes
+    //mostra quantidade ja cadastrada
+    printf("Carregando indices de médicos e pacientes...\n");
     CarregarIndicePacientes(); 
     CarregarIndicesMedicos();
     //DebugListarIndices();
 
+<<<<<<< HEAD
     //printf("\n--- Testando InserirNovoMedico ---");
    
 
@@ -122,6 +125,8 @@ int main() {
     //InserirNovoPaciente(p);
     //ListarConsultasPorMedico();
 
+=======
+>>>>>>> b41284e867e3078a4325850a6abbe63e5f263d9e
     MenuLogin();
 
     printf("---------------\nFIM.\n------------------------");
