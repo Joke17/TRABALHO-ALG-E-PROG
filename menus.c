@@ -57,7 +57,6 @@ void MenuLogin(){
             }
 
             case 0:{
-                LimparTela();
                 return;
             }
         }
@@ -93,7 +92,6 @@ void MenuPrincipal(){
                 break;
             }
             case 0:{
-                LimparTela();
                 return;
             }
         }
@@ -131,7 +129,6 @@ void MenuPacientes(){
             }
 
             case 0:{
-                LimparTela();
                 return;
             }
         }
@@ -183,7 +180,6 @@ void MenuMedicos(){
             }
 
             case 0:{
-                LimparTela();
                 return;
             }
         }
@@ -229,7 +225,6 @@ void MenuConsultas(){
             }
 
             case 0:{
-                LimparTela();
                 return;
             }
         }
