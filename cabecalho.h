@@ -6,6 +6,7 @@
 #include <string.h>
 #include <locale.h>
 
+void CarregarIndicesMedicos();
 typedef struct Login
 {
     char usuario[20];
@@ -63,7 +64,7 @@ void ListaPacientes();
 int BuscarPacientePorCPF();
 
 // funcoes medicos
-void CarregarIndicesMedicos();
+
 void SalvarIndicesMedicos();
 void InserirNovoMedico();
 void ListarMedicos();
