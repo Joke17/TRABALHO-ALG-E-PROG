@@ -183,7 +183,7 @@ void AlterarDadosPaciente()
     FILE *ptarq;
     ptarq = fopen("output/pacientes.bin", "w+b");
     
-    fseek(ptarq, p, SEEK_SET);
+    //fseek(ptarq, p, SEEK_SET);
     fwrite(vetPacientes, sizeof(Paciente), quantidadePacientes , ptarq);
     fclose(ptarq);
 
