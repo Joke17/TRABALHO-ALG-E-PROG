@@ -20,7 +20,7 @@ int buscaBinariaMedico(char *crmBusca) {
     
     // --- CHECAGEM CRÍTICA ---
     if (tabelaIndices == NULL) {
-        printf("DEBUG_BUSCA: ERRO - Tabela de indices nao inicializada.\n");
+        printf("teste_BUSCA: ERRO - Tabela de indices nao inicializada.\n");
         return -1;
     }
     // -------------------------
@@ -31,23 +31,23 @@ int buscaBinariaMedico(char *crmBusca) {
 
     // ... (Mantenha seus prints de debug abaixo) ...
 
-    printf("\nDEBUG_BUSCA: CRM Alvo: %s\n", crmBusca);
-    printf("DEBUG_BUSCA: Qtd Medicos: %d, Fim do Vetor: %d\n", qtdMedicos, fim);
+    printf("\nteste_BUSCA: CRM Alvo: %s\n", crmBusca);
+    printf("teste_BUSCA: Qtd Medicos: %d, Fim do Vetor: %d\n", qtdMedicos, fim);
     
     if (qtdMedicos == 0) {
-        printf("DEBUG_BUSCA: Vetor vazio, retornando -1.\n");
+        printf("teste_BUSCA: Vetor vazio, retornando -1.\n");
         return -1;
     }
 
    while (inicio <= fim) {
         meio = (inicio + fim) / 2;
         
-        printf("DEBUG_BUSCA: Comparando com indice %d: [%s]\n", meio, tabelaIndices[meio].chave); 
+        printf("BUSCA: Comparando com indice %d: [%s]\n", meio, tabelaIndices[meio].chave); 
         
         int cmp = strcmp(crmBusca, tabelaIndices[meio].chave);
 
         if (cmp == 0) {
-            printf("DEBUG_BUSCA: ACHOU!\n");
+            printf("teste_BUSCA: ACHOU!\n");
             return meio; // Encontrou!
         } else if (cmp < 0) {
             // Se o CRM buscado é MENOR que o do meio, procuramos na ESQUERDA.
@@ -57,7 +57,7 @@ int buscaBinariaMedico(char *crmBusca) {
             inicio = meio + 1; // << ESSA LINHA ESTAVA FALTANDO OU ERRADA
         }
     }
-    printf("DEBUG_BUSCA: Não encontrado.\n");
+    printf("teste_BUSCA: Não encontrado.\n");
     return -1;
 }
 // --- FUNÃ‡ÃƒO 1: CARREGAR ÃNDICES ---
@@ -142,10 +142,7 @@ void InserirNovoMedico() {
     
     m.CRM[strcspn(m.CRM, "\n")] = 0; // Remove o '\n' que o fgets acabou de ler
     
-    // NÂO precisamos mais do loop while aqui, pois o fgets já consumiu o '\n'.
-    // while ((c = getchar()) != '\n' && c != EOF); // <<< REMOVIDO/COMENTADO
-    
-    printf("DEBUG: CRM lido: '%s'\n", m.CRM);
+    printf("teste: CRM lido: '%s'\n", m.CRM);
     
     // Antes de continuar, verifica se esse CRM já existe
     if (buscaBinariaMedico(m.CRM) != -1) {
@@ -156,7 +153,7 @@ void InserirNovoMedico() {
     // --- 2. LEITURA DO NOME (DEVE FUNCIONAR AGORA) ---
     char limpar;
     while ((limpar = getchar()) != '\n' && limpar != EOF); 
-    
+
     printf("Nome: ");
 
     fgets(m.nome, 50, stdin); // Lï¿½ o nome com espaï¿½os
