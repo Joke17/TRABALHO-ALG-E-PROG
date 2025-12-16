@@ -7,6 +7,7 @@
 
 int main() {
     setlocale(LC_ALL, "PORTUGUESE");
+    CargaInicial();
     printf("---------------\nINICIO\n------------------------\n\n");
 
     // --- 1. PREPARAÇÃO: CARREGA ÍNDICES DOS MÉDICOS ---
