@@ -136,7 +136,7 @@ m.especialidade[strcspn(m.especialidade, "\n")] = 0;
 
     printf("Valor Hora (ex: 100.50): ");
     scanf("%f", &m.valor_hora_trabalho); // Lê o float
-    getchar(); // Limpa buffer novamente
+    while ((c = getchar()) != '\n' && c != EOF);
 
     // --- Passo 2: Gravar os DADOS no arquivo (HDD) ---
     // Abre o arquivo de DADOS em modo append ("ab"), adiciona ao final
