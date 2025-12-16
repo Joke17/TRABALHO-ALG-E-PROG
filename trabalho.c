@@ -9,7 +9,7 @@ int main() {
     setlocale(LC_ALL, "PORTUGUESE");
     CargaInicial();
     //LimparTela();
-    printf("---------------\nINICIO\n------------------------\n\n");
+    printf("------------------------\nINICIO\n------------------------\n\n");
 
     // --- 1. PREPARAÇÃO: CARREGA ÍNDICES DOS MÉDICOS ---
     //CarregarIndicePacientes();
