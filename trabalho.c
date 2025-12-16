@@ -13,6 +13,8 @@ int main() {
     printf("------------------------\nINICIO\n------------------------\n\n");
 
     //carregando indices de pacientes e medicos para testes
+    //mostra quantidade ja cadastrada
+    printf("Carregando indices de médicos e pacientes...\n");
     CarregarIndicePacientes(); 
     CarregarIndicesMedicos();
     //DebugListarIndices();
