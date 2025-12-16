@@ -11,7 +11,7 @@ void LimparTela() {
 void MenuLogin(){
     int aux;
     do{
-        LimparTela();
+        //LimparTela();
         printf("1- Efetuar Login\n");
         printf("2- Cadastrar Usuário\n");
         printf("0- Encerrar Programa\n");

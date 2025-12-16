@@ -104,12 +104,17 @@ void InserirNovoPaciente()
     printf("----------CADASTRO DE PACIENTES----------\n");
     printf("Nome: ");
     scanf("%s", &paciente.nome);
+    int limpar;
+    while ((limpar = getchar()) != '\n' && limpar != EOF);
     printf("CPF: ");
     scanf("%s", &paciente.CPF);
+    while ((limpar = getchar()) != '\n' && limpar != EOF);
     printf("Data de Nascimento: ");
     scanf("%s", &paciente.data_de_nascimento);
+    while ((limpar = getchar()) != '\n' && limpar != EOF);
     printf("Telefone: ");
     scanf("%s", &paciente.telefone);
+    while ((limpar = getchar()) != '\n' && limpar != EOF);
 
     if(quantidadePacientes > 2){
         printf("aq ofi");
@@ -124,6 +129,7 @@ void InserirNovoPaciente()
 
 
     fclose(ptarq);
+    printf("\n Paciente cadastrado com sucesso!\n");
 
     // OrdenaCPF();
     //BuscarPacientePorCPF(1);

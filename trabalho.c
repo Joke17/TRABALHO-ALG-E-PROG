@@ -12,12 +12,12 @@ int main() {
     printf("---------------\nINICIO\n------------------------\n\n");
 
     // --- 1. PREPARAÇÃO: CARREGA ÍNDICES DOS MÉDICOS ---
-    CarregarIndicePacientes();
-    CarregarIndicesMedicos();
-    DebugListarIndices();
+    //CarregarIndicePacientes();
+    //CarregarIndicesMedicos();
+    //DebugListarIndices();
 
-    printf("\n--- Testando InserirNovoMedico ---");
-    InserirNovoMedico();
+    //printf("\n--- Testando InserirNovoMedico ---");
+    //InserirNovoMedico();
 
     //CarregarIndicePacientes();
     //ListaPacientes();
@@ -45,12 +45,12 @@ int main() {
     // ------------------------------------------------------------------
     // --- B. LISTAR DADOS (Rode na SEGUNDA VEZ, comentando a seção A) ---
     // ------------------------------------------------------------------
-    printf("\n--- TESTANDO ListarConsultasPorData ---\n");
-    ListarConsultasPorData();
-    printf("-----------------------------------------\n");
+    //printf("\n--- TESTANDO ListarConsultasPorData ---\n");
+    //ListarConsultasPorData();
+    //printf("-----------------------------------------\n");
 
     // --- 4. FINALIZAÇÃO: SALVA ÍNDICES E LIMPA MEMÓRIA ---
-    SalvarIndicesMedicos();
+    //SalvarIndicesMedicos();
 
 
      
@@ -121,7 +121,7 @@ int main() {
     //InserirNovoPaciente(p);
     //ListarConsultasPorMedico();
 
-    //MenuLogin();
+    MenuLogin();
 
     printf("---------------\nFIM.\n------------------------");
     return 0;
