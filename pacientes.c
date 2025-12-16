@@ -31,6 +31,17 @@ int BuscarPacientePorCPF(char CPF[])
         //strcpy(CPF,vetIndexPaciente[quantidadePacientes].chave);
     // }
 
+    int achou = 0;
+
+    for(int i = 0; i < quantidadePacientes; i++){
+        if(strcmp(CPF,vetPacientes[i].chave)){
+            achou = 1;
+        }
+    }
+
+    return achou;
+
+    /*
 
     int inicio = 0;                    // Começa no primeiro elemento
     int fim = quantidadePacientes - 1; // Termina no último elemento válido
@@ -39,6 +50,8 @@ int BuscarPacientePorCPF(char CPF[])
     // Enquanto o início não ultrapassar o fim, continuamos procurando
     while (inicio <= fim)
     {
+
+        
         meio = (inicio + fim) / 2; // Calcula o índice bem no meio da lista
 
         // strcmp compara duas strings:
@@ -70,6 +83,8 @@ int BuscarPacientePorCPF(char CPF[])
     // }
     printf("\nCPF não cadastrado %d\n", meio);
     return meio; // Se saiu do loop, é porque não encontrou nada.
+
+    */
 }
 
 void ReordenaPacientes(int posicao){
@@ -116,14 +131,13 @@ void InserirNovoPaciente()
     scanf("%s", &paciente.telefone);
     while ((limpar = getchar()) != '\n' && limpar != EOF);
 
-    if(quantidadePacientes > 2){
-        printf("aq ofi");
-        int p = BuscarPacientePorCPF(paciente.CPF);
-        ReordenaPacientes(p);
+    // if(quantidadePacientes > 2){
+    //     printf("aq ofi");
+    //     int p = BuscarPacientePorCPF(paciente.CPF);
+    //     ReordenaPacientes(p);
     
-        fseek(ptarq,(p * sizeof(Paciente)), 0);
-    }
-
+    //     fseek(ptarq,(p * sizeof(Paciente)), 0);
+    // }
     
     fwrite(&paciente, sizeof(Paciente), 1, ptarq);
 
@@ -137,9 +151,64 @@ void InserirNovoPaciente()
 }
 void AlterarDadosPaciente()
 {
+    char CPF[12];
     printf("\n----------ALTERAÇÃO DE DADOS PACIENTE----------\n");
-    int posicao = BuscarPacientePorCPF(0);
-    printf("%d", posicao);
+    printf("Digite o CPF do paciente que deseja Alterar: ");
+    scanf("%s", CPF);
+
+    int p = BuscarPacientePorCPF(CPF);
+    int edicao = -1;
+
+    printf("Digite o dado que deseja aterar: \n");
+    printf("Para Alterar o Nome digite 1; \n");
+    printf("Para Alterar o Telefone digite 2; \n");
+    printf("Para Alterar data de nascmiento digite 3. \n");
+    scanf("%d", edicao);
+
+    switch (edicao){
+        case 1:
+            printf("Digite o novo Nome: ");
+            scanf("%s", vetPacientes[posicao].nome);
+        break;
+        case 2:
+            printf("Digite o novo Telefone: ");
+            scanf("%s", vetPacientes[posicao].telefone);
+        break;
+        case 3:
+            printf("Digite a nova data de nascimento: ");
+            scanf("%s", vetPacientes[posicao].data_de_nascimento);
+        break;
+    }
+
+    CarregarIndicePacientes();
+
+}
+
+void ExcuirPaciente(){
+    char CPF[12];
+    printf("\n----------EXCLUSÃO DE PACIENTE----------\n");
+    printf("Digite o CPF do paciente que deseja Alterar: ");
+    scanf("%s", CPF);
+
+    int p = BuscarPacientePorCPF(CPF), qt = quantidadePacientes;
+
+    Paciente aux = NULL;
+    vetPacientes[p] = aux;
+    for(p ; p < quantidadePacientes; p++){
+        aux = vetPacientes[p + 1];
+        vetPacientes[p] = vetPacientes[p + 1];
+        vetPacientes[p + 1] = aux;
+        // printf("aq eu\n");
+    }
+    
+    FILE *ptarq;
+    ptarq = fopen("output/pacientes.bin", "w+b");
+    
+    fwrite(vetPacientes, sizeof(Paciente), (quantidadePacientes - 1), ptarq);
+    fclose(ptarq);
+
+    CarregarIndicePacientes();
+
 }
 
 void ListaPacientes()
@@ -152,7 +221,7 @@ void ListaPacientes()
         printf("Nome: %s\n",vetPacientes[i].nome);
         printf("CPF: %s\n",vetPacientes[i].CPF);
         printf("Data de Nascimento: %s\n",vetPacientes[i].data_de_nascimento);
-        printf("Telefone: %s\n",vetPacientes[i].telefone);
+        printf("Telefone: %s\n\n",vetPacientes[i].telefone);
     }
     printf("----------------------------------");
     printf("Fim");
