@@ -157,9 +157,10 @@ void MenuMedicos(){
        //LimparTela();
         printf("1- Inserir novo médico\n");
         printf("2- Buscar médico por nome\n");
-        printf("3- Listar médicos por especialidade\n"); 
-        printf("4- Alterar dados do médico\n"); 
-        printf("5- Excluir médico\n");
+        printf("3- Listar todos os médicos \n"); 
+        printf("4- Listar por especialidade\n");
+        printf("5- Alterar dados do médico\n"); 
+        printf("6- Excluir médico\n");
         printf("0- Voltar para a página anterior\n");
 
         scanf("%d", &aux);
@@ -182,14 +183,19 @@ void MenuMedicos(){
                 ListarMedicos();
                 break;
             }
-
             case 4:{
+               LimparTela();
+               ListarMedicosPorEspecialidade();
+               break; 
+            }
+
+            case 5:{
                 LimparTela();
                 EditarMedico(); 
                 break;
             }
 
-            case 5:{
+            case 6:{
                LimparTela();
                ExcluirMedico();
                 break;

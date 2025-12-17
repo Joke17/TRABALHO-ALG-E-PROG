@@ -182,9 +182,56 @@ void ListarMedicos() {
         fread(&m, sizeof(Medico), 1, fp);
         printf("CRM: %s | Nome: %s | Esp: %s\n", m.CRM, m.nome, m.especialidade);
     }
+    printf("-------------------------\n");
     fclose(fp);
 }
 
+void ListarMedicosPorEspecialidade() {
+    FILE *fp;
+    Medico m;
+    int i;
+    char especialidadeBusca[20];
+    int encontrou = 0;
+
+    if (totalMedicos == 0) {
+        printf("Nenhum medico cadastrado.\n");
+        return;
+    }
+
+    printf("\n--- LISTAR MEDICOS POR ESPECIALIDADE ---\n");
+    printf("Digite a especialidade: ");
+    limpaBuffer();
+    fgets(especialidadeBusca, 20, stdin);
+    removeEnter(especialidadeBusca);
+
+    fp = fopen("output/medicos.bin", "rb");
+    if (!fp) {
+        printf("Erro ao ler dados.\n");
+        return;
+    }
+
+    printf("\nMedicos com especialidade '%s':\n", especialidadeBusca);
+    printf("--------------------------------------------------\n");
+
+    for (i = 0; i < totalMedicos; i++) {
+        fseek(fp, listaIndices[i].posicao, SEEK_SET);
+        fread(&m, sizeof(Medico), 1, fp);
+
+        if (strcmp(m.especialidade, especialidadeBusca) == 0) {
+            printf("CRM: %-6s | Nome: %-25s\n", m.CRM, m.nome);
+            encontrou++;
+        }
+    }
+
+    printf("--------------------------------------------------\n");
+    if (encontrou == 0) {
+        printf("Nenhum medico encontrado com essa especialidade.\n");
+    } else {
+        printf("Total encontrados: %d\n", encontrou);
+    }
+
+    fclose(fp);
+}
 // --- EDITAR ---
 void EditarMedico() {
     char busca[20];
@@ -283,6 +330,7 @@ void BuscarMedicoPorNome() {
 
     printf("\n--- BUSCA POR NOME ---\n");
     printf("Digite parte do nome: ");
+    limpaBuffer();
     
     fgets(nome, 50, stdin);
     removeEnter(nome);
