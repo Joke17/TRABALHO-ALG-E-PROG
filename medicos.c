@@ -13,7 +13,7 @@ void limpaBuffer() {
     while ((c = getchar()) != '\n' && c != EOF);
 }
 
-// Remove o \n do final da string lida pelo fgets
+// remove o \n do final da string lida pelo fgets
 void removeEnter(char *str) {
     size_t tam = strlen(str);
     if (tam > 0 && str[tam - 1] == '\n') {
@@ -35,7 +35,7 @@ int buscaBinariaMedico(char *crm) {
         cmp = strcmp(crm, listaIndices[meio].chave);
 
         if (cmp == 0) {
-            return meio; // Achou
+            return meio; // achou
         } else if (cmp < 0) {
             fim = meio - 1;
         } else {
@@ -51,7 +51,7 @@ void CarregarIndicesMedicos() {
     long tamBytes;
 
     if (fp == NULL) {
-        // Arquivo nao existe, cria lista vazia
+        // arquivo nao existe, cria lista vazia
         totalMedicos = 0;
         capacidade = 10;
         listaIndices = (IndexMedico *) malloc(capacidade * sizeof(IndexMedico));
@@ -61,7 +61,7 @@ void CarregarIndicesMedicos() {
     // Calcula tamanho do arquivo
     fseek(fp, 0, SEEK_END);
     tamBytes = ftell(fp);
-    rewind(fp); // Volta pro inicio
+    rewind(fp); // volta pro inicio
 
     totalMedicos = tamBytes / sizeof(IndexMedico);
     capacidade = totalMedicos + 10;
@@ -128,7 +128,7 @@ void InserirNovoMedico() {
     scanf("%f", &aux.valor_hora_trabalho);
     limpaBuffer();
 
-    // Grava no arquivo de dados
+    // grava no arquivo de dados
     fp = fopen("output/medicos.bin", "ab");
     if (fp == NULL) {
         printf("Erro ao abrir medicos.bin!\n");
@@ -136,7 +136,7 @@ void InserirNovoMedico() {
     }
 
     fseek(fp, 0, SEEK_END);
-    pos = ftell(fp); // Guarda posicao
+    pos = ftell(fp); // guarda posicao
     fwrite(&aux, sizeof(Medico), 1, fp);
     fclose(fp);
 
@@ -186,52 +186,6 @@ void ListarMedicos() {
     fclose(fp);
 }
 
-void ListarMedicosPorEspecialidade() {
-    FILE *fp;
-    Medico m;
-    int i;
-    char especialidadeBusca[20];
-    int encontrou = 0;
-
-    if (totalMedicos == 0) {
-        printf("Nenhum medico cadastrado.\n");
-        return;
-    }
-
-    printf("\n--- LISTAR MEDICOS POR ESPECIALIDADE ---\n");
-    printf("Digite a especialidade: ");
-    limpaBuffer();
-    fgets(especialidadeBusca, 20, stdin);
-    removeEnter(especialidadeBusca);
-
-    fp = fopen("output/medicos.bin", "rb");
-    if (!fp) {
-        printf("Erro ao ler dados.\n");
-        return;
-    }
-
-    printf("\nMedicos com especialidade '%s':\n", especialidadeBusca);
-    printf("--------------------------------------------------\n");
-
-    for (i = 0; i < totalMedicos; i++) {
-        fseek(fp, listaIndices[i].posicao, SEEK_SET);
-        fread(&m, sizeof(Medico), 1, fp);
-
-        if (strcmp(m.especialidade, especialidadeBusca) == 0) {
-            printf("CRM: %-6s | Nome: %-25s\n", m.CRM, m.nome);
-            encontrou++;
-        }
-    }
-
-    printf("--------------------------------------------------\n");
-    if (encontrou == 0) {
-        printf("Nenhum medico encontrado com essa especialidade.\n");
-    } else {
-        printf("Total encontrados: %d\n", encontrou);
-    }
-
-    fclose(fp);
-}
 // --- EDITAR ---
 void EditarMedico() {
     char busca[20];
@@ -360,5 +314,52 @@ void BuscarMedicoPorNome() {
     if (cont == 0) printf("Nenhum medico encontrado com esse nome.\n");
     else printf("Total encontrados: %d\n", cont);
     
+    fclose(fp);
+}
+
+void ListarMedicosPorEspecialidade() {
+    FILE *fp;
+    Medico m;
+    int i;
+    char especialidadeBusca[20];
+    int encontrou = 0;
+
+    if (totalMedicos == 0) {
+        printf("Nenhum medico cadastrado.\n");
+        return;
+    }
+
+    printf("\n--- LISTAR MEDICOS POR ESPECIALIDADE ---\n");
+    printf("Digite a especialidade: ");
+    limpaBuffer();
+    fgets(especialidadeBusca, 20, stdin);
+    removeEnter(especialidadeBusca);
+
+    fp = fopen("output/medicos.bin", "rb");
+    if (!fp) {
+        printf("Erro ao ler dados.\n");
+        return;
+    }
+
+    printf("\nMedicos com especialidade '%s':\n", especialidadeBusca);
+    printf("--------------------------------------------------\n");
+
+    for (i = 0; i < totalMedicos; i++) {
+        fseek(fp, listaIndices[i].posicao, SEEK_SET);
+        fread(&m, sizeof(Medico), 1, fp);
+
+        if (strcmp(m.especialidade, especialidadeBusca) == 0) {
+            printf("CRM: %-6s | Nome: %-25s\n", m.CRM, m.nome);
+            encontrou++;
+        }
+    }
+
+    printf("--------------------------------------------------\n");
+    if (encontrou == 0) {
+        printf("Nenhum medico encontrado com essa especialidade.\n");
+    } else {
+        printf("Total encontrados: %d\n", encontrou);
+    }
+
     fclose(fp);
 }
