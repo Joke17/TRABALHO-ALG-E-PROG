@@ -25,9 +25,6 @@ int BuscarPacientePorCPF(char CPF[])
         // Retorna < 0 se a primeira vier antes no alfabeto
         // Retorna > 0 se a primeira vier depois no alfabeto
         int cmp = strcmp(CPF, vetIndexPaciente[meio].chave);
-
-        printf("cmp %d\n", cmp);
-        printf("m %d\n", meio);
         
         if (cmp == 0)
         {
@@ -64,7 +61,7 @@ void InserirNovoPaciente()
 
     printf("----------CADASTRO DE PACIENTES----------\n");
     printf("Nome: ");
-    scanf("%s", &paciente.nome);
+    scanf(" %[^\n]", &paciente.nome);
     int limpar;
     while ((limpar = getchar()) != '\n' && limpar != EOF);
     printf("CPF: ");
@@ -130,9 +127,10 @@ void AlterarDadosPaciente()
     }
 
     FILE *ptarq;
-    ptarq = fopen("output/pacientes.bin", "w+b");
+    ptarq = fopen("output/pacientes.bin", "r+b");
     
-    fwrite(vetPacientes, sizeof(Paciente), quantidadePacientes , ptarq);
+    fseek(ptarq, posicao , SEEK_SET);
+    fwrite(&vetPacientes[p], sizeof(Paciente), 1 , ptarq);
     fclose(ptarq);
 
     CarregarIndicePacientes();
@@ -262,3 +260,47 @@ void quicksort(IndexPaciente *v, int L, int R){
    if (L < j) quicksort(v, L, j);
    if (R > i) quicksort(v, i, R);
  }
+
+ void BuscarPacientePorNome(){
+    char nomeBusca[50];
+    int i;
+    int encontrou = 0; 
+    Paciente p;
+    FILE *arqDados;
+
+    printf("\n--- BUSCA POR NOME (Parcial) ---\n");
+    printf("Digite parte do nome: ");
+    // limepeza de buffer antes de ler string
+    int limpar;
+    while ((limpar = getchar()) != '\n' && limpar != EOF);
+    fgets(nomeBusca, 50, stdin);
+    nomeBusca[strcspn(nomeBusca, "\n")] = 0; 
+    // se o usuário der Enter sem digitar nada, sai
+    if (strlen(nomeBusca) == 0) return;
+    arqDados = fopen("output/pacientes.bin", "rb"); 
+    if (arqDados == NULL) {
+        printf("Erro ao ler banco de dados de pacientes.\n");
+        return;
+    }
+    printf("\nResultados para '%s':\n", nomeBusca);
+    printf("--------------------------------------------------\n");
+
+    for (i = 0; i < quantidadePacientes; i++) {
+        fseek(arqDados, vetIndexPaciente[i].posicao, SEEK_SET);
+        fread(&p, sizeof(Paciente), 1, arqDados);
+        if (strstr(p.nome, nomeBusca) != NULL) {
+            printf("CPF: %-11s | Nome: %-25s | Telefone: %s\n", p.CPF, p.nome, p.telefone);
+            encontrou++;
+        }
+    }
+
+    printf("--------------------------------------------------\n");
+
+    if (encontrou == 0) {
+        printf("Nenhum paciente encontrado com esse nome.\n"); 
+    }
+    else {
+        printf("Total encontrados: %d\n", encontrou);
+    }
+    fclose(arqDados);
+}

@@ -36,12 +36,13 @@ void MenuLogin(){
                     int teste = VerificarLogin(userAux, senhaAux);
                     if(teste == 0){
                         printf("Login ou senha inválidos\n");
+                        LimparTela();
                     }else{
                         MenuPrincipal();
                         break;
                     }
                     if(auxErro == 2){
-                        printf("Terceira tentativa de login inválida, encerrando o programa...");
+                        printf("Terceira tentativa de login inválida, encerrando o programa...\n");
                         return;
                     }
                 }

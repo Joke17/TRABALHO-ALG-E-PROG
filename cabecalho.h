@@ -61,11 +61,10 @@ void CadastrarNovoUsuario(Login novo);
 // Funçoes Joke
 void InserirNovoPaciente();
 void AlterarDadosPaciente();
-void AdicionarNaMao(); // SÓ PRA TESTE
 void CarregarIndicePacientes();
 // void BuscarPaciente();
 void ListaPacientes();
-int BuscarPacientePorCPF();
+int BuscarPacientePorCPF(char CPF[]);
 void ReordenaPacientes();
 void ExcluirPaciente();
 void BuscarPacientePorNome();
