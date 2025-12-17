@@ -56,7 +56,7 @@ void InserirNovoPaciente()
 
     if (ptarq == NULL)
     {
-        printf("deu merda1\n");
+        printf("Arquivo não encontrado.\n");
     }
 
     printf("----------CADASTRO DE PACIENTES----------\n");
