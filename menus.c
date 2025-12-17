@@ -13,7 +13,7 @@ void LimparTela() {
 void MenuLogin(){
     int aux;
     do{
-        sleep(1.5);
+        sleep(2);
         LimparTela();
         printf("1- Efetuar Login\n");
         printf("2- Cadastrar Usuário\n");
