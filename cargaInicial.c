@@ -5,7 +5,7 @@
 
 #define QUANT_TESTE 3
 
- //função auxiliar para verificar se o arquivo existe e está vazio.
+ //funï¿½ï¿½o auxiliar para verificar se o arquivo existe e estï¿½ vazio.
  //fiz isso aqui para evitar que toda vez que o programa rodar ele adicione os mesmosarquivos de dados de teste
  //assim evita problemas de duplicidade de CRM e CPF que sao chaves primarias
 
@@ -48,7 +48,7 @@ void CargaInicial(){
         
         fclose(loginIni);
     }
-    //cria apenas se os dados ou os ÍNDICES não existirem/estiverem vazios.
+    //cria apenas se os dados ou os ï¿½NDICES nï¿½o existirem/estiverem vazios.
     if(VerificarSeDeveCriar("output/medicos.bin") || VerificarSeDeveCriar("output/indices_medicos.bin")){
         
         FILE *medicoIni = fopen("output/medicos.bin", "wb"); 
@@ -77,7 +77,7 @@ void CargaInicial(){
         
         fwrite(indicesMedicos, sizeof(IndexMedico), QUANT_TESTE, indicesMedicoIni);
         
-        printf("Medicos de teste e índices criados.\n");
+        printf("Medicos de teste e ï¿½ndices criados.\n");
         
         fclose(medicoIni);
         fclose(indicesMedicoIni);
@@ -88,8 +88,8 @@ void CargaInicial(){
         FILE *pacienteIni = fopen("output/pacientes.bin", "wb"); 
         FILE *indicesPacienteIni = fopen("output/indices_pacientes.bin", "wb");
         
-        Paciente p1 = {"11111111111", "Paciente Teste1", "01/01/2000", "38777777777"};
         Paciente p2 = {"22222222222", "Paciente Teste2", "02/02/2000", "38888888888"};
+        Paciente p1 = {"11111111111", "Paciente Teste1", "01/01/2000", "38777777777"};
         Paciente p3 = {"33333333333", "Paciente Teste3", "03/03/2000", "38999999999"};
 
         fseek(pacienteIni, 0, SEEK_SET); 
@@ -111,7 +111,7 @@ void CargaInicial(){
 
         fwrite(indicesPacientes, sizeof(IndexPaciente), QUANT_TESTE, indicesPacienteIni);
         
-        printf("Pacientes de teste e índices criados.\n");
+        printf("Pacientes de teste e ï¿½ndices criados.\n");
         
         fclose(pacienteIni);
         fclose(indicesPacienteIni);

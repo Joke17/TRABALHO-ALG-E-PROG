@@ -7,19 +7,6 @@
 int quantidadePacientes = 0;
 Paciente *vetPacientes;
 IndexPaciente *vetIndexPaciente;
-/*
-void OrdenaCPF(){
-    IndexPaciente aux;
-    int ordenado = 0;
-    while (ordenado != 1){
-        if(strcmp(vetIndexPaciente[i].chave, vetIndexPaciente[i + 1].chave) == 1){
-            aux = vetIndexPaciente[i];
-            vetIndexPaciente[i] = vetIndexPaciente[i + 1];
-            vetIndexPaciente[i + 1] = aux;
-        }
-    }
-}
-*/
 
 int BuscarPacientePorCPF(char CPF[])
 {
@@ -30,7 +17,7 @@ int BuscarPacientePorCPF(char CPF[])
     // } else {
         //strcpy(CPF,vetIndexPaciente[quantidadePacientes].chave);
     // }
-
+/*
     int achou = 0;
 
     for(int i = 0; i < quantidadePacientes; i++){
@@ -39,11 +26,7 @@ int BuscarPacientePorCPF(char CPF[])
             return i;
         }
     }
-
-    
-
-    /*
-
+*/
     int inicio = 0;                    // Começa no primeiro elemento
     int fim = quantidadePacientes - 1; // Termina no último elemento válido
     int meio;                          // Variável para guardar a posição central
@@ -79,31 +62,11 @@ int BuscarPacientePorCPF(char CPF[])
             inicio = meio + 1; // Se é maior, descarta a metade da esquerda e foca na direita.
         }
     }
-    // if(modo == 1){
-    //     ReordenaPacientes(meio);
-    // }
+
     printf("\nCPF não cadastrado %d\n", meio);
-    return meio; // Se saiu do loop, é porque não encontrou nada.
+    return -1; // Se saiu do loop, é porque não encontrou nada.
 
-    */
-}
-
-void ReordenaPacientes(int posicao){
-    Paciente aux;
-    vetPacientes = (Paciente *)realloc(vetPacientes, (quantidadePacientes + 1) * sizeof(Paciente));
-    for(posicao;posicao < quantidadePacientes; posicao++){
-        aux = vetPacientes[posicao + 1];
-        vetPacientes[posicao + 1] = vetPacientes[posicao];
-        vetPacientes[posicao] = aux;
-        // printf("aq eu\n");
-    }
     
-    FILE *ptarq;
-    ptarq = fopen("output/pacientes.bin", "w+b");
-    
-    fwrite(vetPacientes, sizeof(Paciente), (quantidadePacientes + 1), ptarq);
-    fclose(ptarq);
-
 }
 
 void InserirNovoPaciente()
@@ -131,14 +94,6 @@ void InserirNovoPaciente()
     printf("Telefone: ");
     scanf("%s", &paciente.telefone);
     while ((limpar = getchar()) != '\n' && limpar != EOF);
-
-    // if(quantidadePacientes > 2){
-    //     printf("aq ofi");
-    //     int p = BuscarPacientePorCPF(paciente.CPF);
-    //     ReordenaPacientes(p);
-    
-    //     fseek(ptarq,(p * sizeof(Paciente)), 0);
-    // }
     
     fwrite(&paciente, sizeof(Paciente), 1, ptarq);
 
@@ -146,8 +101,6 @@ void InserirNovoPaciente()
     fclose(ptarq);
     printf("\n Paciente cadastrado com sucesso!\n");
 
-    // OrdenaCPF();
-    //BuscarPacientePorCPF(1);
     CarregarIndicePacientes();
 }
 void AlterarDadosPaciente()
@@ -160,9 +113,14 @@ void AlterarDadosPaciente()
     
     
     int p = BuscarPacientePorCPF(CPF);
+    if (p == -1) {
+        printf("Erro: Paciente nao encontrado!\n");
+        return;
+    }
     int edicao = -1;
 
-
+    long posicao = vetIndexPaciente[p].posicao;
+    p = posicao / sizeof(Paciente);
 
     printf("\nPaciente:\n");
     printf("Nome: %s\n",vetPacientes[p].nome);
@@ -179,7 +137,7 @@ void AlterarDadosPaciente()
     switch (edicao){
         case 1:
             printf("Digite o novo Nome: ");
-            scanf("%s", vetPacientes[p].nome);
+            scanf(" %[^\n]", vetPacientes[p].nome);
         break;
         case 2:
             printf("Digite o novo Telefone: ");
@@ -194,7 +152,6 @@ void AlterarDadosPaciente()
     FILE *ptarq;
     ptarq = fopen("output/pacientes.bin", "w+b");
     
-    //fseek(ptarq, p, SEEK_SET);
     fwrite(vetPacientes, sizeof(Paciente), quantidadePacientes , ptarq);
     fclose(ptarq);
 
@@ -205,46 +162,58 @@ void AlterarDadosPaciente()
 void ExcluirPaciente(){
     char CPF[12];
     printf("\n----------EXCLUSÃO DE PACIENTE----------\n");
-    printf("Digite o CPF do paciente que deseja Alterar: ");
+    printf("Digite o CPF do paciente que deseja excluir: ");
     scanf("%s", CPF);
 
-    int p = BuscarPacientePorCPF(CPF), qt = quantidadePacientes;
+    FILE *arqLer;
+    arqLer = fopen("output/pacientes.bin", "r+b");
+    Paciente *ler = (Paciente *)malloc(quantidadePacientes * sizeof(Paciente));
+    fread(ler,sizeof(Paciente),quantidadePacientes,arqLer);
+    fclose(arqLer);
 
-    Paciente aux;
-    vetPacientes[p] = aux;
-    for(p ; p < quantidadePacientes; p++){
-        aux = vetPacientes[p + 1];
-        vetPacientes[p] = vetPacientes[p + 1];
-        vetPacientes[p + 1] = aux;
-        // printf("aq eu\n");
+    FILE *arqNv;
+    arqNv = fopen("output/pacientes.bin", "w+b");
+    for(int i=0;i<quantidadePacientes; i++){
+        if(strcmp(CPF, ler[i].CPF) != 0){
+            fwrite(&ler[i], sizeof(Paciente), 1, arqNv);
+        }
     }
-    
-    FILE *ptarq;
-    ptarq = fopen("output/pacientes.bin", "w+b");
-    
-    fwrite(vetPacientes, sizeof(Paciente), (quantidadePacientes - 1), ptarq);
-    fclose(ptarq);
+    fclose(arqNv);
 
     CarregarIndicePacientes();
-
+    free(ler);
 }
 
 void ListaPacientes()
 {
+    CarregarIndicePacientes();
+
+    FILE *arq = fopen("output/pacientes.bin", "r+b");
+    if (arq == NULL) return; 
+
+    Paciente p; 
+
     printf("----------------------------------");
     printf("Lista de Pacientes");
     printf("----------------------------------\n");
+    
     for (int i = 0; i < quantidadePacientes; i++)
     {
-        printf("Nome: %s\n",vetPacientes[i].nome);
-        printf("CPF: %s\n",vetPacientes[i].CPF);
-        printf("Data de Nascimento: %s\n",vetPacientes[i].data_de_nascimento);
-        printf("Telefone: %s\n\n",vetPacientes[i].telefone);
+        fseek(arq, vetIndexPaciente[i].posicao, SEEK_SET);
+        
+        fread(&p, sizeof(Paciente), 1, arq);
+
+        printf("Nome: %s\n", p.nome);
+        printf("CPF: %s\n", p.CPF);
+        printf("Data de Nascimento: %s\n", p.data_de_nascimento);
+        printf("Telefone: %s\n\n", p.telefone);
     }
+
     printf("----------------------------------");
     printf("Fim");
     printf("----------------------------------\n");
 
+    fclose(arq);
     CarregarIndicePacientes();
 }
 
@@ -270,33 +239,45 @@ void CarregarIndicePacientes()
     for (int i = 0; i < quantidadePacientes; i++)
     {
         strcpy(vetIndexPaciente[i].chave, vetPacientes[i].CPF);
+        vetIndexPaciente[i].posicao = i*sizeof(Paciente);
     }
 
     fclose(ptpacientes);
+
+    quicksort(vetIndexPaciente, 0, quantidadePacientes-1);
+
+    FILE *indexPac = fopen("output/indices_pacientes.bin", "w+b");
+    fwrite(vetIndexPaciente, sizeof(IndexPaciente), quantidadePacientes, indexPac);
+    fclose(indexPac);
+
     printf("Sistema: %d pacientes carregados na memoria.\n", quantidadePacientes);
 }
 
-void AdicionarNaMao()
-{
-    Paciente p;
-
-    // Preenchendo dados falsos pra teste
-    strcpy(p.CPF, "123.456.789-00");
-    strcpy(p.nome, "Laercio da Silva"); // O brabo
-    strcpy(p.data_de_nascimento, "01/01/1980");
-    strcpy(p.telefone, "38999999999");
-
-    // "ab" = Append Binary (Adiciona no final ou cria se não existir)
-    FILE *arq = fopen("output/pacientes.bin", "ab");
-
-    if (arq != NULL)
-    {
-        fwrite(&p, sizeof(Paciente), 1, arq);
-        fclose(arq);
-        printf("Paciente adicionado com sucesso!\n");
-    }
-    else
-    {
-        printf("Erro ao abrir arquivo pra escrita.\n");
-    }
+void troca(IndexPaciente *v, int i, int j) {
+  IndexPaciente aux;
+  aux = v[i];
+  v[i] = v[j];
+  v[j] = aux;
 }
+
+void quicksort(IndexPaciente *v, int L, int R){
+  int i, j;
+  char pivo[20]; 
+  i = L;
+  j = R;
+  strcpy(pivo, v[(i+j)/2].chave); 
+  
+  do {
+    while (strcmp(v[i].chave, pivo) < 0) i++;
+    while (strcmp(v[j].chave, pivo) > 0) j--;
+    
+    if (i <= j){
+      troca(v, i, j); 
+      i++;
+      j--;
+     }
+   } while (i <= j);
+   
+   if (L < j) quicksort(v, L, j);
+   if (R > i) quicksort(v, i, R);
+ }

@@ -48,6 +48,8 @@ typedef struct
 } IndexPaciente, IndexMedico;
 
 void CargaInicial();
+void troca(IndexPaciente *v, int i, int j);
+void quicksort(IndexPaciente *v, int L, int R);
 
 //void OrdenaCPF();
 
