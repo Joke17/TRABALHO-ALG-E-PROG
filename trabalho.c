@@ -10,6 +10,12 @@ int main() {
     setlocale(LC_ALL, "PORTUGUESE");
     CargaInicial();
     //LimparTela();
+
+    /*  Comandos para rodar:
+    gcc *.c -o output/trabalho.exe
+    .\output\trabalho.exe
+    */
+
     printf("------------------------\nINICIO\n------------------------\n\n");
 
     //carregando indices de pacientes e medicos para testes
