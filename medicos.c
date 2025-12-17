@@ -1,386 +1,316 @@
-#include <stdio.h>      // Biblioteca padrão de entrada e saída (printf, scanf, arquivos)
-#include <stdlib.h>     // Biblioteca para gerenciar memória (malloc, realloc, free)
-#include <string.h>     // Biblioteca para manipular textos (strcpy, strcmp)
-#include "cabecalho.h"  // Inclui as definições das structs (medico, IndexMedico)
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "cabecalho.h"
 
-// --- VARIÁVEIS GLOBAIS (Visíveis apenas dentro deste arquivo) ---
-// Ponteiro que vai guardar o endereço da nossa lista de índices na memória RAM
-IndexMedico *tabelaIndices = NULL; 
+IndexMedico *listaIndices = NULL;
+int totalMedicos = 0;
+int capacidade = 0;
 
-// Contador para saber quantos médicos existem atualmente no sistema
-int qtdMedicos = 0;    
+// --- FUNCOES AUXILIARES ---
+void limpaBuffer() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
 
-// Variável de controle para saber o tamanho atual da memória alocada (para saber quando usar realloc)
-int capIndices = 0;    
-
-
-int buscaBinariaMedico(char *crmBusca) {
-    
-    if (tabelaIndices == NULL) {
-        printf("BUSCA: ERRO - Tabela de indices nao inicializada.\n");
-        return -1;
+// Remove o \n do final da string lida pelo fgets
+void removeEnter(char *str) {
+    size_t tam = strlen(str);
+    if (tam > 0 && str[tam - 1] == '\n') {
+        str[tam - 1] = '\0';
     }
-    // -------------------------
+}
+
+// --- BUSCA BINARIA ---
+int buscaBinariaMedico(char *crm) {
+    if (listaIndices == NULL || totalMedicos == 0) return -1;
     
-    int inicio = 0;             
-    int fim = qtdMedicos - 1;   
-    int meio;                   
+    int inicio = 0;
+    int fim = totalMedicos - 1;
+    int meio;
+    int cmp;
 
-
-    printf("\nBUSCA: CRM Alvo: %s\n", crmBusca);
-    printf("BUSCA: Qtd Medicos: %d, Fim do Vetor: %d\n", qtdMedicos, fim);
-    
-    if (qtdMedicos == 0) {
-        printf("BUSCA: Vetor vazio, retornando -1.\n");
-        return -1;
-    }
-
-   while (inicio <= fim) {
+    while (inicio <= fim) {
         meio = (inicio + fim) / 2;
-        
-        printf("BUSCA: Comparando com indice %d: [%s]\n", meio, tabelaIndices[meio].chave); 
-        
-        int cmp = strcmp(crmBusca, tabelaIndices[meio].chave);
+        cmp = strcmp(crm, listaIndices[meio].chave);
 
         if (cmp == 0) {
-            printf("BUSCA: ACHOU!\n");
-            return meio; 
+            return meio; // Achou
         } else if (cmp < 0) {
-            
-            fim = meio - 1; 
-        } else { // (cmp > 0)
-           
-            inicio = meio + 1; 
+            fim = meio - 1;
+        } else {
+            inicio = meio + 1;
         }
     }
-    printf("BUSCA: N�o encontrado.\n");
-    return -1;
+    return -1; // Nao achou
 }
-// --- FUNÇÃO 1: CARREGAR ÍNDICES ---
-// Objetivo: Ler o arquivo de índices do HD e passar para a RAM ao iniciar o programa.
+
+// --- CARREGAR ---
 void CarregarIndicesMedicos() {
-    // Tenta abrir o arquivo de índices em modo leitura binária ("rb")
-    FILE *arqIndex = fopen("output/indices_medicos.bin", "rb");
-    
-    // Se o arquivo não existir (primeira vez que roda o programa), retorna NULL
-    if (arqIndex == NULL) {
-        qtdMedicos = 0; // Começamos com zero médicos
-        capIndices = 10; // Definimos uma capacidade inicial pequena
-        // malloc pede memória ao computador para guardar 10 índices
-        tabelaIndices = (IndexMedico *) malloc(capIndices * sizeof(IndexMedico));
-        return; // Sai da função pois não tem nada para ler do disco
+    FILE *fp = fopen("output/indices_medicos.bin", "rb");
+    long tamBytes;
+
+    if (fp == NULL) {
+        // Arquivo nao existe, cria lista vazia
+        totalMedicos = 0;
+        capacidade = 10;
+        listaIndices = (IndexMedico *) malloc(capacidade * sizeof(IndexMedico));
+        return;
     }
 
-    // -- Descobrindo quantos índices existem no arquivo --
-    fseek(arqIndex, 0, SEEK_END); // Pula o cursor para o final do arquivo
-    long tamanhoBytes = ftell(arqIndex); // Pergunta: "quantos bytes tem até aqui?"
-    
-    // Divide o total de bytes pelo tamanho de um índice para saber a quantidade exata
-    qtdMedicos = tamanhoBytes / sizeof(IndexMedico);
-    
-    // -- Preparando a memória RAM --
-    capIndices = qtdMedicos + 10;
-tabelaIndices = (IndexMedico *) malloc(capIndices * sizeof(IndexMedico));
+    // Calcula tamanho do arquivo
+    fseek(fp, 0, SEEK_END);
+    tamBytes = ftell(fp);
+    rewind(fp); // Volta pro inicio
 
-// NOVO: CHECAGEM CR�TICA DE ALOCA��O AQUI
-if (tabelaIndices == NULL) {
-    printf("ERRO FATAL: Falha ao alocar memoria para carregar indices.\n");
-    fclose(arqIndex); 
-    qtdMedicos = 0; // Se falhou, o vetor est� vazio
-    return;
-}
-// --------------------------------------------------------
-
-// -- Lendo os dados --
-fseek(arqIndex, 0, SEEK_SET);
-fread(tabelaIndices, sizeof(IndexMedico), qtdMedicos, arqIndex);
+    totalMedicos = tamBytes / sizeof(IndexMedico);
+    capacidade = totalMedicos + 10;
     
-    fclose(arqIndex); // Fecha o arquivo pois já está tudo na memória
-    printf("Sistema: %d medicos carregados na memoria.\n", qtdMedicos);
+    listaIndices = (IndexMedico *) malloc(capacidade * sizeof(IndexMedico));
+
+    if (listaIndices == NULL) {
+        printf("Erro fatal: Falha de memoria ao carregar indices.\n");
+        fclose(fp);
+        exit(1); // Fecha o programa se der erro de memoria
+    }
+
+    fread(listaIndices, sizeof(IndexMedico), totalMedicos, fp);
+    fclose(fp);
+    
+    printf("Sistema: %d medicos carregados na memoria.\n", totalMedicos);
 }
 
-// --- FUNÇÃO 2: SALVAR ÍNDICES ---
-// Objetivo: Gravar o que está na RAM de volta no HD antes de fechar o programa.
+// --- SALVAR ---
 void SalvarIndicesMedicos() {
-    // Se a tabela está vazia (NULL), não faz nada
-    if (tabelaIndices == NULL) return;
+    if (listaIndices == NULL) return;
 
-    // Abre o arquivo em modo de escrita binária ("wb"). 
-    // O "w" zera o arquivo e escreve tudo novo por cima.
-    FILE *arqIndex = fopen("output/indices_medicos.bin", "wb");
-    
-    if (arqIndex == NULL) {
+    FILE *fp = fopen("output/indices_medicos.bin", "wb");
+    if (fp == NULL) {
         printf("Erro grave: Nao foi possivel salvar os indices!\n");
         return;
     }
 
-    // Escreve o conteúdo do vetor tabelaIndices inteiro no arquivo
-    fwrite(tabelaIndices, sizeof(IndexMedico), qtdMedicos, arqIndex);
+    fwrite(listaIndices, sizeof(IndexMedico), totalMedicos, fp);
+    fclose(fp);
     
-    fclose(arqIndex); // Fecha e salva as alterações no disco
-    
-    // Limpeza final: libera a memória RAM que pedimos emprestada
-    free(tabelaIndices);
-    tabelaIndices = NULL; // Zera o ponteiro por segurança
+    // Libera memoria ao sair
+    free(listaIndices);
+    listaIndices = NULL;
 }
 
-// --- FUNÇÃO 3: INSERIR NOVO MÉDICO ---
-// Objetivo: Cadastrar dados no arquivo e atualizar o índice de forma ordenada.
+// --- INSERIR ---
 void InserirNovoMedico() {
-    Medico m;
-    int c; // Variável auxiliar para limpeza de buffer quando necessário
+    Medico aux;
+    FILE *fp;
+    long pos;
+    int i;
 
     printf("\n--- CADASTRO DE MEDICO ---\n");
     
-    // --- 1. CRM ---
     printf("Digite o CRM: ");
-    scanf("%s", m.CRM); // Use scanf para o CRM (simples, sem espaços)
-    // LIMPEZA OBRIGATÓRIA DO BUFFER APÓS SCANF
-    while ((c = getchar()) != '\n' && c != EOF);
+    scanf("%s", aux.CRM);
+    limpaBuffer();
 
-    // Verifica duplicidade
-    if (buscaBinariaMedico(m.CRM) != -1) {
+    if (buscaBinariaMedico(aux.CRM) != -1) {
         printf("Erro: Ja existe um medico com este CRM!\n");
         return;
     }
 
-    // --- 2. NOME ---
     printf("Nome: ");
-    // Como limpamos o buffer após o CRM, o fgets vai funcionar perfeitamente
-    fgets(m.nome, 50, stdin); 
-    m.nome[strcspn(m.nome, "\n")] = 0; 
+    fgets(aux.nome, 50, stdin);
+    removeEnter(aux.nome);
 
-    // --- 3. ESPECIALIDADE ---
     printf("Especialidade: ");
-    fgets(m.especialidade, 20, stdin);
-    m.especialidade[strcspn(m.especialidade, "\n")] = 0;
+    fgets(aux.especialidade, 20, stdin);
+    removeEnter(aux.especialidade);
 
-    // --- 4. VALOR ---
     printf("Valor Hora (ex: 100.50): ");
-    scanf("%f", &m.valor_hora_trabalho);
-    // LIMPEZA APÓS LER NÚMERO
-    while ((c = getchar()) != '\n' && c != EOF);
+    scanf("%f", &aux.valor_hora_trabalho);
+    limpaBuffer();
 
-    // --- GRAVAÇÃO (Igual ao seu código) ---
-    FILE *arqDados = fopen("output/medicos.bin", "ab");
-    if (arqDados == NULL) { printf("Erro ao abrir medicos.bin!\n"); return; }
-
-    fseek(arqDados, 0, SEEK_END);
-    long posicaoNoDisco = ftell(arqDados);
-    fwrite(&m, sizeof(Medico), 1, arqDados);
-    fclose(arqDados);
-
-    // --- ATUALIZAÇÃO ÍNDICE (Igual ao seu código) ---
-    if (qtdMedicos >= capIndices) {
-        capIndices += 10;
-        tabelaIndices = (IndexMedico *) realloc(tabelaIndices, capIndices * sizeof(IndexMedico));
+    // Grava no arquivo de dados
+    fp = fopen("output/medicos.bin", "ab");
+    if (fp == NULL) {
+        printf("Erro ao abrir medicos.bin!\n");
+        return;
     }
 
-    int i = qtdMedicos - 1;
-    while (i >= 0 && strcmp(m.CRM, tabelaIndices[i].chave) < 0) {
-        tabelaIndices[i + 1] = tabelaIndices[i]; 
+    fseek(fp, 0, SEEK_END);
+    pos = ftell(fp); // Guarda posicao
+    fwrite(&aux, sizeof(Medico), 1, fp);
+    fclose(fp);
+
+    // Atualiza indice na RAM
+    if (totalMedicos >= capacidade) {
+        capacidade += 10;
+        listaIndices = (IndexMedico *) realloc(listaIndices, capacidade * sizeof(IndexMedico));
+    }
+
+    i = totalMedicos - 1;
+    while (i >= 0 && strcmp(aux.CRM, listaIndices[i].chave) < 0) {
+        listaIndices[i + 1] = listaIndices[i]; 
         i--;
     }
 
-    strcpy(tabelaIndices[i + 1].chave, m.CRM);
-    tabelaIndices[i + 1].posicao = posicaoNoDisco;
-    qtdMedicos++;
+    strcpy(listaIndices[i + 1].chave, aux.CRM);
+    listaIndices[i + 1].posicao = pos;
+    totalMedicos++;
 
     printf("Medico cadastrado com sucesso!\n");
 }
-// --- FUNÇÃO EXTRA: LISTAR TUDO ---
-// Objetivo: Mostrar que a ligação Índice -> Dados está funcionando
+
+// --- LISTAR ---
 void ListarMedicos() {
-    if (qtdMedicos == 0) {
+    FILE *fp;
+    Medico m;
+    int i;
+
+    if (totalMedicos == 0) {
         printf("Nenhum medico cadastrado.\n");
         return;
     }
 
-    // Abre o arquivo de dados apenas para leitura
-    FILE *arqDados = fopen("output/medicos.bin", "rb");
-    if (!arqDados) { printf("Erro ao ler dados.\n"); return; }
-
-    Medico m;
-    printf("\n--- LISTA DE MEDICOS (Ordenada por CRM) ---\n");
-    
-    // Percorre o vetor de índices (que já mantivemos ordenado na RAM)
-    for (int i = 0; i < qtdMedicos; i++) {
-        // A MÁGICA: Pula direto para o byte onde os dados desse médico estão gravados
-        fseek(arqDados, tabelaIndices[i].posicao, SEEK_SET);
-        
-        // Lê os dados do médico nessa posição
-        fread(&m, sizeof(Medico), 1, arqDados);
-        
-        // Mostra na tela
-        printf("CRM: %s | Nome: %s | Esp: %s\n", m.CRM, m.nome, m.especialidade);
+    fp = fopen("output/medicos.bin", "rb");
+    if (!fp) {
+        printf("Erro ao ler dados.\n");
+        return;
     }
 
+    printf("\n--- LISTA DE MEDICOS ---\n");
+    for (i = 0; i < totalMedicos; i++) {
+        fseek(fp, listaIndices[i].posicao, SEEK_SET);
+        fread(&m, sizeof(Medico), 1, fp);
+        printf("CRM: %s | Nome: %s | Esp: %s\n", m.CRM, m.nome, m.especialidade);
+    }
+    fclose(fp);
 }
 
-    // --- FUNÇÃO 4: EDITAR MÉDICO (Update) ---
-// Objetivo: Alterar dados de um médico já existente (menos o CRM).
+// --- EDITAR ---
 void EditarMedico() {
-    char crmBusca[20];
-    int indice, c;
-    FILE *arqDados;
+    char busca[20];
+    int idx;
+    FILE *fp;
     Medico m;
-    long posicao;
+    long pos;
 
     printf("\n--- EDITAR MEDICO ---\n");
     printf("Digite o CRM do medico que deseja alterar: ");
-    scanf("%s", crmBusca);
-    // LIMPA BUFFER IMEDIATAMENTE APÓS SCANF
-    while ((c = getchar()) != '\n' && c != EOF);
+    scanf("%s", busca);
+    limpaBuffer();
 
-    indice = buscaBinariaMedico(crmBusca);
-    if (indice == -1) {
+    idx = buscaBinariaMedico(busca);
+    if (idx == -1) {
         printf("Erro: Medico nao encontrado!\n");
         return;
     }
 
-    arqDados = fopen("output/medicos.bin", "r+b"); 
-    if (arqDados == NULL) { printf("Erro no arquivo.\n"); return; }
+    pos = listaIndices[idx].posicao;
 
-    posicao = tabelaIndices[indice].posicao;
-    fseek(arqDados, posicao, SEEK_SET);
-    fread(&m, sizeof(Medico), 1, arqDados);
+    fp = fopen("output/medicos.bin", "r+b"); 
+    if (fp == NULL) {
+        printf("Erro ao abrir arquivo.\n");
+        return;
+    }
 
-    printf("\n--- Dados Atuais: %s | %s | %.2f ---\n", m.nome, m.especialidade, m.valor_hora_trabalho);
+    fseek(fp, pos, SEEK_SET);
+    fread(&m, sizeof(Medico), 1, fp);
+
+    printf("\n--- Dados Atuais ---\n");
+    printf("Nome: %s | Valor: %.2f\n", m.nome, m.valor_hora_trabalho);
     printf("AVISO: O CRM nao pode ser alterado.\n");
     
-    // --- LEITURA DOS NOVOS DADOS ---
-    // Como o buffer foi limpo lá em cima, o fgets não vai pular
     printf("Novo Nome: ");
     fgets(m.nome, 50, stdin);
-    m.nome[strcspn(m.nome, "\n")] = 0;
+    removeEnter(m.nome);
 
     printf("Nova Especialidade: ");
     fgets(m.especialidade, 20, stdin);
-    m.especialidade[strcspn(m.especialidade, "\n")] = 0;
+    removeEnter(m.especialidade);
 
     printf("Novo Valor Hora: ");
     scanf("%f", &m.valor_hora_trabalho);
-    // LIMPA BUFFER FINAL (Para não atrapalhar o menu depois)
-    while ((c = getchar()) != '\n' && c != EOF);
-
-    fseek(arqDados, posicao, SEEK_SET); 
-    fwrite(&m, sizeof(Medico), 1, arqDados);
-    fclose(arqDados);
+    limpaBuffer();
     
-    printf("Dados atualizados!\n");
+    fseek(fp, pos, SEEK_SET); 
+    fwrite(&m, sizeof(Medico), 1, fp);
+    fclose(fp);
+    
+    printf("Dados do medico atualizados com sucesso!\n");
 }
-// --- FUNÇÃO 5: EXCLUIR MÉDICO (Delete) ---
-// Objetivo: Apagar o médico do sistema.
-// Estratégia: Exclusão Lógica. Apagamos apenas o ÍNDICE da memória.
+
+// --- EXCLUIR ---
 void ExcluirMedico() {
-    char crmBusca[20];
-    int indice, confirmacao, i, c;
+    char busca[20];
+    int idx, op, i;
 
     printf("\n--- EXCLUIR MEDICO ---\n");
     printf("Digite o CRM do medico a ser excluido: ");
-    scanf("%s", crmBusca);
-    // LIMPA BUFFER
-    while ((c = getchar()) != '\n' && c != EOF);
-
-    indice = buscaBinariaMedico(crmBusca);
-
-    if (indice == -1) {
+    scanf("%s", busca);
+    limpaBuffer();
+    
+    idx = buscaBinariaMedico(busca);
+    if (idx == -1) {
         printf("Erro: Medico nao encontrado!\n");
         return;
     }
-
-    printf("Tem certeza que deseja excluir o CRM %s? (1-Sim / 0-Nao): ", crmBusca);
-    scanf("%d", &confirmacao);
-    // --- CORREÇÃO: LIMPAR O BUFFER APÓS O NÚMERO ---
-    // Se não limpar aqui, o 'Enter' sobra e pula o menu principal depois
-    while ((c = getchar()) != '\n' && c != EOF); 
-
-    if (confirmacao != 1) {
+    
+    printf("Tem certeza que deseja excluir o CRM %s? (1-Sim / 0-Nao): ", busca);
+    scanf("%d", &op);
+    limpaBuffer(); 
+    
+    if (op != 1) {
         printf("Operacao cancelada.\n");
         return;
     }
 
-    // Shift Left (Remove do índice)
-    for (i = indice; i < qtdMedicos - 1; i++) {
-        tabelaIndices[i] = tabelaIndices[i + 1];
+    // Remove do vetor puxando os da frente pra tras
+    for (i = idx; i < totalMedicos - 1; i++) {
+        listaIndices[i] = listaIndices[i + 1];
     }
 
-    qtdMedicos--; 
-    SalvarIndicesMedicos(); // Salva a alteração no disco imediatamente
+    totalMedicos--; 
+    SalvarIndicesMedicos();
     
     printf("Medico excluido com sucesso!\n");
 }
 
-// --- FUN��O EXTRA: DEBUG ---
-// Objetivo: Mostrar os índices carregados em memória
-void DebugListarIndices() {
-    printf("\n--- DEBUG: INDICES DE MEDICOS CARREGADOS ---\n");
-    if (qtdMedicos == 0) {
-        printf("Nenhum indice carregado.\n");
-        return;
-    }
-    for (int i = 0; i < qtdMedicos; i++) {
-        printf("Posicao %d: CRM [%s]\n", i, tabelaIndices[i].chave);
-    }
-
-    printf("------------------------------------------\n");
-}
-// --- FUNÇÃO 6: BUSCAR MÉDICO POR NOME (Pesquisa Sequencial) ---
+// --- BUSCAR POR NOME ---
 void BuscarMedicoPorNome() {
-    char nomeBusca[50];
-    int i, c;
-    int encontrou = 0; // Contador de resultados
+    char nome[50];
+    int i, cont = 0;
     Medico m;
-    FILE *arqDados;
+    FILE *fp;
 
-    // 1. Entrada de dados
-    printf("\n--- BUSCA POR NOME (Parcial) ---\n");
+    printf("\n--- BUSCA POR NOME ---\n");
     printf("Digite parte do nome: ");
     
-    // Limpeza de buffer preventiva antes de ler string
-    // (Caso venha de um menu que deixou sujeira)
-    // Se o seu menu já limpa, pode tirar o setbuf, mas mal não faz.
-    setbuf(stdin, NULL); 
-    
-    fgets(nomeBusca, 50, stdin);
-    nomeBusca[strcspn(nomeBusca, "\n")] = 0; // Remove o Enter (\n)
+    fgets(nome, 50, stdin);
+    removeEnter(nome);
 
-    // Se o usuário der Enter sem digitar nada, sai
-    if (strlen(nomeBusca) == 0) return;
+    if (strlen(nome) == 0) return;
 
-    // 2. Abrir arquivo para leitura
-    arqDados = fopen("output/medicos.bin", "rb");
-    if (arqDados == NULL) {
-        printf("Erro ao ler banco de dados.\n");
+    fp = fopen("output/medicos.bin", "rb");
+    if (fp == NULL) {
+        printf("Erro: Banco de dados vazio ou inexistente.\n");
         return;
     }
 
-    printf("\nResultados para '%s':\n", nomeBusca);
+    printf("\nResultados para '%s':\n", nome);
     printf("--------------------------------------------------\n");
 
-    // 3. Loop: Percorre TODOS os médicos ativos no índice
-    // (Usamos o índice para garantir que não mostremos médicos excluídos)
-    for (i = 0; i < qtdMedicos; i++) {
-        
-        // Vai no HD buscar os dados completos deste médico
-        fseek(arqDados, tabelaIndices[i].posicao, SEEK_SET);
-        fread(&m, sizeof(Medico), 1, arqDados);
+    for (i = 0; i < totalMedicos; i++) {
+        fseek(fp, listaIndices[i].posicao, SEEK_SET);
+        fread(&m, sizeof(Medico), 1, fp);
 
-        // 4. A Mágica: strstr (String String)
-        // Verifica se 'nomeBusca' existe DENTRO de 'm.nome'
-        // Retorna um ponteiro se achar, ou NULL se não achar.
-        if (strstr(m.nome, nomeBusca) != NULL) {
+        if (strstr(m.nome, nome) != NULL) {
             printf("CRM: %-6s | Nome: %-25s | Esp: %s\n", m.CRM, m.nome, m.especialidade);
-            encontrou++;
+            cont++;
         }
     }
-
     printf("--------------------------------------------------\n");
-    if (encontrou == 0) {
-        printf("Nenhum medico encontrado com esse nome.\n");
-    } else {
-        printf("Total encontrados: %d\n", encontrou);
-    }
 
-    fclose(arqDados);
+    if (cont == 0) printf("Nenhum medico encontrado com esse nome.\n");
+    else printf("Total encontrados: %d\n", cont);
+    
+    fclose(fp);
 }
