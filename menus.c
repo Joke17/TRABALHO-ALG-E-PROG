@@ -9,10 +9,11 @@ void LimparTela() {
     system("cls");
 }
 
+
 void MenuLogin(){
     int aux;
     do{
-        sleep(2);
+        sleep(1.5);
         LimparTela();
         printf("1- Efetuar Login\n");
         printf("2- Cadastrar Usuário\n");
@@ -122,8 +123,8 @@ void MenuPacientes(){
             }
 
             case 2:{
-               LimparTela();
-                //BuscarPacientePorNome();
+                LimparTela();
+                BuscarPacientePorNome();
                 break;
             }
 
@@ -133,7 +134,7 @@ void MenuPacientes(){
                 break;
             }
             case 4:{
-                //LimparTela();
+                LimparTela();
                 ExcluirPaciente();
                 break;
             }
@@ -156,22 +157,23 @@ void MenuMedicos(){
        //LimparTela();
         printf("1- Inserir novo médico\n");
         printf("2- Buscar médico por nome\n");
-        printf("3- Listar médicos por especialidade\n"); 
-        printf("4- Alterar dados do médico\n"); 
-        printf("5- Excluir médico\n");
+        printf("3- Listar todos os médicos \n"); 
+        printf("4- Listar por especialidade\n");
+        printf("5- Alterar dados do médico\n"); 
+        printf("6- Excluir médico\n");
         printf("0- Voltar para a página anterior\n");
 
         scanf("%d", &aux);
 
         switch(aux){
             case 1:{
-               // LimparTela();
+                LimparTela();
                 InserirNovoMedico();
                 break;
             }
 
             case 2:{
-                //LimparTela();
+                LimparTela();
                 BuscarMedicoPorNome();
                 break;
             }
@@ -181,15 +183,20 @@ void MenuMedicos(){
                 ListarMedicos();
                 break;
             }
-
             case 4:{
-                //LimparTela();
+               LimparTela();
+               ListarMedicosPorEspecialidade();
+               break; 
+            }
+
+            case 5:{
+                LimparTela();
                 EditarMedico(); 
                 break;
             }
 
-            case 5:{
-               // LimparTela();
+            case 6:{
+               LimparTela();
                ExcluirMedico();
                 break;
             }
@@ -205,7 +212,7 @@ void MenuConsultas(){
     int aux;
 
     do{
-        LimparTela();
+        //LimparTela();
         printf("1- Agendar nova consulta\n");
         printf("2- Listar consultas por médico(CRM)\n");
         printf("3- Listar consultas por paciente(CPF)\n"); 
@@ -213,30 +220,29 @@ void MenuConsultas(){
         printf("0- Voltar para a página anterior\n");
 
         scanf("%d", &aux);
-
         switch(aux){
             case 1:{
-                //LimparTela();
+                LimparTela();
                 InserirNovaConsulta();
                 break;
             }
 
             case 2:{
-                //LimparTela();
+                LimparTela();
                 ListarConsultasPorMedico();
                 break;
             }
 
             case 3:{
-               // LimparTela();
+                LimparTela();
                 ListarConsultasPorPaciente();
                 break;
             }
 
             case 4:{
-              // LimparTela();
-                ListarConsultasPorData();
-                break;
+               LimparTela();
+               ListarConsultasPorData();
+               break; 
             }
 
             case 0:{

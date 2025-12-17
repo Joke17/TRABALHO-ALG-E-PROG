@@ -10,28 +10,10 @@ IndexPaciente *vetIndexPaciente;
 
 int BuscarPacientePorCPF(char CPF[])
 {
-    // char CPF[12];
-    // if(modo == 0){
-    //     printf("DIGITE O CFP PACIENTE DESEJADO: ");
-    //     scanf("%s", CPF);  
-    // } else {
-        //strcpy(CPF,vetIndexPaciente[quantidadePacientes].chave);
-    // }
-/*
-    int achou = 0;
-
-    for(int i = 0; i < quantidadePacientes; i++){
-        if(strcmp(CPF,vetIndexPaciente[i].chave) == 0){
-            //achou = 1;
-            return i;
-        }
-    }
-*/
     int inicio = 0;                    // Começa no primeiro elemento
     int fim = quantidadePacientes - 1; // Termina no último elemento válido
     int meio;                          // Variável para guardar a posição central
 
-    // Enquanto o início não ultrapassar o fim, continuamos procurando
     while (inicio <= fim)
     {
 
@@ -50,21 +32,21 @@ int BuscarPacientePorCPF(char CPF[])
         if (cmp == 0)
         {
             printf("CPF no sistema\n", meio);
-            return meio; // ACHOU! Retorna a posição onde está.
+            return meio; // achou
 
         }
         else if (cmp < 0)
         {
-            fim = meio - 1; // Se é menor, descarta a metade da direita e foca na esquerda.
+            fim = meio - 1; // Se é menor, descarta a metade da direita e foca na esquerda
         }
         else
         {
-            inicio = meio + 1; // Se é maior, descarta a metade da esquerda e foca na direita.
+            inicio = meio + 1; // Se é maior, descarta a metade da esquerda e foca na direita
         }
     }
 
     printf("\nCPF não cadastrado %d\n", meio);
-    return -1; // Se saiu do loop, é porque não encontrou nada.
+    return -1; // Se saiu do loop, é pq não encontrou nada
 
     
 }
@@ -110,8 +92,6 @@ void AlterarDadosPaciente()
     printf("Digite o CPF do paciente que deseja Alterar: ");
     scanf("%s", CPF);
 
-    
-    
     int p = BuscarPacientePorCPF(CPF);
     if (p == -1) {
         printf("Erro: Paciente nao encontrado!\n");
@@ -219,15 +199,16 @@ void ListaPacientes()
 
 void CarregarIndicePacientes()
 {
-    // Pacientes
-    FILE *ptpacientes = fopen("output/pacientes.bin", "r+b");
+    FILE *ptpacientes = fopen("output/pacientes.bin", "rb"); //le apenas
     if (ptpacientes == NULL)
     {
-        printf("deu merda\n");
+        // aqui so trata o erro e sai, garantindo quantidadepacientes = 0
+        quantidadePacientes = 0;
+        return; 
     }
 
     fseek(ptpacientes, 0, SEEK_END);
-    long tamanho = (int)ftell(ptpacientes);
+    long tamanho = ftell(ptpacientes);
     rewind(ptpacientes);
 
     quantidadePacientes = tamanho / sizeof(Paciente);

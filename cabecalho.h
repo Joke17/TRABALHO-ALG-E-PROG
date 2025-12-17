@@ -75,6 +75,7 @@ void CarregarIndicesMedicos();
 void SalvarIndicesMedicos();
 void InserirNovoMedico();
 void ListarMedicos();
+void ListarMedicosPorEspecialidade();
 void EditarMedico();
 void ExcluirMedico();
 int buscaBinariaMedico(char *crmBusca);
